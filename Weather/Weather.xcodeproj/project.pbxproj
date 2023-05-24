@@ -14,6 +14,8 @@
 		D2D3FCB52A1DB841000039FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2D3FCB42A1DB841000039FD /* Assets.xcassets */; };
 		D2D3FCB82A1DB841000039FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D3FCB62A1DB841000039FD /* LaunchScreen.storyboard */; };
 		D2D3FCC42A1DBAFD000039FD /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCC32A1DBAFD000039FD /* EndPoint.swift */; };
+		D2D3FCC62A1E190C000039FD /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCC52A1E190C000039FD /* NetworkService.swift */; };
+		D2D3FCCA2A1E1BAE000039FD /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCC92A1E1BAE000039FD /* Entity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		D2D3FCB72A1DB841000039FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2D3FCB92A1DB841000039FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2D3FCC32A1DBAFD000039FD /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		D2D3FCC52A1E190C000039FD /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		D2D3FCC92A1E1BAE000039FD /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,14 +62,11 @@
 		D2D3FCAA2A1DB83E000039FD /* Weather */ = {
 			isa = PBXGroup;
 			children = (
-				D2D3FCC12A1DBA7F000039FD /* Domain */,
+				D2D3FCC82A1E1B7C000039FD /* Application */,
+				D2D3FCC72A1E1B61000039FD /* View */,
 				D2D3FCBF2A1DBA00000039FD /* Service */,
-				D2D3FCAB2A1DB83E000039FD /* AppDelegate.swift */,
-				D2D3FCAD2A1DB83E000039FD /* SceneDelegate.swift */,
-				D2D3FCAF2A1DB83E000039FD /* ViewController.swift */,
-				D2D3FCB12A1DB83F000039FD /* Main.storyboard */,
+				D2D3FCC12A1DBA7F000039FD /* Domain */,
 				D2D3FCB42A1DB841000039FD /* Assets.xcassets */,
-				D2D3FCB62A1DB841000039FD /* LaunchScreen.storyboard */,
 				D2D3FCB92A1DB841000039FD /* Info.plist */,
 			);
 			path = Weather;
@@ -75,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				D2D3FCC32A1DBAFD000039FD /* EndPoint.swift */,
+				D2D3FCC52A1E190C000039FD /* NetworkService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -82,6 +84,7 @@
 		D2D3FCC02A1DBA0D000039FD /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				D2D3FCC92A1E1BAE000039FD /* Entity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -100,6 +103,33 @@
 			children = (
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		D2D3FCC72A1E1B61000039FD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D2D3FCCB2A1E1DFE000039FD /* MainView */,
+				D2D3FCB12A1DB83F000039FD /* Main.storyboard */,
+				D2D3FCB62A1DB841000039FD /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D2D3FCC82A1E1B7C000039FD /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				D2D3FCAB2A1DB83E000039FD /* AppDelegate.swift */,
+				D2D3FCAD2A1DB83E000039FD /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		D2D3FCCB2A1E1DFE000039FD /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				D2D3FCAF2A1DB83E000039FD /* ViewController.swift */,
+			);
+			path = MainView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,7 +203,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2D3FCC62A1E190C000039FD /* NetworkService.swift in Sources */,
 				D2D3FCB02A1DB83F000039FD /* ViewController.swift in Sources */,
+				D2D3FCCA2A1E1BAE000039FD /* Entity.swift in Sources */,
 				D2D3FCAC2A1DB83E000039FD /* AppDelegate.swift in Sources */,
 				D2D3FCC42A1DBAFD000039FD /* EndPoint.swift in Sources */,
 				D2D3FCAE2A1DB83E000039FD /* SceneDelegate.swift in Sources */,
