@@ -16,6 +16,8 @@
 		D2D3FCC42A1DBAFD000039FD /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCC32A1DBAFD000039FD /* EndPoint.swift */; };
 		D2D3FCC62A1E190C000039FD /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCC52A1E190C000039FD /* NetworkService.swift */; };
 		D2D3FCCA2A1E1BAE000039FD /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCC92A1E1BAE000039FD /* Entity.swift */; };
+		D2D3FCCD2A1E1F22000039FD /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCCC2A1E1F22000039FD /* Repository.swift */; };
+		D2D3FCCF2A1E2435000039FD /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCCE2A1E2435000039FD /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		D2D3FCC32A1DBAFD000039FD /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		D2D3FCC52A1E190C000039FD /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		D2D3FCC92A1E1BAE000039FD /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		D2D3FCCC2A1E1F22000039FD /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		D2D3FCCE2A1E2435000039FD /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,8 @@
 		D2D3FCC22A1DBA87000039FD /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				D2D3FCCC2A1E1F22000039FD /* Repository.swift */,
+				D2D3FCCE2A1E2435000039FD /* NetworkError.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -203,6 +209,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2D3FCCD2A1E1F22000039FD /* Repository.swift in Sources */,
+				D2D3FCCF2A1E2435000039FD /* NetworkError.swift in Sources */,
 				D2D3FCC62A1E190C000039FD /* NetworkService.swift in Sources */,
 				D2D3FCB02A1DB83F000039FD /* ViewController.swift in Sources */,
 				D2D3FCCA2A1E1BAE000039FD /* Entity.swift in Sources */,
