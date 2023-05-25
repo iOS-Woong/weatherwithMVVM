@@ -8,9 +8,9 @@
 import Foundation
 
 struct Repository {
-    let endPoint: EndPoint
+    private let endPoint: EndPoint = EndPoint()
     
-    func fetch(query: QueryItem, completion: @escaping (Result<Entity, NetworkError>) -> Void) {
+    func fetch(query: QueryItem, completion: @escaping (Result<Data, NetworkError>) -> Void) {
         guard let url = endPoint.url(city: query) else {
             completion(.failure(.invalidURL))
             return
@@ -37,12 +37,8 @@ struct Repository {
                 return
             }
             
-            do {
-                let entity = try JSONDecoder().decode(Entity.self, from: data)
-                completion(.success(entity))
-            } catch {
-                completion(.failure(.decodeError))
-            }
+            completion(.success(data))
+            
         }.resume()
     }
     

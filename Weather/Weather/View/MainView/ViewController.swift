@@ -11,6 +11,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let networkService = NetworkService()
+        networkService.fetch()
     }
 
 

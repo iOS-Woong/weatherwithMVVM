@@ -19,13 +19,13 @@ enum Path: String {
     case base = "/data/2.5/weather"
 }
 
-enum QueryItem: String {
+enum QueryItem: String, CaseIterable {
     case seoul = "seoul"
     case busan = "busan"
     case incheon = "incheon"
     case daegu = "daegu"
     case daejeon = "daejeon"
-    case gwhangju = "gwhangju"
+    case gwhangju = "gwangju"
     case ulsan = "ulsan"
     case sejong = "sejong"
     
