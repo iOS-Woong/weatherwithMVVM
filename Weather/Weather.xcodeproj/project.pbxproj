@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D24807862A1FBB3900922838 /* ContentCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24807852A1FBB3900922838 /* ContentCollectionHeaderView.swift */; };
+		D24807892A1FBFDD00922838 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24807882A1FBFDD00922838 /* ReusableView.swift */; };
+		D248078B2A1FC18000922838 /* ContentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D248078A2A1FC18000922838 /* ContentsCollectionViewCell.swift */; };
 		D2D3FCAC2A1DB83E000039FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCAB2A1DB83E000039FD /* AppDelegate.swift */; };
 		D2D3FCAE2A1DB83E000039FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCAD2A1DB83E000039FD /* SceneDelegate.swift */; };
 		D2D3FCB02A1DB83F000039FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCAF2A1DB83E000039FD /* ViewController.swift */; };
@@ -22,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D24807852A1FBB3900922838 /* ContentCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionHeaderView.swift; sourceTree = "<group>"; };
+		D24807882A1FBFDD00922838 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		D248078A2A1FC18000922838 /* ContentsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsCollectionViewCell.swift; sourceTree = "<group>"; };
 		D2D3FCA82A1DB83E000039FD /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D3FCAB2A1DB83E000039FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2D3FCAD2A1DB83E000039FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +55,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D24807812A1FB5CE00922838 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				D24807872A1FBB4200922838 /* Header */,
+				D24807822A1FB7A500922838 /* Cell */,
+				D24807882A1FBFDD00922838 /* ReusableView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		D24807822A1FB7A500922838 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D248078A2A1FC18000922838 /* ContentsCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		D24807872A1FBB4200922838 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				D24807852A1FBB3900922838 /* ContentCollectionHeaderView.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
 		D2D3FC9F2A1DB83E000039FD = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +148,7 @@
 		D2D3FCC72A1E1B61000039FD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D24807812A1FB5CE00922838 /* CustomView */,
 				D2D3FCCB2A1E1DFE000039FD /* MainView */,
 				D2D3FCB12A1DB83F000039FD /* Main.storyboard */,
 				D2D3FCB62A1DB841000039FD /* LaunchScreen.storyboard */,
@@ -214,11 +247,14 @@
 			files = (
 				D2D3FCCD2A1E1F22000039FD /* Repository.swift in Sources */,
 				D2D3FCCF2A1E2435000039FD /* NetworkError.swift in Sources */,
+				D24807892A1FBFDD00922838 /* ReusableView.swift in Sources */,
 				D2D3FCC62A1E190C000039FD /* NetworkService.swift in Sources */,
 				D2D3FCB02A1DB83F000039FD /* ViewController.swift in Sources */,
 				D2D3FCCA2A1E1BAE000039FD /* CurrentWeather.swift in Sources */,
 				D2D3FCAC2A1DB83E000039FD /* AppDelegate.swift in Sources */,
 				D2D3FCC42A1DBAFD000039FD /* EndPoint.swift in Sources */,
+				D248078B2A1FC18000922838 /* ContentsCollectionViewCell.swift in Sources */,
+				D24807862A1FBB3900922838 /* ContentCollectionHeaderView.swift in Sources */,
 				D2D3FCAE2A1DB83E000039FD /* SceneDelegate.swift in Sources */,
 				D2D3FCD32A1FA71B000039FD /* MainViewModel.swift in Sources */,
 			);
