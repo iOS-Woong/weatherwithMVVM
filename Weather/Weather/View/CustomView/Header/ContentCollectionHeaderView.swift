@@ -11,6 +11,8 @@ class ContentCollectionHeaderView: UICollectionReusableView, ReusableView {
     private let contentVerticalStackView: UIStackView = {
        let stackView = UIStackView()
         
+        stackView.alignment = .center
+        stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         return stackView
@@ -36,6 +38,8 @@ class ContentCollectionHeaderView: UICollectionReusableView, ReusableView {
 
     private let minMaxHorizontalStackView: UIStackView = {
        let stackView = UIStackView()
+        
+        stackView.axis = .horizontal
         
         return stackView
     }()
