@@ -9,14 +9,19 @@ import Foundation
 
 struct NetworkRepository {
     private let endPoint: EndPoint = EndPoint()
+    private let urlSession: URLSessionProtocol
+    
+    init(urlSession: URLSessionProtocol) {
+        self.urlSession = urlSession
+    }
     
     func fetch(query: QueryItem, completion: @escaping (Result<Data, NetworkError>) -> Void) {
         guard let url = endPoint.url(city: query) else {
             completion(.failure(.invalidURL))
             return
         }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
+                
+        let task = urlSession.dataTask(with: url) { data, response, error in
             if let error = error {
                 print(error.localizedDescription)
                 completion(.failure(.requestError))
@@ -39,7 +44,8 @@ struct NetworkRepository {
             
             completion(.success(data))
             
-        }.resume()
+        }
+        task.resume()
     }
     
 }
