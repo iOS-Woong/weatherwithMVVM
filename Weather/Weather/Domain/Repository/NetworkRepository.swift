@@ -11,7 +11,7 @@ struct NetworkRepository {
     private let endPoint: EndPoint = EndPoint()
     private let urlSession: URLSessionProtocol
     
-    init(urlSession: URLSessionProtocol) {
+    init(urlSession: URLSessionProtocol = URLSession.shared) {
         self.urlSession = urlSession
     }
     

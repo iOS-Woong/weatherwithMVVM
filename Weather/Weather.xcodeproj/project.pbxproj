@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D23663F52A29FC5800D6CDD6 /* .gitIgnore in Resources */ = {isa = PBXBuildFile; fileRef = D23663F42A29FC5800D6CDD6 /* .gitIgnore */; };
 		D23663FD2A2A010C00D6CDD6 /* NetworkRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23663FC2A2A010C00D6CDD6 /* NetworkRepositoryTests.swift */; };
+		D23664042A2A02CD00D6CDD6 /* StubURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23664032A2A02CD00D6CDD6 /* StubURLSession.swift */; };
 		D24807862A1FBB3900922838 /* ContentCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24807852A1FBB3900922838 /* ContentCollectionHeaderView.swift */; };
 		D24807892A1FBFDD00922838 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24807882A1FBFDD00922838 /* ReusableView.swift */; };
 		D248078B2A1FC18000922838 /* ContentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D248078A2A1FC18000922838 /* ContentsCollectionViewCell.swift */; };
@@ -49,6 +50,7 @@
 		D23663F42A29FC5800D6CDD6 /* .gitIgnore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitIgnore; sourceTree = "<group>"; };
 		D23663FA2A2A010C00D6CDD6 /* NetworkRepositoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkRepositoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23663FC2A2A010C00D6CDD6 /* NetworkRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepositoryTests.swift; sourceTree = "<group>"; };
+		D23664032A2A02CD00D6CDD6 /* StubURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubURLSession.swift; sourceTree = "<group>"; };
 		D24807852A1FBB3900922838 /* ContentCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionHeaderView.swift; sourceTree = "<group>"; };
 		D24807882A1FBFDD00922838 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		D248078A2A1FC18000922838 /* ContentsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -149,17 +151,19 @@
 		D276AB812A29F282007E3677 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				D23663FB2A2A010C00D6CDD6 /* NetworkRepositoryTests */,
 				D276AB782A29F224007E3677 /* URLSessionTests */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
 		};
-		D276AB822A29F3AF007E3677 /* Protocol */ = {
+		D276AB822A29F3AF007E3677 /* TestDouble */ = {
 			isa = PBXGroup;
 			children = (
 				D276AB832A29F3C8007E3677 /* URLSessionProtocol.swift */,
+				D23664032A2A02CD00D6CDD6 /* StubURLSession.swift */,
 			);
-			path = Protocol;
+			path = TestDouble;
 			sourceTree = "<group>";
 		};
 		D2D3FC9F2A1DB83E000039FD = {
@@ -168,7 +172,6 @@
 				D23663F42A29FC5800D6CDD6 /* .gitIgnore */,
 				D276AB802A29F24F007E3677 /* Tests */,
 				D2D3FCAA2A1DB83E000039FD /* Weather */,
-				D23663FB2A2A010C00D6CDD6 /* NetworkRepositoryTests */,
 				D2D3FCA92A1DB83E000039FD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -186,7 +189,7 @@
 		D2D3FCAA2A1DB83E000039FD /* Weather */ = {
 			isa = PBXGroup;
 			children = (
-				D276AB822A29F3AF007E3677 /* Protocol */,
+				D276AB822A29F3AF007E3677 /* TestDouble */,
 				D2D3FCC82A1E1B7C000039FD /* Application */,
 				D2D3FCC72A1E1B61000039FD /* View */,
 				D2D3FCBF2A1DBA00000039FD /* Service */,
@@ -421,6 +424,7 @@
 				D248078B2A1FC18000922838 /* ContentsCollectionViewCell.swift in Sources */,
 				D24807862A1FBB3900922838 /* ContentCollectionHeaderView.swift in Sources */,
 				D2D3FCAE2A1DB83E000039FD /* SceneDelegate.swift in Sources */,
+				D23664042A2A02CD00D6CDD6 /* StubURLSession.swift in Sources */,
 				D2D3FCD32A1FA71B000039FD /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
