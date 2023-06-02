@@ -1,6 +1,6 @@
 //
-//  NetworkRepositoryTests.swift
-//  NetworkRepositoryTests
+//  URLSessionTests.swift
+//  URLSessionTests
 //
 //  Created by 서현웅 on 2023/06/02.
 //
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Weather
 
-final class NetworkRepositoryTests: XCTestCase {
+final class URLSessionTests: XCTestCase {
 
     var sut: URLSession!
     let endPoint = EndPoint()
