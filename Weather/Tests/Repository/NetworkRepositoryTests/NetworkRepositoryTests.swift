@@ -67,4 +67,29 @@ final class NetworkRepositoryTests: XCTestCase {
         }
         wait(for: [promise], timeout: 10)
     }
+    
+    func test_request_responseStatusCode가_300_일때_invalidResponse로_실패하는지() {
+        // given
+        let promise = expectation(description: "testDouble: Failure_invalidResponse")
+        let url = URL(string: "stubEndPoint")!
+        let data = "stringDummy".data(using: .utf8)
+        let response = HTTPURLResponse(url: url, statusCode: 300, httpVersion: nil, headerFields: nil)
+        let dummy = DummyData(data: nil, response: response, error: nil)
+        let stubUrlSession = StubURLSession(dummyData: dummy)
+        
+        sut.urlSession = stubUrlSession
+        
+        // when
+        sut.request(url: url) { result in
+            switch result {
+            case .success(_):
+                XCTFail()
+            case .failure(let error):
+                print("나에러나에러나에러나에러나에러나에러나에러나에러나에러나에러나에러", error)
+                XCTAssertEqual(error, NetworkError.responseError(code: 300, data: nil))
+                promise.fulfill()
+            }
+        }
+        wait(for: [promise], timeout: 10)
+    }
 }
