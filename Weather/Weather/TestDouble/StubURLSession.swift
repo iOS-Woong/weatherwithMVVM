@@ -21,7 +21,7 @@ struct DummyData {
 class StubURLSession: URLSessionProtocol {
     let dummyData: DummyData?
     
-    init(dummyData: DummyData) {
+    init(dummyData: DummyData? = nil) {
         self.dummyData = dummyData
     }
     
