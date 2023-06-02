@@ -9,14 +9,14 @@ import Foundation
 
 struct NetworkRepository {
     private let endPoint: EndPoint = EndPoint()
-    private let urlSession: URLSessionProtocol
+    var urlSession: URLSessionProtocol
     
     init(urlSession: URLSessionProtocol = URLSession.shared) {
         self.urlSession = urlSession
     }
     
-    func fetch(query: QueryItem, completion: @escaping (Result<Data, NetworkError>) -> Void) {
-        guard let url = endPoint.url(city: query) else {
+    func request(url: URL?, completion: @escaping (Result<Data, NetworkError>) -> Void) {
+        guard let url = url else {
             completion(.failure(.invalidURL))
             return
         }
