@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Repository {
+struct NetworkRepository {
     private let endPoint: EndPoint = EndPoint()
     
     func fetch(query: QueryItem, completion: @escaping (Result<Data, NetworkError>) -> Void) {

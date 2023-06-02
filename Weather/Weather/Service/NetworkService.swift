@@ -12,7 +12,7 @@ enum ProcessDataError: Error {
 }
 
 struct NetworkService {
-    private let repository = Repository()
+    private let repository = NetworkRepository()
     
     private var queryCities: [QueryItem] {
         return QueryItem.allCases.map { $0 }
