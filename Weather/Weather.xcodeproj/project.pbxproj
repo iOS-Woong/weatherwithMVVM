@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D23663F52A29FC5800D6CDD6 /* .gitIgnore in Resources */ = {isa = PBXBuildFile; fileRef = D23663F42A29FC5800D6CDD6 /* .gitIgnore */; };
 		D24807862A1FBB3900922838 /* ContentCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24807852A1FBB3900922838 /* ContentCollectionHeaderView.swift */; };
 		D24807892A1FBFDD00922838 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24807882A1FBFDD00922838 /* ReusableView.swift */; };
 		D248078B2A1FC18000922838 /* ContentsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D248078A2A1FC18000922838 /* ContentsCollectionViewCell.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D23663F42A29FC5800D6CDD6 /* .gitIgnore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitIgnore; sourceTree = "<group>"; };
 		D24807852A1FBB3900922838 /* ContentCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionHeaderView.swift; sourceTree = "<group>"; };
 		D24807882A1FBFDD00922838 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		D248078A2A1FC18000922838 /* ContentsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		D2D3FC9F2A1DB83E000039FD = {
 			isa = PBXGroup;
 			children = (
+				D23663F42A29FC5800D6CDD6 /* .gitIgnore */,
 				D276AB802A29F24F007E3677 /* Tests */,
 				D2D3FCAA2A1DB83E000039FD /* Weather */,
 				D2D3FCA92A1DB83E000039FD /* Products */,
@@ -319,6 +322,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D23663F52A29FC5800D6CDD6 /* .gitIgnore in Resources */,
 				D2D3FCB82A1DB841000039FD /* LaunchScreen.storyboard in Resources */,
 				D2D3FCB52A1DB841000039FD /* Assets.xcassets in Resources */,
 				D2D3FCB32A1DB83F000039FD /* Main.storyboard in Resources */,
