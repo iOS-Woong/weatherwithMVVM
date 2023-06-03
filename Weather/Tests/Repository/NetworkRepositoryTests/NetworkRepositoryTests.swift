@@ -124,10 +124,37 @@ final class NetworkRepositoryTests: XCTestCase {
         wait(for: [promise], timeout: 10)
     }
     
-    // NetworkError 04. requestError
-    func test_request_responseStatusCode가_300_일때_requestError300으로_실패하는지() {
+    // NetworkError 03. requestError
+    func test_request_error가_nil이_아닐때_requestError으로_실패하는지() {
         // given
-        let promise = expectation(description: "testDouble: Failure_requestError300")
+        let promise = expectation(description: "testDouble: Failure_requestError")
+        let url = URL(string: "stubEndPoint")!
+        let data = "stringDummy".data(using: .utf8)
+        let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
+        let dummy = DummyData(data: data, response: response, error: NetworkError.requestError)
+        let stubUrlSession = StubURLSession(dummyData: dummy)
+        
+        sut.urlSession = stubUrlSession
+        
+        // when
+        sut.request(url: url) { result in
+            switch result {
+            case .success(_):
+                break
+            case .failure(let error):
+                // then
+                XCTAssertEqual(error, NetworkError.requestError)
+                promise.fulfill()
+            }
+        }
+        wait(for: [promise], timeout: 10)
+    }
+    
+    
+    // NetworkError 04. responseError
+    func test_request_responseStatusCode가_300_일때_responseError300으로_실패하는지() {
+        // given
+        let promise = expectation(description: "testDouble: Failure_responseError300")
         let url = URL(string: "stubEndPoint")!
         let data = "stringDummy".data(using: .utf8)
         let response = HTTPURLResponse(url: url, statusCode: 300, httpVersion: nil, headerFields: nil)
