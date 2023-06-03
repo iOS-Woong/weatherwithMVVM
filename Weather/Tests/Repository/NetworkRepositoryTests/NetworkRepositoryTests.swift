@@ -73,7 +73,7 @@ final class NetworkRepositoryTests: XCTestCase {
     }
     
     // NetworkError 01. invalidResponse
-    func test_request_response를_nil로_요청했을때_응답이_invalidResponse로_실패하는지() {
+    func test_request_response를_nil로_전달받을때_응답이_invalidResponse로_실패하는지() {
         // given
         let promise = expectation(description: "testDouble: Failure_invalidResponse")
         let url = URL(string: "stubEndPoint")
@@ -88,10 +88,36 @@ final class NetworkRepositoryTests: XCTestCase {
         sut.request(url: url) { result in
             switch result {
             case .success(_):
-                print("야호성공")
+                XCTFail()
             case .failure(let error):
                 // then
                 XCTAssertEqual(error, NetworkError.invalidResponse)
+                promise.fulfill()
+            }
+        }
+        wait(for: [promise], timeout: 10)
+    }
+    
+    // NetworkError 02. invalidData
+    func test_request_data를_nil로_전달받을때_응답이_invalidData로_실패하는지() {
+        // given
+        let promise = expectation(description: "testDouble: Failure_invalidData")
+        let url = URL(string: "stubEndPoint")!
+        let data: Data? = nil
+        let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
+        let dummy = DummyData(data: data, response: response, error: nil)
+        let stubUrlSession = StubURLSession(dummyData: dummy)
+        
+        sut.urlSession = stubUrlSession
+        
+        // when
+        sut.request(url: url) { result in
+            switch result {
+            case .success(_):
+                XCTFail()
+            case .failure(let error):
+                // then
+                XCTAssertEqual(error, NetworkError.invalidData)
                 promise.fulfill()
             }
         }
