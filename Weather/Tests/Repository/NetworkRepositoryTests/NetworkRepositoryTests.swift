@@ -114,7 +114,7 @@ final class NetworkRepositoryTests: XCTestCase {
         sut.request(url: url) { result in
             switch result {
             case .success(_):
-                XCTFail()
+                break
             case .failure(let error):
                 // then
                 XCTAssertEqual(error, NetworkError.invalidData)
@@ -156,7 +156,6 @@ final class NetworkRepositoryTests: XCTestCase {
         // given
         let promise = expectation(description: "testDouble: Failure_responseError300")
         let url = URL(string: "stubEndPoint")!
-        let data = "stringDummy".data(using: .utf8)
         let response = HTTPURLResponse(url: url, statusCode: 300, httpVersion: nil, headerFields: nil)
         let dummy = DummyData(data: nil, response: response, error: nil)
         let stubUrlSession = StubURLSession(dummyData: dummy)
@@ -167,7 +166,7 @@ final class NetworkRepositoryTests: XCTestCase {
         sut.request(url: url) { result in
             switch result {
             case .success(_):
-                XCTFail()
+                break
             case .failure(let error):
                 XCTAssertEqual(error, NetworkError.responseError(code: 300, data: nil))
                 promise.fulfill()

@@ -13,5 +13,4 @@ enum NetworkError: Error, Equatable {
     case invalidData // 2
     case requestError // 3
     case responseError(code: Int, data: Data?) // 4
-    case decodeError // 5
 }
