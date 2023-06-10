@@ -12,7 +12,13 @@ class WeatherViewController: UIViewController {
         case hourly, city, wind, tempMap, detail
     }
     
+    typealias Datasource = UICollectionViewDiffableDataSource<Section, AnyHashable>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>
+    
     private let viewModel: MainViewModel
+    
+    private var datasource: Datasource?
+    private var snapshot: Snapshot?
     
     private let weatherCollectionView = {
         let collectioniView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
@@ -34,6 +40,8 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        configureDataSource()
+        configureSnapshot()
     }
     
     private func setupViews() {
@@ -115,4 +123,30 @@ extension WeatherViewController {
         }
         return layout
     }
+}
+
+// MARK: DiffableDataSource Configure
+extension WeatherViewController {
+    private func configureDataSource() {
+        let hourlyResistration = hourlySecitonItemConfigure()
+        
+        datasource = Datasource(collectionView: weatherCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+            return self.weatherCollectionView.dequeueConfiguredReusableCell(using: hourlyResistration, for: indexPath, item: itemIdentifier)
+        })
+    }
+    
+    private func hourlySecitonItemConfigure() -> UICollectionView.CellRegistration<HourlyCollectionViewCell, Any> {
+        let hourlySectionResistration = UICollectionView.CellRegistration<HourlyCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
+            // TODO: 여기에 hourly 컨피규어
+        }
+        return hourlySectionResistration
+    }
+    
+    private func configureSnapshot() {
+        snapshot = .init()
+        snapshot?.appendSections([.hourly])
+        snapshot?.appendItems(["하용"])
+        datasource?.apply(self.snapshot!, animatingDifferences: true)
+    }
+    
 }
