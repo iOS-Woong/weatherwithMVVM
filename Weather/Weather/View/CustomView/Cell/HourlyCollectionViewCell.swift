@@ -58,6 +58,8 @@ class HourlyCollectionViewCell: UICollectionViewCell, ReusableView {
             timeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             timeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
+            weatherImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.45),
+            weatherImageView.heightAnchor.constraint(equalTo: weatherImageView.widthAnchor, multiplier: 0.9),
             weatherImageView.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 10),
             weatherImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
