@@ -41,8 +41,17 @@ class WeatherViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupCollectionViewAttributes()
-        configureDataSource()
+        configureCollectionViewCellDatasource()
+        configureSupplementaryViewDatasource()
         configureSnapshot()
+    }
+    
+    private func configureSnapshot() {
+        snapshot = .init()
+        let mockAnyHashables = viewModel.testUUIDs() // 테스트객체 (제거할것)
+        snapshot?.appendSections([.hourly])
+        snapshot?.appendItems(mockAnyHashables)
+        datasource?.apply(self.snapshot!, animatingDifferences: true)
     }
     
     private func setupCollectionViewAttributes() {
@@ -78,6 +87,13 @@ extension WeatherViewController {
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
                                                                                  heightDimension: .absolute(110)),
                                                                subitems: [item])
+                
+                let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                                                                                               heightDimension: .fractionalHeight(0.25)),
+                                                                             elementKind: UICollectionView.elementKindSectionHeader,
+                                                                             alignment: .top)
+                section?.boundarySupplementaryItems = [headerView]
+                
                 section = .init(group: group)
                 section?.orthogonalScrollingBehavior = .continuous
                 
@@ -132,39 +148,41 @@ extension WeatherViewController {
 
 // MARK: DiffableDataSource Configure
 extension WeatherViewController {
-    private func configureDataSource() {
-        let hourlyResistration = hourlySecitonItemConfigure()
+    private func configureCollectionViewCellDatasource() {
+        let hourlyCollectionViewCellResistration = hourlySecitonItemConfigure()
         
         datasource = Datasource(collectionView: weatherCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            return self.weatherCollectionView.dequeueConfiguredReusableCell(using: hourlyResistration, for: indexPath, item: itemIdentifier)
+            return self.weatherCollectionView.dequeueConfiguredReusableCell(using: hourlyCollectionViewCellResistration, for: indexPath, item: itemIdentifier)
         })
     }
     
+    private func configureSupplementaryViewDatasource() {
+        let hourlyHeaderViewResistration = hourlySectionHeaderConfigure()
+        
+        datasource?.supplementaryViewProvider = { collectionView, elementKind, indexPath in
+            var collectionReusableView: UICollectionReusableView?
+            // TODO: 섹션별로 헤더를 다르게 설정해줄 것
+            collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: hourlyHeaderViewResistration, for: indexPath)
+
+            return collectionReusableView
+        }
+    }
+    
+    
     private func hourlySecitonItemConfigure() -> UICollectionView.CellRegistration<HourlyCollectionViewCell, Any> {
         let hourlySectionResistration = UICollectionView.CellRegistration<HourlyCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
-            // TODO: 여기에 hourly 컨피규어
+            // TODO: 여기에 hourlyCell 컨피규어
         }
+        
         return hourlySectionResistration
     }
     
-    private func configureSnapshot() {
-        snapshot = .init()
-        let mockAnyHashables = testUUIDs() // 테스트객체 (제거할것)
-        snapshot?.appendSections([.hourly])
-        snapshot?.appendItems(mockAnyHashables)
-        datasource?.apply(self.snapshot!, animatingDifferences: true)
-    }
-    
-    // 테스트함수 (제거할것)
-    private func testUUIDs() -> [UUID] {
-        var uuids = [UUID]()
-        
-        for _ in 0...20 {
-            let uuid = UUID()
-            
-            uuids.append(uuid)
+    private func hourlySectionHeaderConfigure() -> UICollectionView.SupplementaryRegistration<ContentCollectionHeaderView> {
+        let hourlySectionHeaderResistration = UICollectionView.SupplementaryRegistration<ContentCollectionHeaderView>(
+            elementKind: UICollectionView.elementKindSectionHeader) { supplementaryView, elementKind, indexPath in
+            // TODO: 여기 hourlyHeader 컨피규어
         }
-        return uuids
+        
+        return hourlySectionHeaderResistration
     }
-    
 }

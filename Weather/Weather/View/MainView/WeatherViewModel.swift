@@ -9,18 +9,18 @@ import Foundation
 
 class MainViewModel {
     private let service = NetworkService()
-//    
-//    func fetchCurrentWeathers(entity: CurrentWeather.Type) {
-//        service.fetch(type: entity.self) { result in
-//            switch result {
-//            case .success(let entity):
-//                // TODO: cities Weather entity 처리
-//                print(entity)
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
+    
+    
+    
+    func testUUIDs() -> [UUID] {
+        var uuids = [UUID]()
+
+        for _ in 0...20 {
+            let uuid = UUID()
+            uuids.append(uuid)
+        }
+        return uuids
+    }
     
     
 }
