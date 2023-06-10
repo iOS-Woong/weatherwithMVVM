@@ -59,7 +59,8 @@ class WeatherViewController: UIViewController {
     }
     
     private func setupViews() {
-        view.backgroundColor = .white
+        let collectionImage = UIImage(named: "night")
+        weatherCollectionView.backgroundView = UIImageView(image: collectionImage)
         view.addSubview(weatherCollectionView)
         
         NSLayoutConstraint.activate([
@@ -89,12 +90,12 @@ extension WeatherViewController {
                                                                subitems: [item])
                 
                 let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                                               heightDimension: .fractionalHeight(0.25)),
+                                                                                               heightDimension: .fractionalHeight(0.4)),
                                                                              elementKind: UICollectionView.elementKindSectionHeader,
                                                                              alignment: .top)
+                section = .init(group: group)
                 section?.boundarySupplementaryItems = [headerView]
                 
-                section = .init(group: group)
                 section?.orthogonalScrollingBehavior = .continuous
                 
                 return section

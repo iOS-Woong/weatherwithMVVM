@@ -11,6 +11,8 @@ class HourlyCollectionViewCell: UICollectionViewCell, ReusableView {
     private let timeLabel = {
        let label = UILabel()
         
+        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        label.textColor = .white
         label.textAlignment = .center
         label.text = "오전 3시" // ForTest
         
@@ -29,6 +31,8 @@ class HourlyCollectionViewCell: UICollectionViewCell, ReusableView {
     private let tempLabel = {
        let label = UILabel()
         
+        label.font = UIFont.systemFont(ofSize: 19, weight: .medium)
+        label.textColor = .white
         label.text = "17°"
         
         return label
