@@ -8,12 +8,8 @@
 import UIKit
 
 class WeatherViewController: UIViewController {
-    enum Seciton {
-        case hourly
-        case city
-        case wind
-        case tempMap
-        case detail
+    enum Section: Int {
+        case hourly, city, wind, tempMap, detail
     }
     
     private let viewModel: MainViewModel
@@ -50,5 +46,73 @@ class WeatherViewController: UIViewController {
             weatherCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             weatherCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+}
+
+// MARK: Layout Configure
+extension WeatherViewController {
+    private func createLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { sectionNumber, environment -> NSCollectionLayoutSection? in
+            guard let sectionKind = Section(rawValue: sectionNumber) else { return nil }
+            var section: NSCollectionLayoutSection?
+            
+            switch sectionKind {
+            case .hourly:
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.2),
+                                                                    heightDimension: .fractionalHeight(1.0)))
+                item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
+                
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                                                                                 heightDimension: .absolute(110)),
+                                                               subitems: [item])
+                section = .init(group: group)
+                section?.orthogonalScrollingBehavior = .continuous
+                
+                return section
+            
+            case .city:
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                                                                    heightDimension: .fractionalHeight(1.0)))
+                
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                                                                               heightDimension: .absolute(500)),
+                                                             subitems: [item])
+                section = .init(group: group)
+                
+                return section
+                
+            case .wind:
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                                                                    heightDimension: .fractionalHeight(1.0)))
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                                                                               heightDimension: .absolute(250)),
+                                                             subitems: [item])
+                section = .init(group: group)
+
+                return section
+                
+            case .tempMap:
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                                                                    heightDimension: .fractionalHeight(1.0)))
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                                                                               heightDimension: .absolute(400)),
+                                                             subitems: [item])
+                section = .init(group: group)
+
+                return section
+                
+            case .detail:
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
+                                                                    heightDimension: .fractionalHeight(1.0)))
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                                                                               heightDimension: .absolute(300)),
+                                                             subitems: [item])
+                section = .init(group: group)
+
+                return section
+            }
+        
+        }
+        return layout
     }
 }
