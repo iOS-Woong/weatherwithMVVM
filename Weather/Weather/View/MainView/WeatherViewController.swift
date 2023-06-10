@@ -40,8 +40,13 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        setupCollectionViewAttributes()
         configureDataSource()
         configureSnapshot()
+    }
+    
+    private func setupCollectionViewAttributes() {
+        weatherCollectionView.collectionViewLayout = createLayout()
     }
     
     private func setupViews() {
@@ -144,9 +149,22 @@ extension WeatherViewController {
     
     private func configureSnapshot() {
         snapshot = .init()
+        let mockAnyHashables = testUUIDs() // 테스트객체 (제거할것)
         snapshot?.appendSections([.hourly])
-        snapshot?.appendItems(["하용"])
+        snapshot?.appendItems(mockAnyHashables)
         datasource?.apply(self.snapshot!, animatingDifferences: true)
+    }
+    
+    // 테스트함수 (제거할것)
+    private func testUUIDs() -> [UUID] {
+        var uuids = [UUID]()
+        
+        for _ in 0...20 {
+            let uuid = UUID()
+            
+            uuids.append(uuid)
+        }
+        return uuids
     }
     
 }
