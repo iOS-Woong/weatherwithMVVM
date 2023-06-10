@@ -48,9 +48,11 @@ class WeatherViewController: UIViewController {
     
     private func configureSnapshot() {
         snapshot = .init()
-        let mockAnyHashables = viewModel.testUUIDs() // 테스트객체 (제거할것)
-        snapshot?.appendSections([.hourly])
-        snapshot?.appendItems(mockAnyHashables)
+        let hourlyMockAnyHashables = viewModel.testUUIDs(count: 24) // 테스트객체 (제거할것)
+        let cityMockAnyHashables = viewModel.testUUIDs(count: QueryItem.allCases.count - 1) // 서울뺴고
+        snapshot?.appendSections([.hourly, .city])
+        snapshot?.appendItems(hourlyMockAnyHashables, toSection: .hourly)
+        snapshot?.appendItems(cityMockAnyHashables, toSection: .city)
         datasource?.apply(self.snapshot!, animatingDifferences: true)
     }
     
@@ -88,6 +90,7 @@ extension WeatherViewController {
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
                                                                                  heightDimension: .absolute(110)),
                                                                subitems: [item])
+                group.contentInsets = .init(top: 0, leading: 10, bottom: 10, trailing: 10)
                 
                 let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
                                                                                                heightDimension: .fractionalHeight(0.4)),
@@ -103,10 +106,11 @@ extension WeatherViewController {
             case .city:
                 let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
                                                                     heightDimension: .fractionalHeight(1.0)))
-                
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                               heightDimension: .absolute(500)),
+                                                                               heightDimension: .absolute(60)),
                                                              subitems: [item])
+                group.contentInsets = .init(top: 10, leading: 10, bottom: 5, trailing: 10)
+
                 section = .init(group: group)
                 
                 return section
@@ -151,9 +155,25 @@ extension WeatherViewController {
 extension WeatherViewController {
     private func configureCollectionViewCellDatasource() {
         let hourlyCollectionViewCellResistration = hourlySecitonItemConfigure()
+        let cityCollectionViewCellResistration = citySectionItemConfigure()
         
         datasource = Datasource(collectionView: weatherCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            return self.weatherCollectionView.dequeueConfiguredReusableCell(using: hourlyCollectionViewCellResistration, for: indexPath, item: itemIdentifier)
+            guard let sectionKind = Section(rawValue: indexPath.section) else { return nil }
+            
+            switch sectionKind {
+            case .hourly:
+                return self.weatherCollectionView.dequeueConfiguredReusableCell(using: hourlyCollectionViewCellResistration,
+                                                                                for: indexPath, item: itemIdentifier)
+            case .city:
+                return self.weatherCollectionView.dequeueConfiguredReusableCell(using: cityCollectionViewCellResistration,
+                                                                                for: indexPath, item: itemIdentifier)
+            case .wind:
+                return nil
+            case .tempMap:
+                return nil
+            case .detail:
+                return nil
+            }
         })
     }
     
@@ -186,4 +206,12 @@ extension WeatherViewController {
         
         return hourlySectionHeaderResistration
     }
+    
+    private func citySectionItemConfigure() -> UICollectionView.CellRegistration<CityCollectionViewCell, Any> {
+        let citySectionResistration = UICollectionView.CellRegistration<CityCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
+            // TODO: 여기 cityCell 컨피규어
+        }
+        return citySectionResistration
+    }
+    
 }

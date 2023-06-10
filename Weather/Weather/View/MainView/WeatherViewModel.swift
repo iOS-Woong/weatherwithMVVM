@@ -12,10 +12,11 @@ class MainViewModel {
     
     
     
-    func testUUIDs() -> [UUID] {
+    func testUUIDs(count: Int) -> [UUID] {
         var uuids = [UUID]()
-
-        for _ in 0...20 {
+        let index = count - 1
+        
+        for _ in 0...index {
             let uuid = UUID()
             uuids.append(uuid)
         }

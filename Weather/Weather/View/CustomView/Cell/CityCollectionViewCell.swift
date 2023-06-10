@@ -14,6 +14,7 @@ class CityCollectionViewCell: UICollectionViewCell {
         
         label.text = "대구" // test
         label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         
         return label
     }()
@@ -21,6 +22,7 @@ class CityCollectionViewCell: UICollectionViewCell {
     private let weatherImageView = {
         let imageView = UIImageView()
         
+        imageView.image = UIImage(systemName: "cloud")
         
         return imageView
     }()
@@ -30,6 +32,9 @@ class CityCollectionViewCell: UICollectionViewCell {
         
         label.text = "-17°"
         label.textColor = .white
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        label.textColor = .systemGray2
         
         return label
     }()
@@ -47,6 +52,8 @@ class CityCollectionViewCell: UICollectionViewCell {
         
         label.text = "34°"
         label.textColor = .white
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         
         return label
     }()
@@ -55,7 +62,8 @@ class CityCollectionViewCell: UICollectionViewCell {
         let stackView = UIStackView()
         
         stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
+        stackView.distribution = .fill
+        stackView.spacing = 5
         stackView.alignment = .center
         
         return stackView
@@ -72,7 +80,7 @@ class CityCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-        [maxTempLabel, chartView, minTempLabel].forEach(minMaxChartHorizonStackView.addArrangedSubview(_:))
+        [minTempLabel, chartView, maxTempLabel].forEach(minMaxChartHorizonStackView.addArrangedSubview(_:))
         
         let targetViews = [cityLabel, weatherImageView, minMaxChartHorizonStackView]
         targetViews.forEach {
@@ -82,19 +90,21 @@ class CityCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             cityLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            cityLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-            cityLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            cityLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             
-            weatherImageView.leadingAnchor.constraint(equalTo: cityLabel.trailingAnchor, constant: 5),
-            weatherImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.15),
-            weatherImageView.heightAnchor.constraint(equalTo: weatherImageView.widthAnchor, multiplier: 0.9),
+            chartView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.08),
+            
             weatherImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            weatherImageView.leadingAnchor.constraint(equalTo: cityLabel.trailingAnchor, constant: 50),
+            weatherImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.09),
+            weatherImageView.heightAnchor.constraint(equalTo: weatherImageView.widthAnchor, multiplier: 0.9),
             
-            minMaxChartHorizonStackView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.8),
-            minMaxChartHorizonStackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.4),
-            minMaxChartHorizonStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5)
+            minTempLabel.widthAnchor.constraint(equalTo: minMaxChartHorizonStackView.widthAnchor, multiplier: 0.2),
+            maxTempLabel.widthAnchor.constraint(equalTo: minMaxChartHorizonStackView.widthAnchor, multiplier: 0.2),
+            
+            minMaxChartHorizonStackView.heightAnchor.constraint(equalTo: contentView.heightAnchor),
+            minMaxChartHorizonStackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.55),
+            minMaxChartHorizonStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
-        
     }
-    
 }
