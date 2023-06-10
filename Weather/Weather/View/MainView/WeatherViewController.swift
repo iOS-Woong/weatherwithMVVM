@@ -177,8 +177,8 @@ extension WeatherViewController {
         return hourlySectionResistration
     }
     
-    private func hourlySectionHeaderConfigure() -> UICollectionView.SupplementaryRegistration<ContentCollectionHeaderView> {
-        let hourlySectionHeaderResistration = UICollectionView.SupplementaryRegistration<ContentCollectionHeaderView>(
+    private func hourlySectionHeaderConfigure() -> UICollectionView.SupplementaryRegistration<hourlyCollectionHeaderView> {
+        let hourlySectionHeaderResistration = UICollectionView.SupplementaryRegistration<hourlyCollectionHeaderView>(
             elementKind: UICollectionView.elementKindSectionHeader) { supplementaryView, elementKind, indexPath in
             // TODO: 여기 hourlyHeader 컨피규어
         }
