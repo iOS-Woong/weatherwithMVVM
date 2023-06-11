@@ -85,12 +85,11 @@ extension WeatherViewController {
             case .hourly:
                 let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.2),
                                                                     heightDimension: .fractionalHeight(1.0)))
-                item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
                 
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                                 heightDimension: .absolute(110)),
+                                                                                 heightDimension: .absolute(150)),
                                                                subitems: [item])
-                group.contentInsets = .init(top: 0, leading: 10, bottom: 10, trailing: 10)
+                group.contentInsets = .init(top: 0, leading: 10, bottom: 30, trailing: 10)
                 
                 let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
                                                                                                heightDimension: .fractionalHeight(0.4)),
@@ -110,8 +109,13 @@ extension WeatherViewController {
                                                                                heightDimension: .absolute(60)),
                                                              subitems: [item])
                 group.contentInsets = .init(top: 10, leading: 10, bottom: 5, trailing: 10)
-
+                let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                                                                                               heightDimension: .fractionalHeight(0.05)),
+                                                                             elementKind: UICollectionView.elementKindSectionHeader,
+                                                                             alignment: .top)
+                headerView.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
                 section = .init(group: group)
+                section?.boundarySupplementaryItems = [headerView]
                 
                 return section
                 
@@ -142,7 +146,7 @@ extension WeatherViewController {
                                                                                heightDimension: .absolute(300)),
                                                              subitems: [item])
                 section = .init(group: group)
-
+                
                 return section
             }
         
@@ -179,16 +183,28 @@ extension WeatherViewController {
     
     private func configureSupplementaryViewDatasource() {
         let hourlyHeaderViewResistration = hourlySectionHeaderConfigure()
+        let cityHeaderViewResistration = citySectionHeaderConfigure()
         
         datasource?.supplementaryViewProvider = { collectionView, elementKind, indexPath in
+            guard let sectionKind = Section(rawValue: indexPath.section) else { return nil }
             var collectionReusableView: UICollectionReusableView?
-            // TODO: 섹션별로 헤더를 다르게 설정해줄 것
-            collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: hourlyHeaderViewResistration, for: indexPath)
-
+            
+            switch sectionKind {
+            case .hourly:
+                collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: hourlyHeaderViewResistration, for: indexPath)
+            case .city:
+                collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: cityHeaderViewResistration, for: indexPath)
+            case .wind:
+                print("A")
+            case .tempMap:
+                print("A")
+            case .detail:
+                print("A")
+            }
+            
             return collectionReusableView
         }
     }
-    
     
     private func hourlySecitonItemConfigure() -> UICollectionView.CellRegistration<HourlyCollectionViewCell, Any> {
         let hourlySectionResistration = UICollectionView.CellRegistration<HourlyCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
@@ -212,6 +228,15 @@ extension WeatherViewController {
             // TODO: 여기 cityCell 컨피규어
         }
         return citySectionResistration
+    }
+    
+    private func citySectionHeaderConfigure() -> UICollectionView.SupplementaryRegistration<CityCollectionHeaderView> {
+        let citySectionHeaderResistration = UICollectionView.SupplementaryRegistration<CityCollectionHeaderView>(
+            elementKind: UICollectionView.elementKindSectionHeader) { supplementaryView, elementKind, indexPath in
+            // TODO: 여기 cityHeader 컨피규어
+        }
+        
+        return citySectionHeaderResistration
     }
     
 }
