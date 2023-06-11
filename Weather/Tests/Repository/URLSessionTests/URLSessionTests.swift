@@ -20,17 +20,20 @@ final class URLSessionTests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
-
-    func test_서울URL요청시_상태코드200번이_들어오는지() {
-        // given
-        let url = endPoint.url(city: .seoul)!
-        let promise = expectation(description: "Status Code 200")
+    
+    // MARK: CurrentWeatherDataAPI HealthCheck
+    
+    func test_CurrentWeatherDataAPI_HealthCheck_하나의_도시대상() {
+        // promise
+        let url = endPoint.url(city: .seoul, for: .weather)!
+        let promise = expectation(description: "[API: Current Weather] HealthCheck!")
+        
         // when
-        let task = sut.dataTask(with: url) { data, response, error in
+        let task = sut.dataTask(with: url) { _, response, _ in
             guard let response = response as? HTTPURLResponse else {
                 return
             }
-            //then
+            // then
             let statusCode = response.statusCode
             XCTAssertEqual(statusCode, 200)
             promise.fulfill()
@@ -39,5 +42,10 @@ final class URLSessionTests: XCTestCase {
         
         wait(for: [promise], timeout: 10)
     }
+
+    func test_FiveDayWeatherForecast_HealthCheck() {
+        
+    }
+    
     
 }

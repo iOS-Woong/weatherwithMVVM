@@ -7,6 +7,9 @@
 
 import Foundation
 
+// currentWather: https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+// 5dayweather: https://api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
+
 enum Scheme: String {
     case https = "https"
 }
@@ -16,7 +19,8 @@ enum Host: String {
 }
 
 enum Path: String {
-    case base = "/data/2.5/weather"
+    case weather = "/data/2.5/weather"
+    case forecast = "/data/2.5/forecast"
 }
 
 enum QueryItem: String, CaseIterable {
@@ -41,15 +45,14 @@ enum QueryItem: String, CaseIterable {
 
 enum key: String {
     case key = "&appid=44aea5632c5f4c27d89bbe765acbed69"
-    
 }
 
 struct EndPoint {
-    func url(city query: QueryItem) -> URL? {
+    func url(city query: QueryItem, for path: Path) -> URL? {
         var component = URLComponents()
         component.scheme = Scheme.https.rawValue
         component.host = Host.base.rawValue
-        component.path = Path.base.rawValue
+        component.path = path.rawValue
         component.queryItems = query.description
         return component.url
     }

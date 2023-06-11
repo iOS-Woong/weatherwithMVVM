@@ -4,13 +4,12 @@
 //
 //  Created by 서현웅 on 2023/06/12.
 //
-
-import Foundation
-
 /*
  API: 5 day weather forecast
  https://openweathermap.org/forecast5
  */
+
+import Foundation
 
 struct FiveDayWeatherForecast: Codable {
     let cod: String
@@ -19,31 +18,28 @@ struct FiveDayWeatherForecast: Codable {
     let city: FCity
 }
 
-// MARK: - City
 struct FCity: Codable {
     let id: Int
     let name: String
-    let coord: Coord
+    let coord: FCoord
     let country: String
     let population, timezone, sunrise, sunset: Int
 }
 
-// MARK: - Coord
 struct FCoord: Codable {
     let lat, lon: Double
 }
 
-// MARK: - List
 struct FList: Codable {
     let dt: Int
-    let main: Main
+    let main: FMain
     let weather: [FWeather]
-    let clouds: Clouds
-    let wind: Wind
+    let clouds: FClouds
+    let wind: FWind
     let visibility: Int
     let pop: Double
-    let rain: Rain?
-    let sys: Sys
+    let rain: FRain?
+    let sys: FSys
     let dtTxt: String
 
     enum CodingKeys: String, CodingKey {
@@ -52,12 +48,10 @@ struct FList: Codable {
     }
 }
 
-// MARK: - Clouds
 struct FClouds: Codable {
     let all: Int
 }
 
-// MARK: - Main
 struct FMain: Codable {
     let temp, feelsLike, tempMin, tempMax: Double
     let pressure, seaLevel, grndLevel, humidity: Int
@@ -76,7 +70,6 @@ struct FMain: Codable {
     }
 }
 
-// MARK: - Rain
 struct FRain: Codable {
     let the3H: Double
 
@@ -85,18 +78,15 @@ struct FRain: Codable {
     }
 }
 
-// MARK: - Sys
 struct FSys: Codable {
     let pod: String
 }
 
-// MARK: - Weather
 struct FWeather: Codable {
     let id: Int
     let main, description, icon: String
 }
 
-// MARK: - Wind
 struct FWind: Codable {
     let speed: Double
     let deg: Int
