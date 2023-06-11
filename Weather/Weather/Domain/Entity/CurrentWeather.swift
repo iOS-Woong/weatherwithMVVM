@@ -5,27 +5,64 @@
 //  Created by 서현웅 on 2023/05/24.
 //
 
+/*
+ API: Current weather data
+ https://openweathermap.org/current
+ */
+
 import Foundation
 
 struct CurrentWeather: Codable {
+    let coord: Coord
     let weather: [Weather]
+    let base: String
     let main: Main
+    let visibility: Int
     let wind: Wind
-    let dt: Int //Time of data calculation, unix, UTC
+    let rain: Rain
+    let clouds: Clouds
+    let dt: Int
+    let sys: Sys
     let timezone, id: Int
     let name: String
+    let cod: Int
+}
+
+struct Clouds: Codable {
+    let all: Int
+}
+
+struct Coord: Codable {
+    let lon, lat: Double
 }
 
 struct Main: Codable {
-    let temp, tempMin, tempMax: Double
-    let humidity: Int
+    let temp, feelsLike, tempMin, tempMax: Double
+    let pressure, humidity, seaLevel, grndLevel: Int
 
     enum CodingKeys: String, CodingKey {
         case temp
+        case feelsLike = "feels_like"
         case tempMin = "temp_min"
         case tempMax = "temp_max"
-        case humidity
+        case pressure, humidity
+        case seaLevel = "sea_level"
+        case grndLevel = "grnd_level"
     }
+}
+
+struct Rain: Codable {
+    let the1H: Double
+
+    enum CodingKeys: String, CodingKey {
+        case the1H = "1h"
+    }
+}
+
+struct Sys: Codable {
+    let type, id: Int
+    let country: String
+    let sunrise, sunset: Int
 }
 
 struct Weather: Codable {
@@ -34,6 +71,7 @@ struct Weather: Codable {
 }
 
 struct Wind: Codable {
-    let speed: Double // Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.
-    let deg: Int // 방향임. 각도로 계산되어 전달되는듯함 (이를, 남,서,동,북, 남서 등으로 해줘야함.
+    let speed: Double
+    let deg: Int
+    let gust: Double
 }
