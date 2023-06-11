@@ -51,11 +51,13 @@ class WeatherViewController: UIViewController {
         let hourlyMockAnyHashables = viewModel.testUUIDs(count: 24) // 테스트객체 (제거할것)
         let cityMockAnyHashables = viewModel.testUUIDs(count: QueryItem.allCases.count - 1) // 서울뺴고
         let windMockAnyHashables = viewModel.testUUIDs(count: 1)
+        let tempMapMockAnyHashables = viewModel.testUUIDs(count: 1)
         
-        snapshot?.appendSections([.hourly, .city, .wind])
+        snapshot?.appendSections([.hourly, .city, .wind, .tempMap])
         snapshot?.appendItems(hourlyMockAnyHashables, toSection: .hourly)
         snapshot?.appendItems(cityMockAnyHashables, toSection: .city)
         snapshot?.appendItems(windMockAnyHashables, toSection: .wind)
+        snapshot?.appendItems(tempMapMockAnyHashables, toSection: .tempMap)
         datasource?.apply(self.snapshot!, animatingDifferences: true)
     }
     
@@ -143,10 +145,18 @@ extension WeatherViewController {
                 let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
                                                                     heightDimension: .fractionalHeight(1.0)))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                               heightDimension: .absolute(400)),
+                                                                               heightDimension: .absolute(300)),
                                                              subitems: [item])
+                let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                                                                                               heightDimension: .fractionalHeight(0.05)),
+                                                                             elementKind: UICollectionView.elementKindSectionHeader,
+                                                                             alignment: .top)
+                headerView.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
                 section = .init(group: group)
+                section?.boundarySupplementaryItems = [headerView]
+                section?.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
 
+                
                 return section
                 
             case .detail:
@@ -156,6 +166,7 @@ extension WeatherViewController {
                                                                                heightDimension: .absolute(300)),
                                                              subitems: [item])
                 section = .init(group: group)
+                
                 
                 return section
             }
@@ -171,10 +182,11 @@ extension WeatherViewController {
         let hourlyCollectionViewCellResistration = hourlySecitonItemConfigure()
         let cityCollectionViewCellResistration = citySectionItemConfigure()
         let windCollectionViewCellResistration = windSectionItemConfigure()
+        let tempMapCollectionViewCellResistration = tempSectionItemConfigure()
         
         datasource = Datasource(collectionView: weatherCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             guard let sectionKind = Section(rawValue: indexPath.section) else { return nil }
-            
+            // TODO: 공통으로 들어가는 섹션구성
             switch sectionKind {
             case .hourly:
                 return self.weatherCollectionView.dequeueConfiguredReusableCell(using: hourlyCollectionViewCellResistration,
@@ -186,7 +198,8 @@ extension WeatherViewController {
                 return self.weatherCollectionView.dequeueConfiguredReusableCell(using: windCollectionViewCellResistration,
                                                                                 for: indexPath, item: itemIdentifier)
             case .tempMap:
-                return nil
+                return self.weatherCollectionView.dequeueConfiguredReusableCell(using: tempMapCollectionViewCellResistration,
+                                                                                for: indexPath, item: itemIdentifier)
             case .detail:
                 return nil
             }
@@ -209,7 +222,7 @@ extension WeatherViewController {
             case .wind:
                 collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: cityHeaderViewResistration, for: indexPath)
             case .tempMap:
-                print("A")
+                collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: cityHeaderViewResistration, for: indexPath)
             case .detail:
                 print("A")
             }
@@ -257,4 +270,20 @@ extension WeatherViewController {
         }
         return windSectionResistration
     }
+    
+    private func tempSectionItemConfigure() -> UICollectionView.CellRegistration<TempMapCollectionViewCell, Any> {
+        let tempSectionResistration = UICollectionView.CellRegistration<TempMapCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
+            // TODO: 여기 tempCell 컨피규어
+        }
+        
+        return tempSectionResistration
+    }
+    
+    private func detailSectionItemConfigure() -> UICollectionView.CellRegistration<DetailCollectionViewCell, Any> {
+        let detailSectionResistration = UICollectionView.CellRegistration<DetailCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
+            // TODO: detailSection의 복잡도로 인해 컨피규어는 추후 서버통신작업을 마치고 진행함
+        }
+        return detailSectionResistration
+    }
+    
 }

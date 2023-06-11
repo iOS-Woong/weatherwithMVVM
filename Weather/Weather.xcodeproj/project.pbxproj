@@ -18,6 +18,8 @@
 		D28E952D2A350DBE0076A8FA /* CityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E952C2A350DBE0076A8FA /* CityCollectionViewCell.swift */; };
 		D28E952F2A35200A0076A8FA /* CityCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E952E2A35200A0076A8FA /* CityCollectionHeaderView.swift */; };
 		D28E95312A3646F40076A8FA /* WindCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E95302A3646F40076A8FA /* WindCollectionViewCell.swift */; };
+		D28E95332A364FC90076A8FA /* TempMapCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E95322A364FC90076A8FA /* TempMapCollectionViewCell.swift */; };
+		D28E95352A3651FE0076A8FA /* DetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E95342A3651FE0076A8FA /* DetailCollectionViewCell.swift */; };
 		D2D3FCAC2A1DB83E000039FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCAB2A1DB83E000039FD /* AppDelegate.swift */; };
 		D2D3FCAE2A1DB83E000039FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCAD2A1DB83E000039FD /* SceneDelegate.swift */; };
 		D2D3FCB02A1DB83F000039FD /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCAF2A1DB83E000039FD /* WeatherViewController.swift */; };
@@ -62,6 +64,8 @@
 		D28E952C2A350DBE0076A8FA /* CityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCollectionViewCell.swift; sourceTree = "<group>"; };
 		D28E952E2A35200A0076A8FA /* CityCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCollectionHeaderView.swift; sourceTree = "<group>"; };
 		D28E95302A3646F40076A8FA /* WindCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindCollectionViewCell.swift; sourceTree = "<group>"; };
+		D28E95322A364FC90076A8FA /* TempMapCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempMapCollectionViewCell.swift; sourceTree = "<group>"; };
+		D28E95342A3651FE0076A8FA /* DetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		D2D3FCA82A1DB83E000039FD /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D3FCAB2A1DB83E000039FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2D3FCAD2A1DB83E000039FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 				D248078A2A1FC18000922838 /* HourlyCollectionViewCell.swift */,
 				D28E952C2A350DBE0076A8FA /* CityCollectionViewCell.swift */,
 				D28E95302A3646F40076A8FA /* WindCollectionViewCell.swift */,
+				D28E95322A364FC90076A8FA /* TempMapCollectionViewCell.swift */,
+				D28E95342A3651FE0076A8FA /* DetailCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -421,6 +427,7 @@
 				D2D3FCCF2A1E2435000039FD /* NetworkError.swift in Sources */,
 				D28E952F2A35200A0076A8FA /* CityCollectionHeaderView.swift in Sources */,
 				D24807892A1FBFDD00922838 /* ReusableView.swift in Sources */,
+				D28E95352A3651FE0076A8FA /* DetailCollectionViewCell.swift in Sources */,
 				D2D3FCC62A1E190C000039FD /* NetworkService.swift in Sources */,
 				D28E95312A3646F40076A8FA /* WindCollectionViewCell.swift in Sources */,
 				D2D3FCB02A1DB83F000039FD /* WeatherViewController.swift in Sources */,
@@ -430,6 +437,7 @@
 				D276AB842A29F3C8007E3677 /* URLSessionProtocol.swift in Sources */,
 				D248078B2A1FC18000922838 /* HourlyCollectionViewCell.swift in Sources */,
 				D24807862A1FBB3900922838 /* hourlyCollectionHeaderView.swift in Sources */,
+				D28E95332A364FC90076A8FA /* TempMapCollectionViewCell.swift in Sources */,
 				D2D3FCAE2A1DB83E000039FD /* SceneDelegate.swift in Sources */,
 				D23664042A2A02CD00D6CDD6 /* StubURLSession.swift in Sources */,
 				D28E952D2A350DBE0076A8FA /* CityCollectionViewCell.swift in Sources */,
