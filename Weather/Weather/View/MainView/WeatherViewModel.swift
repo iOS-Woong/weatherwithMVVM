@@ -12,6 +12,11 @@ class MainViewModel {
     
     
     
+}
+
+
+// Test함수
+extension MainViewModel {
     func testUUIDs(count: Int) -> [UUID] {
         var uuids = [UUID]()
         let index = count - 1
@@ -22,6 +27,4 @@ class MainViewModel {
         }
         return uuids
     }
-    
-    
 }

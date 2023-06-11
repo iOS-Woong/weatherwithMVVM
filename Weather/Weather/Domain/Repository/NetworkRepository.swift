@@ -8,7 +8,6 @@
 import Foundation
 
 struct NetworkRepository {
-    private let endPoint: EndPoint = EndPoint()
     var urlSession: URLSessionProtocol
     
     init(urlSession: URLSessionProtocol = URLSession.shared) {

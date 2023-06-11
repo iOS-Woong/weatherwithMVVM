@@ -48,11 +48,11 @@ enum key: String {
 }
 
 struct EndPoint {
-    func url(city query: QueryItem, for path: Path) -> URL? {
+    func url(city query: QueryItem, for pathKind: Path) -> URL? {
         var component = URLComponents()
         component.scheme = Scheme.https.rawValue
         component.host = Host.base.rawValue
-        component.path = path.rawValue
+        component.path = pathKind.rawValue
         component.queryItems = query.description
         return component.url
     }
