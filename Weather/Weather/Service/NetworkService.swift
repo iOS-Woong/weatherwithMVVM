@@ -8,7 +8,7 @@
 import Foundation
 
 enum ProcessDataError: Error {
-    case decodeError
+    case decodeError(query: URL? = nil)
 }
 
 struct NetworkService {
@@ -28,7 +28,7 @@ struct NetworkService {
                 case .success(let decodedData):
                     completion(.success(decodedData))
                 case .failure(_):
-                    completion(.failure(ProcessDataError.decodeError))
+                    completion(.failure(ProcessDataError.decodeError(query: url)))
                 }
                                 
             case .failure(let error):
@@ -46,7 +46,7 @@ struct NetworkService {
             let entity = try jsonDecoder.decode(type.self, from: data)
             return .success(entity)
         } catch {
-            return .failure(.decodeError)
+            return .failure(.decodeError())
         }
     }
 }
