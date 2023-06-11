@@ -50,9 +50,12 @@ class WeatherViewController: UIViewController {
         snapshot = .init()
         let hourlyMockAnyHashables = viewModel.testUUIDs(count: 24) // 테스트객체 (제거할것)
         let cityMockAnyHashables = viewModel.testUUIDs(count: QueryItem.allCases.count - 1) // 서울뺴고
-        snapshot?.appendSections([.hourly, .city])
+        let windMockAnyHashables = viewModel.testUUIDs(count: 1)
+        
+        snapshot?.appendSections([.hourly, .city, .wind])
         snapshot?.appendItems(hourlyMockAnyHashables, toSection: .hourly)
         snapshot?.appendItems(cityMockAnyHashables, toSection: .city)
+        snapshot?.appendItems(windMockAnyHashables, toSection: .wind)
         datasource?.apply(self.snapshot!, animatingDifferences: true)
     }
     
@@ -123,10 +126,17 @@ extension WeatherViewController {
                 let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
                                                                     heightDimension: .fractionalHeight(1.0)))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                               heightDimension: .absolute(250)),
+                                                                               heightDimension: .absolute(150)),
                                                              subitems: [item])
+                let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                                                                                               heightDimension: .fractionalHeight(0.05)),
+                                                                             elementKind: UICollectionView.elementKindSectionHeader,
+                                                                             alignment: .top)
+                headerView.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
                 section = .init(group: group)
-
+                
+                section?.boundarySupplementaryItems = [headerView]
+                section?.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
                 return section
                 
             case .tempMap:
@@ -160,6 +170,7 @@ extension WeatherViewController {
     private func configureCollectionViewCellDatasource() {
         let hourlyCollectionViewCellResistration = hourlySecitonItemConfigure()
         let cityCollectionViewCellResistration = citySectionItemConfigure()
+        let windCollectionViewCellResistration = windSectionItemConfigure()
         
         datasource = Datasource(collectionView: weatherCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             guard let sectionKind = Section(rawValue: indexPath.section) else { return nil }
@@ -172,7 +183,8 @@ extension WeatherViewController {
                 return self.weatherCollectionView.dequeueConfiguredReusableCell(using: cityCollectionViewCellResistration,
                                                                                 for: indexPath, item: itemIdentifier)
             case .wind:
-                return nil
+                return self.weatherCollectionView.dequeueConfiguredReusableCell(using: windCollectionViewCellResistration,
+                                                                                for: indexPath, item: itemIdentifier)
             case .tempMap:
                 return nil
             case .detail:
@@ -195,7 +207,7 @@ extension WeatherViewController {
             case .city:
                 collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: cityHeaderViewResistration, for: indexPath)
             case .wind:
-                print("A")
+                collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: cityHeaderViewResistration, for: indexPath)
             case .tempMap:
                 print("A")
             case .detail:
@@ -239,4 +251,10 @@ extension WeatherViewController {
         return citySectionHeaderResistration
     }
     
+    private func windSectionItemConfigure() -> UICollectionView.CellRegistration<WindCollectionViewCell, Any> {
+        let windSectionResistration = UICollectionView.CellRegistration<WindCollectionViewCell,Any> { cell, indexPath, itemIdentifier in
+            // TODO: 여기 windCell 컨피규어
+        }
+        return windSectionResistration
+    }
 }
