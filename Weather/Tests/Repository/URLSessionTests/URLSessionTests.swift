@@ -21,7 +21,7 @@ final class URLSessionTests: XCTestCase {
         sut = nil
     }
     
-    // MARK: CurrentWeatherDataAPI HealthCheck
+    // MARK: CurrentWeatherDataAPI HealthCheck : 한개도시 & 연쇄도시
     
     func test_CurrentWeatherDataAPI_HealthCheck_하나의_도시대상() {
         // given
@@ -44,9 +44,10 @@ final class URLSessionTests: XCTestCase {
     func test_CurrentWeatherDataAPI_HealthCheck_전체_도시대상_연쇄호출() {
         // given
         let allCityQueryItems : [QueryItem] = QueryItem.allCases // 8개 도시
-        var allResponse = [Int]()
+        var allResponse = [Int]() // response의 목록을 담을 객체
         let promise = expectation(description: "[API: Current Weather] 8개도시 연쇄호출 HealthCheck!")
         
+        // when
         for city in allCityQueryItems {
             let url = self.endPoint.url(city: city, for: .weather)!
             
@@ -68,8 +69,23 @@ final class URLSessionTests: XCTestCase {
     }
     
     
-    // MARK:  API: 5dayWeatherForecastAPI HealthCheck
-    func test_FiveDayWeatherForecast_HealthCheck() {
+    // MARK: API: 5dayWeatherForecastAPI HealthCheck : 한개도시
+    
+    func test_FiveDayWeatherForecast_HealthCheck_하나의_도시대상() {
+        // given
+        let url = endPoint.url(city: .seoul, for: .forecast)!
+        let promise = expectation(description: "[API: FiveDayWeatherForecast] 단수호출 HealthCheck!")
         
+        // when
+        let task = sut.dataTask(with: url) { _, response, _ in
+            guard let response = response as? HTTPURLResponse else { return }
+            // then
+            let statusCode = response.statusCode
+            XCTAssertEqual(statusCode, 200)
+            promise.fulfill()
+        }
+        task.resume()
+        
+        wait(for: [promise], timeout: 10)
     }
 }
