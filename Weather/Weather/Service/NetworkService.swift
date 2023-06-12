@@ -13,7 +13,6 @@ enum ProcessDataError: Error {
 
 struct NetworkService {
     private let repository = NetworkRepository()
-    private let endPoint: EndPoint = EndPoint()
     
     
     func fetch<T: Decodable>(url: URL?,
