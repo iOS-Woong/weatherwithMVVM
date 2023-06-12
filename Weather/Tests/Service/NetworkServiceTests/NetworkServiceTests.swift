@@ -85,7 +85,6 @@ final class NetworkServiceTests: XCTestCase {
                         XCTAssertEqual(allCityName, setAllCity.union(allCityName))
                         promise.fulfill()
                     }
-                    
                 case .failure(let error):
                     XCTFail("\(error)")
                 }
