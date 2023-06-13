@@ -27,6 +27,19 @@ final class DataTransferServiceTests: XCTestCase {
             XCTAssertEqual( $0.count, 27)
             promise.fulfill()
         }
+        
         wait(for: [promise], timeout: 10)
     }
+    
+    func test_fetchAllCitiesCurrentWeather_호출시_CityWeather를_8개반환하는가() {
+        let promise = expectation(description: "CityWeather count 8(UI에 보여줄 데이터수) Test")
+        
+        sut.fetchAllCitiesCurrentWeather {
+            XCTAssertEqual( $0.count, 8)
+            promise.fulfill()
+        }
+        
+        wait(for: [promise], timeout: 10)
+    }
+    
 }
