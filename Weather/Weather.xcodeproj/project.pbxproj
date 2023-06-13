@@ -24,7 +24,7 @@
 		D28E953B2A365BA60076A8FA /* WeatherMaps.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E953A2A365BA60076A8FA /* WeatherMaps.swift */; };
 		D28E95442A367D1F0076A8FA /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E95432A367D1F0076A8FA /* NetworkServiceTests.swift */; };
 		D28E954B2A37A38D0076A8FA /* DataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E954A2A37A38D0076A8FA /* DataTransferService.swift */; };
-		D28E95532A384EC10076A8FA /* DataTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E95522A384EC10076A8FA /* DataTransferTests.swift */; };
+		D28E95532A384EC10076A8FA /* DataTransferServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E95522A384EC10076A8FA /* DataTransferServiceTests.swift */; };
 		D2D3FCAC2A1DB83E000039FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCAB2A1DB83E000039FD /* AppDelegate.swift */; };
 		D2D3FCAE2A1DB83E000039FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCAD2A1DB83E000039FD /* SceneDelegate.swift */; };
 		D2D3FCB02A1DB83F000039FD /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCAF2A1DB83E000039FD /* WeatherViewController.swift */; };
@@ -91,7 +91,7 @@
 		D28E95432A367D1F0076A8FA /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 		D28E954A2A37A38D0076A8FA /* DataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferService.swift; sourceTree = "<group>"; };
 		D28E95502A384EC10076A8FA /* DataTransferServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataTransferServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D28E95522A384EC10076A8FA /* DataTransferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferTests.swift; sourceTree = "<group>"; };
+		D28E95522A384EC10076A8FA /* DataTransferServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferServiceTests.swift; sourceTree = "<group>"; };
 		D2D3FCA82A1DB83E000039FD /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D3FCAB2A1DB83E000039FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2D3FCAD2A1DB83E000039FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -223,7 +223,7 @@
 		D28E953C2A367CED0076A8FA /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				D28E95512A384EC10076A8FA /* DataTransferTests */,
+				D28E95512A384EC10076A8FA /* DataTransferServiceTests */,
 				D28E95422A367D1F0076A8FA /* NetworkServiceTests */,
 			);
 			path = Service;
@@ -237,12 +237,12 @@
 			path = NetworkServiceTests;
 			sourceTree = "<group>";
 		};
-		D28E95512A384EC10076A8FA /* DataTransferTests */ = {
+		D28E95512A384EC10076A8FA /* DataTransferServiceTests */ = {
 			isa = PBXGroup;
 			children = (
-				D28E95522A384EC10076A8FA /* DataTransferTests.swift */,
+				D28E95522A384EC10076A8FA /* DataTransferServiceTests.swift */,
 			);
-			path = DataTransferTests;
+			path = DataTransferServiceTests;
 			sourceTree = "<group>";
 		};
 		D2D3FC9F2A1DB83E000039FD = {
@@ -562,7 +562,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D28E95532A384EC10076A8FA /* DataTransferTests.swift in Sources */,
+				D28E95532A384EC10076A8FA /* DataTransferServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
