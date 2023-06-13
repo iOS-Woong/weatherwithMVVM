@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D23663F52A29FC5800D6CDD6 /* .gitIgnore in Resources */ = {isa = PBXBuildFile; fileRef = D23663F42A29FC5800D6CDD6 /* .gitIgnore */; };
 		D23663FD2A2A010C00D6CDD6 /* NetworkRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23663FC2A2A010C00D6CDD6 /* NetworkRepositoryTests.swift */; };
 		D23664042A2A02CD00D6CDD6 /* StubURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23664032A2A02CD00D6CDD6 /* StubURLSession.swift */; };
 		D24807862A1FBB3900922838 /* hourlyCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24807852A1FBB3900922838 /* hourlyCollectionHeaderView.swift */; };
@@ -70,7 +69,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D23663F42A29FC5800D6CDD6 /* .gitIgnore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitIgnore; sourceTree = "<group>"; };
 		D23663FA2A2A010C00D6CDD6 /* NetworkRepositoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkRepositoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23663FC2A2A010C00D6CDD6 /* NetworkRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepositoryTests.swift; sourceTree = "<group>"; };
 		D23664032A2A02CD00D6CDD6 /* StubURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubURLSession.swift; sourceTree = "<group>"; };
@@ -248,9 +246,8 @@
 		D2D3FC9F2A1DB83E000039FD = {
 			isa = PBXGroup;
 			children = (
-				D23663F42A29FC5800D6CDD6 /* .gitIgnore */,
-				D276AB802A29F24F007E3677 /* Tests */,
 				D2D3FCAA2A1DB83E000039FD /* Weather */,
+				D276AB802A29F24F007E3677 /* Tests */,
 				D2D3FCA92A1DB83E000039FD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -525,7 +522,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D23663F52A29FC5800D6CDD6 /* .gitIgnore in Resources */,
 				D2D3FCB82A1DB841000039FD /* LaunchScreen.storyboard in Resources */,
 				D2D3FCB52A1DB841000039FD /* Assets.xcassets in Resources */,
 			);
