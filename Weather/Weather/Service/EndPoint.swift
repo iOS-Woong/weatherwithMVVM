@@ -36,15 +36,12 @@ enum QueryItem: String, CaseIterable {
     var description: [URLQueryItem] {
         let queryItems = [
             URLQueryItem(name: "q", value: self.rawValue),
-            URLQueryItem(name: "appid", value: "44aea5632c5f4c27d89bbe765acbed69")
+            URLQueryItem(name: "appid", value: "44aea5632c5f4c27d89bbe765acbed69"),
+            URLQueryItem(name: "lang", value: "kr")
         ]
         
         return queryItems
     }
-}
-
-enum key: String {
-    case key = "&appid=44aea5632c5f4c27d89bbe765acbed69"
 }
 
 struct EndPoint {

@@ -27,6 +27,7 @@ final class NetworkServiceTests: XCTestCase {
 
     func test_fetch_서울을_fetch했을때_FiveDayWeatherForecast타입의_cityName을_seoul로_가져오는가() {
         let url = endPoint.url(city: .seoul, for: .forecast)!
+        print(url)
         let seoulString = "Seoul"
         let promise = expectation(description: "[fetch & Precess Test]")
         
@@ -57,7 +58,6 @@ final class NetworkServiceTests: XCTestCase {
         sut.fetch(url: url, type: CurrentWeather.self) { result in
             switch result {
             case .success(let data):
-                print("부산나와야하는데?", data.name)
                 XCTAssertEqual(data.name, "Ulsan")
                 promise.fulfill()
             case .failure(let error):

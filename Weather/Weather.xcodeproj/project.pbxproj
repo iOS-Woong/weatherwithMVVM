@@ -24,6 +24,7 @@
 		D28E953B2A365BA60076A8FA /* WeatherMaps.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E953A2A365BA60076A8FA /* WeatherMaps.swift */; };
 		D28E95442A367D1F0076A8FA /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E95432A367D1F0076A8FA /* NetworkServiceTests.swift */; };
 		D28E954B2A37A38D0076A8FA /* DataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E954A2A37A38D0076A8FA /* DataTransferService.swift */; };
+		D28E95532A384EC10076A8FA /* DataTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E95522A384EC10076A8FA /* DataTransferTests.swift */; };
 		D2D3FCAC2A1DB83E000039FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCAB2A1DB83E000039FD /* AppDelegate.swift */; };
 		D2D3FCAE2A1DB83E000039FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCAD2A1DB83E000039FD /* SceneDelegate.swift */; };
 		D2D3FCB02A1DB83F000039FD /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCAF2A1DB83E000039FD /* WeatherViewController.swift */; };
@@ -59,6 +60,13 @@
 			remoteGlobalIDString = D2D3FCA72A1DB83E000039FD;
 			remoteInfo = Weather;
 		};
+		D28E95542A384EC10076A8FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2D3FCA02A1DB83E000039FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2D3FCA72A1DB83E000039FD;
+			remoteInfo = Weather;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +90,8 @@
 		D28E95412A367D1F0076A8FA /* NetworkServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D28E95432A367D1F0076A8FA /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 		D28E954A2A37A38D0076A8FA /* DataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferService.swift; sourceTree = "<group>"; };
+		D28E95502A384EC10076A8FA /* DataTransferServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataTransferServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D28E95522A384EC10076A8FA /* DataTransferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferTests.swift; sourceTree = "<group>"; };
 		D2D3FCA82A1DB83E000039FD /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D3FCAB2A1DB83E000039FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2D3FCAD2A1DB83E000039FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +123,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D28E953E2A367D1F0076A8FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D28E954D2A384EC10076A8FA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -206,6 +223,7 @@
 		D28E953C2A367CED0076A8FA /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				D28E95512A384EC10076A8FA /* DataTransferTests */,
 				D28E95422A367D1F0076A8FA /* NetworkServiceTests */,
 			);
 			path = Service;
@@ -217,6 +235,14 @@
 				D28E95432A367D1F0076A8FA /* NetworkServiceTests.swift */,
 			);
 			path = NetworkServiceTests;
+			sourceTree = "<group>";
+		};
+		D28E95512A384EC10076A8FA /* DataTransferTests */ = {
+			isa = PBXGroup;
+			children = (
+				D28E95522A384EC10076A8FA /* DataTransferTests.swift */,
+			);
+			path = DataTransferTests;
 			sourceTree = "<group>";
 		};
 		D2D3FC9F2A1DB83E000039FD = {
@@ -236,6 +262,7 @@
 				D276AB772A29F224007E3677 /* URLSessionTests.xctest */,
 				D23663FA2A2A010C00D6CDD6 /* NetworkRepositoryTests.xctest */,
 				D28E95412A367D1F0076A8FA /* NetworkServiceTests.xctest */,
+				D28E95502A384EC10076A8FA /* DataTransferServiceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -377,6 +404,24 @@
 			productReference = D28E95412A367D1F0076A8FA /* NetworkServiceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		D28E954F2A384EC10076A8FA /* DataTransferServiceTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D28E95562A384EC10076A8FA /* Build configuration list for PBXNativeTarget "DataTransferServiceTests" */;
+			buildPhases = (
+				D28E954C2A384EC10076A8FA /* Sources */,
+				D28E954D2A384EC10076A8FA /* Frameworks */,
+				D28E954E2A384EC10076A8FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D28E95552A384EC10076A8FA /* PBXTargetDependency */,
+			);
+			name = DataTransferServiceTests;
+			productName = DataTransferTests;
+			productReference = D28E95502A384EC10076A8FA /* DataTransferServiceTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D2D3FCA72A1DB83E000039FD /* Weather */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2D3FCBC2A1DB841000039FD /* Build configuration list for PBXNativeTarget "Weather" */;
@@ -416,6 +461,10 @@
 						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = D2D3FCA72A1DB83E000039FD;
 					};
+					D28E954F2A384EC10076A8FA = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = D2D3FCA72A1DB83E000039FD;
+					};
 					D2D3FCA72A1DB83E000039FD = {
 						CreatedOnToolsVersion = 14.3;
 					};
@@ -438,6 +487,7 @@
 				D276AB762A29F224007E3677 /* URLSessionTests */,
 				D23663F92A2A010C00D6CDD6 /* NetworkRepositoryTests */,
 				D28E95402A367D1F0076A8FA /* NetworkServiceTests */,
+				D28E954F2A384EC10076A8FA /* DataTransferServiceTests */,
 			);
 		};
 /* End PBXProject section */
@@ -458,6 +508,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D28E953F2A367D1F0076A8FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D28E954E2A384EC10076A8FA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -498,6 +555,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D28E95442A367D1F0076A8FA /* NetworkServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D28E954C2A384EC10076A8FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D28E95532A384EC10076A8FA /* DataTransferTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +612,11 @@
 			isa = PBXTargetDependency;
 			target = D2D3FCA72A1DB83E000039FD /* Weather */;
 			targetProxy = D28E95452A367D1F0076A8FA /* PBXContainerItemProxy */;
+		};
+		D28E95552A384EC10076A8FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2D3FCA72A1DB83E000039FD /* Weather */;
+			targetProxy = D28E95542A384EC10076A8FA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -692,6 +762,50 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = woong.NetworkServiceTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weather.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Weather";
+			};
+			name = Release;
+		};
+		D28E95572A384EC10076A8FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N2WW86KJNF;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = woong.DataTransferTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weather.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Weather";
+			};
+			name = Debug;
+		};
+		D28E95582A384EC10076A8FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N2WW86KJNF;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = woong.DataTransferTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -904,6 +1018,15 @@
 			buildConfigurations = (
 				D28E95482A367D200076A8FA /* Debug */,
 				D28E95492A367D200076A8FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D28E95562A384EC10076A8FA /* Build configuration list for PBXNativeTarget "DataTransferServiceTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D28E95572A384EC10076A8FA /* Debug */,
+				D28E95582A384EC10076A8FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
