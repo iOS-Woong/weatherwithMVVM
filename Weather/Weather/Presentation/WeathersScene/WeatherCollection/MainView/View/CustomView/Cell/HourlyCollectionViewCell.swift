@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HourlyCollectionViewCell: UICollectionViewCell, ReusableView {
+class HourlyCollectionViewCell: UICollectionViewCell {
     private let timeLabel = {
        let label = UILabel()
         

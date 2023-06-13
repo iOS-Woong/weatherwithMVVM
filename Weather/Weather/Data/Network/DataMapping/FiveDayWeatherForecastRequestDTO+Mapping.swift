@@ -11,7 +11,7 @@
 
 import Foundation
 
-struct FiveDayWeatherForecast: Codable {
+struct FiveDayWeatherForecastRequestDTO: Codable {
     let cod: String
     let message, cnt: Int
     let list: [FList]

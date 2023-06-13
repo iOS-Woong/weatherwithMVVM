@@ -12,7 +12,7 @@
 
 import Foundation
 
-struct CurrentWeather: Codable {
+struct CurrentWeatherRequestDTO: Codable {
     let coord: Coord
     let weather: [Weather]
     let base: String
