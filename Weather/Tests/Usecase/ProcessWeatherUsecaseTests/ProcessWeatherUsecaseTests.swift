@@ -1,6 +1,6 @@
 //
-//  DataTransferServiceTests.swift
-//  DataTransferServiceTests
+//  ProcessWeatherUsecaseTests.swift
+//  ProcessWeatherUsecaseTests
 //
 //  Created by 서현웅 on 2023/06/13.
 //
@@ -8,12 +8,12 @@
 import XCTest
 @testable import Weather
 
-final class DataTransferServiceTests: XCTestCase {
+final class ProcessWeatherUsecaseTests: XCTestCase {
 
-    var sut: DataTransferService!
+    var sut: ProcessWeatherUsecase!
     
     override func setUpWithError() throws {
-        sut = DataTransferService()
+        sut = ProcessWeatherUsecase()
     }
 
     override func tearDownWithError() throws {
