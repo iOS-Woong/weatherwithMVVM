@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D22BC1D92A394C9300CD5D2F /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22BC1D82A394C9300CD5D2F /* Forecast.swift */; };
 		D22BC1DB2A394CBB00CD5D2F /* CityWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22BC1DA2A394CBB00CD5D2F /* CityWeather.swift */; };
+		D22BC1DF2A39521400CD5D2F /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22BC1DE2A39521400CD5D2F /* Observable.swift */; };
 		D23663FD2A2A010C00D6CDD6 /* NetworkRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23663FC2A2A010C00D6CDD6 /* NetworkRepositoryTests.swift */; };
 		D23664042A2A02CD00D6CDD6 /* StubURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23664032A2A02CD00D6CDD6 /* StubURLSession.swift */; };
 		D24807862A1FBB3900922838 /* hourlyCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24807852A1FBB3900922838 /* hourlyCollectionHeaderView.swift */; };
@@ -73,6 +74,7 @@
 /* Begin PBXFileReference section */
 		D22BC1D82A394C9300CD5D2F /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		D22BC1DA2A394CBB00CD5D2F /* CityWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityWeather.swift; sourceTree = "<group>"; };
+		D22BC1DE2A39521400CD5D2F /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		D23663FA2A2A010C00D6CDD6 /* NetworkRepositoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkRepositoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D23663FC2A2A010C00D6CDD6 /* NetworkRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepositoryTests.swift; sourceTree = "<group>"; };
 		D23664032A2A02CD00D6CDD6 /* StubURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubURLSession.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				D28E954A2A37A38D0076A8FA /* ProcessWeatherUsecase.swift */,
+				D2D3FCC32A1DBAFD000039FD /* EndPoint.swift */,
 				D22BC1D72A394C5400CD5D2F /* DTO */,
 			);
 			path = Usecase;
@@ -181,6 +184,14 @@
 				D28E95512A384EC10076A8FA /* ProcessWeatherUsecaseTests */,
 			);
 			path = Usecase;
+			sourceTree = "<group>";
+		};
+		D22BC1DD2A39520200CD5D2F /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				D22BC1DE2A39521400CD5D2F /* Observable.swift */,
+			);
+			path = Infrastructure;
 			sourceTree = "<group>";
 		};
 		D23663FB2A2A010C00D6CDD6 /* NetworkRepositoryTests */ = {
@@ -320,7 +331,6 @@
 		D2D3FCBF2A1DBA00000039FD /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				D2D3FCC32A1DBAFD000039FD /* EndPoint.swift */,
 				D2D3FCC52A1E190C000039FD /* NetworkService.swift */,
 			);
 			path = Service;
@@ -357,6 +367,7 @@
 		D2D3FCC72A1E1B61000039FD /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				D22BC1DD2A39520200CD5D2F /* Infrastructure */,
 				D2D3FCCB2A1E1DFE000039FD /* MainView */,
 				D2D3FCB62A1DB841000039FD /* LaunchScreen.storyboard */,
 			);
@@ -615,6 +626,7 @@
 				D2D3FCCA2A1E1BAE000039FD /* CurrentWeather.swift in Sources */,
 				D2D3FCAC2A1DB83E000039FD /* AppDelegate.swift in Sources */,
 				D2D3FCC42A1DBAFD000039FD /* EndPoint.swift in Sources */,
+				D22BC1DF2A39521400CD5D2F /* Observable.swift in Sources */,
 				D276AB842A29F3C8007E3677 /* URLSessionProtocol.swift in Sources */,
 				D248078B2A1FC18000922838 /* HourlyCollectionViewCell.swift in Sources */,
 				D22BC1D92A394C9300CD5D2F /* Forecast.swift in Sources */,

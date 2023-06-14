@@ -8,7 +8,7 @@
 import Foundation
 
 class MainViewModel {
-    private let service = NetworkService()
+    private let usecase = ProcessWeatherUsecase()
     
     
     
