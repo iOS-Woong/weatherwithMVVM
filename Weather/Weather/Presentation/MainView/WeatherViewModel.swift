@@ -9,7 +9,8 @@ import Foundation
 
 class MainViewModel {
     private let usecase = ProcessWeatherUsecase()
-    
+    var forecasts: Observable<[Forecast]?> = .init(nil)
+    var weathers: Observable<[CityWeather]?> = .init(nil)
     
     
 }
