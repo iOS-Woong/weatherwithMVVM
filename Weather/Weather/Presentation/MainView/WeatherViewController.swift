@@ -45,9 +45,10 @@ class WeatherViewController: UIViewController {
         configureSupplementaryViewDatasource()
         configureSnapshot()
         bind()
+        fetch()
     }
     
-    func bind() {
+    private func bind() {
         viewModel.forecasts.subscribe(onNext: {
             $0
         })
@@ -55,6 +56,10 @@ class WeatherViewController: UIViewController {
         viewModel.weathers.subscribe(onNext: {
             $0
         })
+    }
+    
+    private func fetch() {
+        viewModel.fetch()
     }
     
     private func configureSnapshot() {
