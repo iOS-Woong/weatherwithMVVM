@@ -7,17 +7,17 @@
 
 import Foundation
 
-class MainViewModel {
+class WeatherViewModel {
     private let usecase = ProcessWeatherUsecase()
+    
     var forecasts: Observable<[Forecast]?> = .init(nil)
     var weathers: Observable<[CityWeather]?> = .init(nil)
-    
     
 }
 
 
 // Test함수
-extension MainViewModel {
+extension WeatherViewModel {
     func testUUIDs(count: Int) -> [UUID] {
         var uuids = [UUID]()
         let index = count - 1

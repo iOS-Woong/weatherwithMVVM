@@ -15,7 +15,7 @@ class WeatherViewController: UIViewController {
     typealias Datasource = UICollectionViewDiffableDataSource<Section, AnyHashable>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>
     
-    private let viewModel: MainViewModel
+    private let viewModel: WeatherViewModel
     
     private var datasource: Datasource?
     private var snapshot: Snapshot?
@@ -28,7 +28,7 @@ class WeatherViewController: UIViewController {
         return collectioniView
     }()
     
-    init(viewModel: MainViewModel) {
+    init(viewModel: WeatherViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -44,6 +44,17 @@ class WeatherViewController: UIViewController {
         configureCollectionViewCellDatasource()
         configureSupplementaryViewDatasource()
         configureSnapshot()
+        bind()
+    }
+    
+    func bind() {
+        viewModel.forecasts.subscribe(onNext: {
+            $0
+        })
+        
+        viewModel.weathers.subscribe(onNext: {
+            $0
+        })
     }
     
     private func configureSnapshot() {
