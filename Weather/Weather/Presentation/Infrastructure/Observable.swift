@@ -24,5 +24,4 @@ class Observable<T> {
         onNext(value)
         self.listner = onNext
     }
-    
 }
