@@ -239,6 +239,7 @@
 		D22BC1ED2A395BB300CD5D2F /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				D22BC1F32A39618E00CD5D2F /* WeatherViewModelTests */,
 				D22BC1E52A3956AC00CD5D2F /* ObservableTests */,
 			);
 			path = Presentation;
@@ -357,7 +358,6 @@
 			children = (
 				D276AB802A29F24F007E3677 /* Tests */,
 				D2D3FCAA2A1DB83E000039FD /* Weather */,
-				D22BC1F32A39618E00CD5D2F /* WeatherViewModelTests */,
 				D2D3FCA92A1DB83E000039FD /* Products */,
 			);
 			sourceTree = "<group>";

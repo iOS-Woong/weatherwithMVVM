@@ -43,18 +43,19 @@ class WeatherViewController: UIViewController {
         setupCollectionViewAttributes()
         configureCollectionViewCellDatasource()
         configureSupplementaryViewDatasource()
-        configureSnapshot()
         bind()
         fetch()
     }
     
     private func bind() {
-        viewModel.forecasts.subscribe(onNext: {
-            $0
+        viewModel.forecasts.subscribe(onNext: { forecasts in
+            guard let forecasts else { return }
+            self.configureSnapshot(forecasts, to: .hourly)
         })
-        
-        viewModel.weathers.subscribe(onNext: {
-            $0
+     
+        viewModel.weathers.subscribe(onNext: { weathers in
+            guard let weathers else { return }
+            self.configureSnapshot(weathers, to: .city)
         })
     }
     
@@ -62,19 +63,15 @@ class WeatherViewController: UIViewController {
         viewModel.fetch()
     }
     
-    private func configureSnapshot() {
-        snapshot = .init()
-        let hourlyMockAnyHashables = viewModel.testUUIDs(count: 24) // 테스트객체 (제거할것)
-        let cityMockAnyHashables = viewModel.testUUIDs(count: QueryItem.allCases.count - 1) // 서울뺴고
-        let windMockAnyHashables = viewModel.testUUIDs(count: 1)
-        let tempMapMockAnyHashables = viewModel.testUUIDs(count: 1)
-        
-        snapshot?.appendSections([.hourly, .city, .wind, .tempMap])
-        snapshot?.appendItems(hourlyMockAnyHashables, toSection: .hourly)
-        snapshot?.appendItems(cityMockAnyHashables, toSection: .city)
-        snapshot?.appendItems(windMockAnyHashables, toSection: .wind)
-        snapshot?.appendItems(tempMapMockAnyHashables, toSection: .tempMap)
-        datasource?.apply(self.snapshot!, animatingDifferences: true)
+    private func configureSnapshot(_ itemIdentifier: [AnyHashable], to section: Section) {
+        DispatchQueue.main.async {
+            if self.snapshot == nil {
+                self.snapshot = .init()
+            }
+            self.snapshot?.appendSections([section])
+            self.snapshot?.appendItems(itemIdentifier, toSection: section)
+            self.datasource?.apply(self.snapshot!, animatingDifferences: true)
+        }
     }
     
     private func setupCollectionViewAttributes() {
@@ -249,7 +246,8 @@ extension WeatherViewController {
     
     private func hourlySecitonItemConfigure() -> UICollectionView.CellRegistration<HourlyCollectionViewCell, Any> {
         let hourlySectionResistration = UICollectionView.CellRegistration<HourlyCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
-            // TODO: 여기에 hourlyCell 컨피규어
+            guard let itemIdentifier = itemIdentifier as? Forecast else { return }
+            cell.configure(itemIdentifier)
         }
         
         return hourlySectionResistration
@@ -266,7 +264,8 @@ extension WeatherViewController {
     
     private func citySectionItemConfigure() -> UICollectionView.CellRegistration<CityCollectionViewCell, Any> {
         let citySectionResistration = UICollectionView.CellRegistration<CityCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
-            // TODO: 여기 cityCell 컨피규어
+            guard let itemIdentifier = itemIdentifier as? CityWeather else { return }
+            cell.configure(itemIdentifier)
         }
         return citySectionResistration
     }

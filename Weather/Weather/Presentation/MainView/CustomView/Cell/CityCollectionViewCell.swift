@@ -12,7 +12,6 @@ class CityCollectionViewCell: UICollectionViewCell {
     private let cityLabel = {
         let label = UILabel()
         
-        label.text = "대구" // test
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         
@@ -30,7 +29,6 @@ class CityCollectionViewCell: UICollectionViewCell {
     private let minTempLabel = {
         let label = UILabel()
         
-        label.text = "-17°"
         label.textColor = .white
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
@@ -50,7 +48,6 @@ class CityCollectionViewCell: UICollectionViewCell {
     private let maxTempLabel = {
         let label = UILabel()
         
-        label.text = "34°"
         label.textColor = .white
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
@@ -77,6 +74,12 @@ class CityCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(_ data: CityWeather) {
+        cityLabel.text = data.description
+        maxTempLabel.text = data.temparature.tempMax.description
+        minTempLabel.text = data.temparature.tempMin.description
     }
     
     private func setupViews() {

@@ -47,6 +47,11 @@ class HourlyCollectionViewCell: UICollectionViewCell, ReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(_ data: Forecast) {
+        timeLabel.text = data.dt
+        tempLabel.text = data.temp.description
+    }
+    
     private func setupViews() {
         let targetViews = [timeLabel, weatherImageView, tempLabel]
         targetViews.forEach {
