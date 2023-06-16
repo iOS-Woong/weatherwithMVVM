@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Forecast {
+struct Forecast: Hashable {
+    let id = UUID()
     let dt: String
     let temp : Double
     let icon: String
