@@ -19,4 +19,8 @@ extension WeatherViewModel {
         usecase.fetchFiveDaysForecast { self.forecasts.value = $0 }
         usecase.fetchAllCitiesCurrentWeather { self.weathers.value = $0 }
     }
+    
+    func fetchWeatherIcon(iconString: String , completion: @escaping (Data) -> Void) {
+        usecase.fetchWeatherIcon(iconString: iconString, completion: completion)
+    }
 }

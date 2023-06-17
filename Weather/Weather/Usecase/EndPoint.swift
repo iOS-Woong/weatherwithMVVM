@@ -9,7 +9,9 @@ import Foundation
 
 // currentWather: https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 // 5dayweather: https://api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
-
+// ImageData: https://api.openweathermap.org/img/wn/{image Name}@2x.png
+// 01d
+// https://api.openweathermap.org/img/wn/{image Name}@2x.png
 enum Scheme: String {
     case https = "https"
 }
@@ -21,6 +23,7 @@ enum Host: String {
 enum Path: String {
     case weather = "/data/2.5/weather"
     case forecast = "/data/2.5/forecast"
+    case icon = "/img/wn"
 }
 
 enum QueryItem: String, CaseIterable {
@@ -45,12 +48,12 @@ enum QueryItem: String, CaseIterable {
 }
 
 struct EndPoint {
-    func url(city query: QueryItem, for pathKind: Path) -> URL? {
+    func url(city query: QueryItem?, for pathKind: Path) -> URL? {
         var component = URLComponents()
         component.scheme = Scheme.https.rawValue
         component.host = Host.base.rawValue
         component.path = pathKind.rawValue
-        component.queryItems = query.description
+        component.queryItems = query?.description
         return component.url
     }
 }

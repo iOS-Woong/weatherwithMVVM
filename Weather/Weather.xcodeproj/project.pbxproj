@@ -197,19 +197,19 @@
 			children = (
 				D28E954A2A37A38D0076A8FA /* ProcessWeatherUsecase.swift */,
 				D2D3FCC32A1DBAFD000039FD /* EndPoint.swift */,
-				D22BC1D72A394C5400CD5D2F /* DTO */,
+				D22BC1D72A394C5400CD5D2F /* DecodeModel */,
 			);
 			path = Usecase;
 			sourceTree = "<group>";
 		};
-		D22BC1D72A394C5400CD5D2F /* DTO */ = {
+		D22BC1D72A394C5400CD5D2F /* DecodeModel */ = {
 			isa = PBXGroup;
 			children = (
 				D2D3FCC92A1E1BAE000039FD /* CurrentWeather.swift */,
 				D28E95382A3659920076A8FA /* FiveDayWeatherForecast.swift */,
 				D28E953A2A365BA60076A8FA /* WeatherMaps.swift */,
 			);
-			path = DTO;
+			path = DecodeModel;
 			sourceTree = "<group>";
 		};
 		D22BC1DC2A394EF800CD5D2F /* Usecase */ = {

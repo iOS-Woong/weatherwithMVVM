@@ -60,4 +60,17 @@ struct ProcessWeatherUsecase {
             }
         }
     }
+    
+    func fetchWeatherIcon(iconString: String, completion: @escaping (Data) -> Void) {
+        let url = endPoint.url(city: nil, for: .icon)
+        
+        service.fetch(url: url, type: Data.self) { result in
+            switch result {
+            case .success(let data):
+                completion(data)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
