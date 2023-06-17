@@ -18,6 +18,7 @@ enum Scheme: String {
 
 enum Host: String {
     case base = "api.openweathermap.org"
+    case sub = "openweathermap.org"
 }
 
 enum Path: String {
@@ -54,6 +55,15 @@ struct EndPoint {
         component.host = Host.base.rawValue
         component.path = pathKind.rawValue
         component.queryItems = query?.description
+        return component.url
+    }
+    
+    func imageUrl(icon name: String) -> URL? {
+        var component = URLComponents()
+        component.scheme = Scheme.https.rawValue
+        component.host = Host.sub.rawValue
+        component.path = Path.icon.rawValue
+        component.path.append("/\(name)@2x.png")
         return component.url
     }
 }

@@ -97,4 +97,15 @@ final class NetworkServiceTests: XCTestCase {
         }
         wait(for: [promise], timeout: 10)
     }
+    
+    func test_fetch_이미지URL로_fetch하면_데이터타입을_전달하는가() {
+        let url = endPoint.imageUrl(icon: "10d")!
+        let promise = expectation(description: "Data is fulfill")
+        
+        sut.fetch(url: url) { data in
+            XCTAssertNotNil(data)
+            promise.fulfill()
+        }
+        wait(for: [promise], timeout: 10)
+    }
 }
