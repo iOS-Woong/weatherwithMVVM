@@ -247,7 +247,11 @@ extension WeatherViewController {
     private func hourlySecitonItemConfigure() -> UICollectionView.CellRegistration<HourlyCollectionViewCell, Any> {
         let hourlySectionResistration = UICollectionView.CellRegistration<HourlyCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
             guard let itemIdentifier = itemIdentifier as? Forecast else { return }
-            cell.configure(itemIdentifier)
+            cell.configure(text: itemIdentifier)
+            
+            self.viewModel.fetchWeatherIcon(iconString: itemIdentifier.icon) {
+                cell.configure(image: $0)
+            }
         }
         
         return hourlySectionResistration

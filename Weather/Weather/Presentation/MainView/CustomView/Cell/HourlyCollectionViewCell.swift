@@ -14,7 +14,6 @@ class HourlyCollectionViewCell: UICollectionViewCell, ReusableView {
         label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         label.textColor = .white
         label.textAlignment = .center
-        label.text = "오전 3시" // ForTest
         
         return label
     }()
@@ -22,7 +21,6 @@ class HourlyCollectionViewCell: UICollectionViewCell, ReusableView {
     private let weatherImageView = {
        let imageView = UIImageView()
         
-        imageView.image = UIImage(systemName: "cloud") // ForTest
         imageView.tintColor = .systemBlue
         
         return imageView
@@ -33,7 +31,6 @@ class HourlyCollectionViewCell: UICollectionViewCell, ReusableView {
         
         label.font = UIFont.systemFont(ofSize: 19, weight: .medium)
         label.textColor = .white
-        label.text = "17°"
         
         return label
     }()
@@ -47,9 +44,17 @@ class HourlyCollectionViewCell: UICollectionViewCell, ReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(_ data: Forecast) {
-        timeLabel.text = data.dt
-        tempLabel.text = data.temp.description
+    func configure(text data: Forecast) {
+        DispatchQueue.main.async {
+            self.timeLabel.text = data.dt
+            self.tempLabel.text = data.temp.description
+        }
+    }
+    
+    func configure(image data: Data) {
+        DispatchQueue.main.async {
+            self.weatherImageView.image = UIImage(data: data)
+        }
     }
     
     private func setupViews() {
