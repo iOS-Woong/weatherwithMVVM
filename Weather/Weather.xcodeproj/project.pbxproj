@@ -17,6 +17,8 @@
 		D24807862A1FBB3900922838 /* hourlyCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24807852A1FBB3900922838 /* hourlyCollectionHeaderView.swift */; };
 		D24807892A1FBFDD00922838 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24807882A1FBFDD00922838 /* ReusableView.swift */; };
 		D248078B2A1FC18000922838 /* HourlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D248078A2A1FC18000922838 /* HourlyCollectionViewCell.swift */; };
+		D275F6222A3D7FFE002EB932 /* MemoryCacheStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D275F6212A3D7FFD002EB932 /* MemoryCacheStorage.swift */; };
+		D275F6242A3D84C9002EB932 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D275F6232A3D84C9002EB932 /* DiskStorage.swift */; };
 		D276AB7A2A29F225007E3677 /* URLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276AB792A29F225007E3677 /* URLSessionTests.swift */; };
 		D276AB842A29F3C8007E3677 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276AB832A29F3C8007E3677 /* URLSessionProtocol.swift */; };
 		D28E952D2A350DBE0076A8FA /* CityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E952C2A350DBE0076A8FA /* CityCollectionViewCell.swift */; };
@@ -101,6 +103,8 @@
 		D24807852A1FBB3900922838 /* hourlyCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hourlyCollectionHeaderView.swift; sourceTree = "<group>"; };
 		D24807882A1FBFDD00922838 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		D248078A2A1FC18000922838 /* HourlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCollectionViewCell.swift; sourceTree = "<group>"; };
+		D275F6212A3D7FFD002EB932 /* MemoryCacheStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCacheStorage.swift; sourceTree = "<group>"; };
+		D275F6232A3D84C9002EB932 /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
 		D276AB772A29F224007E3677 /* URLSessionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URLSessionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D276AB792A29F225007E3677 /* URLSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTests.swift; sourceTree = "<group>"; };
 		D276AB832A29F3C8007E3677 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
@@ -292,6 +296,15 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
+		D275F6202A3D7359002EB932 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				D275F6212A3D7FFD002EB932 /* MemoryCacheStorage.swift */,
+				D275F6232A3D84C9002EB932 /* DiskStorage.swift */,
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
 		D276AB782A29F224007E3677 /* URLSessionTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,6 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				D2D3FCC82A1E1B7C000039FD /* Application */,
+				D275F6202A3D7359002EB932 /* DataSource */,
 				D2D3FCC72A1E1B61000039FD /* Presentation */,
 				D22BC1D62A393EF800CD5D2F /* Usecase */,
 				D2D3FCBF2A1DBA00000039FD /* Service */,
@@ -776,6 +790,8 @@
 				D28E954B2A37A38D0076A8FA /* ProcessWeatherUsecase.swift in Sources */,
 				D28E953B2A365BA60076A8FA /* WeatherMaps.swift in Sources */,
 				D22BC1DB2A394CBB00CD5D2F /* CityWeather.swift in Sources */,
+				D275F6242A3D84C9002EB932 /* DiskStorage.swift in Sources */,
+				D275F6222A3D7FFE002EB932 /* MemoryCacheStorage.swift in Sources */,
 				D28E95392A3659920076A8FA /* FiveDayWeatherForecast.swift in Sources */,
 				D2D3FCD32A1FA71B000039FD /* WeatherViewModel.swift in Sources */,
 			);
