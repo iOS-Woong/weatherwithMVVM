@@ -47,6 +47,17 @@ class DiskStorage {
         return loadObject
     }
     
+    func remove(_ key: String) throws {
+        let filePath = directory.appendingPathComponent(key)
+        
+        do {
+            try fileManager.removeItem(at: filePath)
+        } catch {
+            throw DiskStorageError.removeError(path: filePath.path)
+        }
+    }
+    
+    
     private func createDirectory(with url: URL) throws {
         guard !fileManager.fileExists(atPath: url.path) else { return }
         
