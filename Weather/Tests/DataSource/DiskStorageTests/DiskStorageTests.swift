@@ -17,6 +17,8 @@ final class DiskStorageTests: XCTestCase {
         sut = nil
     }
     
+    // MARK: Init
+    
     func test_diskStorage_init했을때_의도한URL에_Directory가_생성되었는지() {
         // given
         let directoryName = "ForTestDirectory_First"
@@ -33,6 +35,8 @@ final class DiskStorageTests: XCTestCase {
         
         XCTAssertTrue(result)
     }
+    
+    // MARK: Create
     
     func test_diskStorage_insert했을때_Directory에_파일이생성되었는지() {
         // given
@@ -57,6 +61,8 @@ final class DiskStorageTests: XCTestCase {
         
         XCTAssertTrue(result)
     }
+    
+    // MARK: Read
     
     func test_diskStorage_object했을때_파일을가져오는지() {
         // given
@@ -94,6 +100,54 @@ final class DiskStorageTests: XCTestCase {
         // then
         XCTAssertThrowsError(try sut.object(mismatchedKey)) { error in
             XCTAssertEqual(error as? DiskStorageError, DiskStorageError.canNotLoadFile(path: filePath.path))
+        }
+    }
+    
+    // MARK: Delete
+    
+    func test_diskStorage_remove했을때_파일을지우는지() {
+        // given
+        let directoryName = "ForTestDirectory_Fifth"
+        let keyName = "key"
+        // when
+        sut = try! DiskStorage(directoryName: directoryName)
+        let mock = createJsonMock()
+        sut.insert(mock, for: keyName)
+        try! sut.remove(keyName)
+        
+        
+        // then
+        guard let url = fileManager.urls(for: .documentDirectory,
+                                         in: .userDomainMask).first else { return }
+        let directory = url.appendingPathComponent(directoryName)
+        let filePath = directory.appendingPathComponent(keyName)
+        
+        let result = fileManager.fileExists(atPath: filePath.path)
+
+        XCTAssertFalse(result)
+    }
+    
+    func test_diskStorage_잘못된키값으로_remove했을때_에러를뱉는지() {
+        // given
+        let directoryName = "ForTestDirectory_Sixth"
+        let keyName = "Key"
+        let mismatchedKey = "mismatchedKey"
+        
+        // when
+        sut = try! DiskStorage(directoryName: directoryName)
+        let mock = createJsonMock()
+        try sut.insert(mock, for: keyName)
+        
+        
+        guard let url = fileManager.urls(for: .documentDirectory,
+                                         in: .userDomainMask).first else { return }
+        let directory = url.appendingPathComponent(directoryName)
+        let filePath = directory.appendingPathComponent(mismatchedKey)
+        
+        // then
+        XCTAssertThrowsError(try sut.remove(mismatchedKey)) { error in
+            XCTAssertEqual(DiskStorageError.removeError(path: filePath.path),
+                           error as? DiskStorageError)
         }
     }
     
