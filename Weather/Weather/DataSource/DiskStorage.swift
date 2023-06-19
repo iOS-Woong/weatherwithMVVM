@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DiskStorageError: Error, Equatable {
+enum DiskStorageError: Error {
     case canNotFoundDocumentDirectory
     case canNotCreateStorageDirectory(path: String)
     case storeError(path: String)
@@ -46,7 +46,7 @@ class DiskStorage {
         
         return loadObject
     }
-
+    
     private func createDirectory(with url: URL) throws {
         guard !fileManager.fileExists(atPath: url.path) else { return }
         
