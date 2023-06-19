@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum DiskStorageError: Error {
+enum DiskStorageError: Error, Equatable {
     case canNotFoundDocumentDirectory
     case canNotCreateStorageDirectory(path: String)
     case storeError(path: String)
     case removeError(path: String)
-    case canNotLoadFileList(path: String)
+    case canNotLoadFile(path: String)
 }
 
 class DiskStorage {
@@ -33,7 +33,20 @@ class DiskStorage {
         fileManager.createFile(atPath: filePath.path, contents: object)
     }
     
-    
+    func object(_ key: String) throws -> Data? {
+        let filePath = directory.appendingPathComponent(key)
+        
+        var loadObject: Data?
+        
+        do {
+            loadObject = try Data(contentsOf: filePath)
+        } catch {
+            throw DiskStorageError.canNotLoadFile(path: filePath.path)
+        }
+        
+        return loadObject
+    }
+
     private func createDirectory(with url: URL) throws {
         guard !fileManager.fileExists(atPath: url.path) else { return }
         
