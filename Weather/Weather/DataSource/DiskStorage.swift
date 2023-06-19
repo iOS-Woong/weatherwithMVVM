@@ -27,6 +27,12 @@ class DiskStorage {
         try createDirectory(with: self.directory)
     }
     
+    func insert(_ object: Data, for key: String) {
+        let filePath = directory.appendingPathComponent(key)
+        
+        fileManager.createFile(atPath: filePath.path, contents: object)
+    }
+    
     
     private func createDirectory(with url: URL) throws {
         guard !fileManager.fileExists(atPath: url.path) else { return }
