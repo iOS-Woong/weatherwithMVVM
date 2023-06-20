@@ -7,17 +7,31 @@
 
 import UIKit
 
-class MemoryCacheStorage {
-    private let cache = NSCache<NSString, UIImage>()
+class MemoryObject<T> {
+    let value: T
+    
+    init(value: T) {
+        self.value = value
+    }
+}
+
+
+class MemoryCacheStorage<T> {
+    typealias MemoryType = NSCache<NSString, MemoryObject<T>>
+    
+    private let cache = MemoryType()
 }
 
 extension MemoryCacheStorage {
-    func insert(_ object: UIImage, for key: String) {
-        cache.setObject(object, forKey: key as NSString)
+    func insert(_ object: T, for key: String) {
+        let memoryObject = MemoryObject(value: object)
+        
+        cache.setObject(memoryObject, forKey: key as NSString)
     }
     
-    func object(_ key: String) -> UIImage? {
-        guard let cachedImage = cache.object(forKey: key as NSString) else { return nil }
-        return cachedImage
+    func object(_ key: String) -> T? {
+        guard let memoryObject = cache.object(forKey: key as NSString) else { return nil }
+        
+        return memoryObject.value
     }    
 }
