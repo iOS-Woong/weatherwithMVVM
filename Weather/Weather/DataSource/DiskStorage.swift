@@ -39,7 +39,7 @@ class DiskStorage {
         fileManager.createFile(atPath: filePath.path, contents: object)
     }
     
-    func object(_ key: String) throws -> Data? {
+    func object(_ key: String) -> Data? {
         let filePath = directory.appendingPathComponent(key)
         
         return fileManager.contents(atPath: filePath.path)

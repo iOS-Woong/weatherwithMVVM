@@ -20,7 +20,7 @@ class MemoryObject<T> {
 
 
 class MemoryCacheStorage<T> {
-    typealias MemoryType = NSCache<NSString, MemoryObject<T>>
+    typealias MemoryType = NSCache<NSString, MemoryObject<T?>>
     
     private let cache = MemoryType()
     
@@ -32,7 +32,7 @@ class MemoryCacheStorage<T> {
 }
 
 extension MemoryCacheStorage {
-    func insert(_ object: T, for key: String) {
+    func insert(_ object: T?, for key: String) {
         let memoryObject = MemoryObject(value: object)
         
         cache.setObject(memoryObject, forKey: key as NSString)
