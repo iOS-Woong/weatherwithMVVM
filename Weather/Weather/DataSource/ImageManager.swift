@@ -8,10 +8,12 @@
 import Foundation
 
 class ImageManager {
+    private let usecase: ProcessWeatherUsecase
     private let memoryCacheStorage: MemoryCacheStorage<Data>
     private let diskStorage: DiskStorage
     
-    init(memoryCacheStorage: MemoryCacheStorage<Data>, diskStorage: DiskStorage) {
+    init(usecase: ProcessWeatherUsecase ,memoryCacheStorage: MemoryCacheStorage<Data>, diskStorage: DiskStorage) {
+        self.usecase = usecase
         self.memoryCacheStorage = memoryCacheStorage
         self.diskStorage = diskStorage
     }
@@ -25,14 +27,20 @@ class ImageManager {
             completion(.success(data))
             memoryCacheStorage.insert(data, for: url)
         } else {
-            return
+            return loadImage(url: url) { result in
+                switch result {
+                case .success(let data):
+                    completion(.success(data))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
         }
     }
     
-    private func loadImage(url: String, completion: @escaping (Result<Data, NetworkError>) -> Void) {
-        
-        
-        
+    private func loadImage(url: String, completion: @escaping (Result<Data?, Error>) -> Void) {
+        usecase.fetchWeatherIcon(iconString: url) { data in
+            completion(.success(data))
+        }
     }
-    
 }
