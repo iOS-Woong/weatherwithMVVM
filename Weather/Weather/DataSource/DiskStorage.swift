@@ -42,15 +42,7 @@ class DiskStorage {
     func object(_ key: String) throws -> Data? {
         let filePath = directory.appendingPathComponent(key)
         
-        var loadObject: Data?
-        
-        do {
-            loadObject = try Data(contentsOf: filePath)
-        } catch {
-            throw DiskStorageError.canNotLoadFile(path: filePath.path)
-        }
-        
-        return loadObject
+        return fileManager.contents(atPath: filePath.path)
     }
     
     func remove(_ key: String) throws {

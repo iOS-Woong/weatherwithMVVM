@@ -98,28 +98,29 @@ final class DiskStorageTests: XCTestCase {
         XCTAssertEqual(result, mock)
     }
     
-    func test_diskStorage_잘못된키값으로_object했을때_에러를뱉는지() {
-        // given
-        let directoryName = "ForTestDirectory_Fourth"
-        let keyName = "key"
-        let mismatchedKey = "mismatchedKey"
-        
-        sut = try! DiskStorage(directoryName: directoryName)
-        let mock = createJsonMock()
-        sut.insert(mock, for: keyName)
-
-        // when
-        
-        guard let url = fileManager.urls(for: .documentDirectory,
-                                         in: .userDomainMask).first else { return }
-        let directory = url.appendingPathComponent(directoryName)
-        let filePath = directory.appendingPathComponent(mismatchedKey)
-
-        // then
-        XCTAssertThrowsError(try sut.object(mismatchedKey)) { error in
-            XCTAssertEqual(error as? DiskStorageError, DiskStorageError.canNotLoadFile(path: filePath.path))
-        }
-    }
+// Data(contentsOf: ) , do-try-catch로 Data를 가져왔을 때, 레거시 유닛테스트
+//    func test_diskStorage_잘못된키값으로_object했을때_에러를뱉는지() {
+//        // given
+//        let directoryName = "ForTestDirectory_Fourth"
+//        let keyName = "key"
+//        let mismatchedKey = "mismatchedKey"
+//
+//        sut = try! DiskStorage(directoryName: directoryName)
+//        let mock = createJsonMock()
+//        sut.insert(mock, for: keyName)
+//
+//        // when
+//
+//        guard let url = fileManager.urls(for: .documentDirectory,
+//                                         in: .userDomainMask).first else { return }
+//        let directory = url.appendingPathComponent(directoryName)
+//        let filePath = directory.appendingPathComponent(mismatchedKey)
+//
+//        // then
+//        XCTAssertThrowsError(try sut.object(mismatchedKey)) { error in
+//            XCTAssertEqual(error as? DiskStorageError, DiskStorageError.canNotLoadFile(path: filePath.path))
+//        }
+//    }
     
     // MARK: Delete
     
