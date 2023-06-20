@@ -63,6 +63,24 @@ final class DiskStorageTests: XCTestCase {
     }
     
     // MARK: Read
+    func test_diskStorage_isStored했을때_파일이있으면_True값을뱉는지() {
+        // given
+        let directoryName = "isStored"
+        let keyName = "storedBoolCheck"
+        
+        sut = try! DiskStorage(directoryName: directoryName)
+        let mock = createJsonMock()
+        
+        // when
+        sut.insert(mock, for: keyName)
+
+        // then
+        let result = sut.isStored(for: keyName)
+        
+        XCTAssertTrue(result)
+        
+    }
+    
     
     func test_diskStorage_object했을때_파일을가져오는지() {
         // given
