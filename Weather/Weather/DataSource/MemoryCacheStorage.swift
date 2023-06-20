@@ -7,6 +7,9 @@
 
 import UIKit
 
+
+
+
 class MemoryObject<T> {
     let value: T
     
@@ -20,6 +23,12 @@ class MemoryCacheStorage<T> {
     typealias MemoryType = NSCache<NSString, MemoryObject<T>>
     
     private let cache = MemoryType()
+    
+    init() {
+        cache.countLimit = .max
+        cache.totalCostLimit = .zero
+    }
+    
 }
 
 extension MemoryCacheStorage {
