@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D21226D22A41933F009205E0 /* ImageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21226D12A41933F009205E0 /* ImageManagerTests.swift */; };
 		D22BC1D92A394C9300CD5D2F /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22BC1D82A394C9300CD5D2F /* Forecast.swift */; };
 		D22BC1DB2A394CBB00CD5D2F /* CityWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22BC1DA2A394CBB00CD5D2F /* CityWeather.swift */; };
 		D22BC1DF2A39521400CD5D2F /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22BC1DE2A39521400CD5D2F /* Observable.swift */; };
@@ -49,6 +50,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D21226D32A41933F009205E0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2D3FCA02A1DB83E000039FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2D3FCA72A1DB83E000039FD;
+			remoteInfo = Weather;
+		};
 		D22BC1E82A3956AC00CD5D2F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D2D3FCA02A1DB83E000039FD /* Project object */;
@@ -108,6 +116,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D21226CF2A41933F009205E0 /* ImageManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D21226D12A41933F009205E0 /* ImageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManagerTests.swift; sourceTree = "<group>"; };
 		D22BC1D82A394C9300CD5D2F /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		D22BC1DA2A394CBB00CD5D2F /* CityWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityWeather.swift; sourceTree = "<group>"; };
 		D22BC1DE2A39521400CD5D2F /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -160,6 +170,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D21226CC2A41933F009205E0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D22BC1E12A3956AC00CD5D2F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -226,6 +243,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D21226D02A41933F009205E0 /* ImageManagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				D21226D12A41933F009205E0 /* ImageManagerTests.swift */,
+			);
+			path = ImageManagerTests;
+			sourceTree = "<group>";
+		};
 		D22BC1D52A393EB400CD5D2F /* Interface */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +282,7 @@
 		D22BC1DC2A394EF800CD5D2F /* Usecase */ = {
 			isa = PBXGroup;
 			children = (
+				D21226D02A41933F009205E0 /* ImageManagerTests */,
 				D28E95512A384EC10076A8FA /* ProcessWeatherUsecaseTests */,
 			);
 			path = Usecase;
@@ -444,6 +470,7 @@
 				D22BC1F22A39618E00CD5D2F /* WeatherViewModelTests.xctest */,
 				D275F62A2A3D8558002EB932 /* MemoryCacheStorageTests.xctest */,
 				D2E5A1C12A3FD40F00392D4E /* DiskStorageTests.xctest */,
+				D21226CF2A41933F009205E0 /* ImageManagerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -540,6 +567,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D21226CE2A41933F009205E0 /* ImageManagerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D21226D72A41933F009205E0 /* Build configuration list for PBXNativeTarget "ImageManagerTests" */;
+			buildPhases = (
+				D21226CB2A41933F009205E0 /* Sources */,
+				D21226CC2A41933F009205E0 /* Frameworks */,
+				D21226CD2A41933F009205E0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D21226D42A41933F009205E0 /* PBXTargetDependency */,
+			);
+			name = ImageManagerTests;
+			productName = ImageManagerTests;
+			productReference = D21226CF2A41933F009205E0 /* ImageManagerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D22BC1E32A3956AC00CD5D2F /* ObservableTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D22BC1EA2A3956AC00CD5D2F /* Build configuration list for PBXNativeTarget "ObservableTests" */;
@@ -711,6 +756,10 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					D21226CE2A41933F009205E0 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = D2D3FCA72A1DB83E000039FD;
+					};
 					D22BC1E32A3956AC00CD5D2F = {
 						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = D2D3FCA72A1DB83E000039FD;
@@ -770,11 +819,19 @@
 				D22BC1F12A39618E00CD5D2F /* WeatherViewModelTests */,
 				D275F6292A3D8558002EB932 /* MemoryCacheStorageTests */,
 				D2E5A1C02A3FD40F00392D4E /* DiskStorageTests */,
+				D21226CE2A41933F009205E0 /* ImageManagerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D21226CD2A41933F009205E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D22BC1E22A3956AC00CD5D2F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -843,6 +900,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D21226CB2A41933F009205E0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D21226D22A41933F009205E0 /* ImageManagerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D22BC1E02A3956AC00CD5D2F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -946,6 +1011,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D21226D42A41933F009205E0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2D3FCA72A1DB83E000039FD /* Weather */;
+			targetProxy = D21226D32A41933F009205E0 /* PBXContainerItemProxy */;
+		};
 		D22BC1E92A3956AC00CD5D2F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D2D3FCA72A1DB83E000039FD /* Weather */;
@@ -1000,6 +1070,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D21226D52A41933F009205E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N2WW86KJNF;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = woong.ImageManagerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weather.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Weather";
+			};
+			name = Debug;
+		};
+		D21226D62A41933F009205E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N2WW86KJNF;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = woong.ImageManagerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weather.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Weather";
+			};
+			name = Release;
+		};
 		D22BC1EB2A3956AC00CD5D2F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1539,6 +1653,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D21226D72A41933F009205E0 /* Build configuration list for PBXNativeTarget "ImageManagerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D21226D52A41933F009205E0 /* Debug */,
+				D21226D62A41933F009205E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D22BC1EA2A3956AC00CD5D2F /* Build configuration list for PBXNativeTarget "ObservableTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
