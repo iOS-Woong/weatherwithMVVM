@@ -282,7 +282,6 @@
 		D22BC1DC2A394EF800CD5D2F /* Usecase */ = {
 			isa = PBXGroup;
 			children = (
-				D21226D02A41933F009205E0 /* ImageManagerTests */,
 				D28E95512A384EC10076A8FA /* ProcessWeatherUsecaseTests */,
 			);
 			path = Usecase;
@@ -373,6 +372,7 @@
 		D275F6252A3D8537002EB932 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				D21226D02A41933F009205E0 /* ImageManagerTests */,
 				D2E5A1C22A3FD40F00392D4E /* DiskStorageTests */,
 				D275F62B2A3D8559002EB932 /* MemoryCacheStorageTests */,
 			);
