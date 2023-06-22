@@ -8,14 +8,14 @@
 import Foundation
 
 class ImageManager {
-    static let shared = ImageManager()
-    
-    private let usecase: ProcessWeatherUsecase
+    private let networkManager: NetworkRepository
     private let memoryCacheStorage: MemoryCacheStorage<Data>
     private let diskStorage: DiskStorage?
     
-    private init() {
-        self.usecase = ProcessWeatherUsecase()
+    init(networkManager: NetworkRepository = NetworkRepository(),
+         memoryCacheStorage: MemoryCacheStorage<Data> = MemoryCacheStorage(),
+         diskStorage: DiskStorage = try! DiskStorage(directoryName: "mainDirectory"))  {
+        self.networkManager = networkManager
         self.memoryCacheStorage = MemoryCacheStorage()
         self.diskStorage = try? DiskStorage(directoryName: "ImageFolder")
     }
@@ -40,9 +40,15 @@ class ImageManager {
         }
     }
     
-    private func loadImage(url: String, completion: @escaping (Result<Data?, Error>) -> Void) {
-        usecase.fetchWeatherIcon(iconString: url) { data in
-            completion(.success(data))
+    private func loadImage(url: String, completion: @escaping (Result<Data, Error>) -> Void) {
+        let requestUrl = URL(string: url)
+        networkManager.request(url: requestUrl) { result in
+            switch result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
 }
