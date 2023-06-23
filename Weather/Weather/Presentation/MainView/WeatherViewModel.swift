@@ -15,7 +15,7 @@ class WeatherViewModel {
 }
 
 extension WeatherViewModel {
-    func fetchFiveDaysForecast() {
+    func fetchWeatherData() {
         usecase.fetchFiveDaysForecast { self.forecasts.value = $0 }
         usecase.fetchAllCitiesCurrentWeather { self.weathers.value = $0 }
     }

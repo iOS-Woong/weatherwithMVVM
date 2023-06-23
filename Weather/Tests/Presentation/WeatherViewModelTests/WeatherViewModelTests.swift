@@ -39,7 +39,7 @@ final class WeatherViewModelTests: XCTestCase {
         }
         
         // when
-        sut.fetchFiveDaysForecast()
+        sut.fetchWeatherData()
         
 //        // then
 //        XCTAssertNotNil(testForecasts)

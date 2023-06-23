@@ -46,8 +46,8 @@ class HourlyCollectionViewCell: UICollectionViewCell, ReusableView {
     
     func configure(text data: Forecast) {
         DispatchQueue.main.async {
-            self.timeLabel.text = data.dt
-            self.tempLabel.text = data.temp.description
+            self.timeLabel.text = data.dt.convertUtcToKst()
+            self.tempLabel.text = data.temp.convertCelciusTemp()
         }
     }
     
@@ -78,6 +78,32 @@ class HourlyCollectionViewCell: UICollectionViewCell, ReusableView {
         ])
         
     }
-    
-    
 }
+
+private extension String {
+    func convertUtcToKst() -> String? {
+        let utcDateString = self
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+
+        if let utcDate = dateFormatter.date(from: utcDateString) {
+            dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            dateFormatter.dateFormat = "a hh시"
+            
+            return dateFormatter.string(from: utcDate)
+        }
+        return nil
+    }
+}
+
+private extension Double {
+    func convertCelciusTemp() -> String {
+        let celciusInt = Int(UnitTemperature.celsius.converter.value(fromBaseUnitValue: self))
+        
+        return celciusInt.description + "°"
+    }
+}
+
