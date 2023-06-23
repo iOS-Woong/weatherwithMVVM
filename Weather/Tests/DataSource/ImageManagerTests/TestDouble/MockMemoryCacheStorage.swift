@@ -9,6 +9,7 @@
 import XCTest
 
 class MockMemoryCacheStorage: MemoryCacheStorageType {
+    private let fileName: StaticString = "MockMemoryCacheStorage.swift"
     
     private var storage: [String: Data] = [:]
     
@@ -32,5 +33,10 @@ class MockMemoryCacheStorage: MemoryCacheStorageType {
         return storage[key]
     }
     
+    func verifyInsert(object: Data, key: String, callCount: Int = 1) {
+        XCTAssertEqual(key, insertKey, file: fileName)
+        XCTAssertEqual(object, insertValue, file: fileName)
+        XCTAssertEqual(insertCallCount, callCount, file: fileName)
+    }
     
 }

@@ -44,6 +44,8 @@
 		D2D3FCCD2A1E1F22000039FD /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCCC2A1E1F22000039FD /* NetworkRepository.swift */; };
 		D2D3FCCF2A1E2435000039FD /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCCE2A1E2435000039FD /* NetworkError.swift */; };
 		D2D3FCD32A1FA71B000039FD /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCD22A1FA71B000039FD /* WeatherViewModel.swift */; };
+		D2DFAE002A452E4E00D0245E /* MockDiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DFADFE2A452E3300D0245E /* MockDiskStorage.swift */; };
+		D2DFAE032A45427B00D0245E /* MockMemoryCacheStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DFAE012A45426100D0245E /* MockMemoryCacheStorage.swift */; };
 		D2E5A1C42A3FD40F00392D4E /* DiskStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E5A1C32A3FD40F00392D4E /* DiskStorageTests.swift */; };
 		D2E5A1CB2A40118600392D4E /* DiskStorageError+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E5A1CA2A40118600392D4E /* DiskStorageError+Equatable.swift */; };
 		D2E5A1CD2A40399200392D4E /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E5A1CC2A40399200392D4E /* ImageManager.swift */; };
@@ -163,6 +165,8 @@
 		D2D3FCCC2A1E1F22000039FD /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
 		D2D3FCCE2A1E2435000039FD /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		D2D3FCD22A1FA71B000039FD /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
+		D2DFADFE2A452E3300D0245E /* MockDiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDiskStorage.swift; sourceTree = "<group>"; };
+		D2DFAE012A45426100D0245E /* MockMemoryCacheStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMemoryCacheStorage.swift; sourceTree = "<group>"; };
 		D2E5A1C12A3FD40F00392D4E /* DiskStorageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiskStorageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2E5A1C32A3FD40F00392D4E /* DiskStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorageTests.swift; sourceTree = "<group>"; };
 		D2E5A1CA2A40118600392D4E /* DiskStorageError+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiskStorageError+Equatable.swift"; sourceTree = "<group>"; };
@@ -246,6 +250,7 @@
 		D21226D02A41933F009205E0 /* ImageManagerTests */ = {
 			isa = PBXGroup;
 			children = (
+				D2DFADFD2A452DE900D0245E /* TestDouble */,
 				D21226D12A41933F009205E0 /* ImageManagerTests.swift */,
 			);
 			path = ImageManagerTests;
@@ -553,6 +558,15 @@
 				D2D3FCD22A1FA71B000039FD /* WeatherViewModel.swift */,
 			);
 			path = MainView;
+			sourceTree = "<group>";
+		};
+		D2DFADFD2A452DE900D0245E /* TestDouble */ = {
+			isa = PBXGroup;
+			children = (
+				D2DFADFE2A452E3300D0245E /* MockDiskStorage.swift */,
+				D2DFAE012A45426100D0245E /* MockMemoryCacheStorage.swift */,
+			);
+			path = TestDouble;
 			sourceTree = "<group>";
 		};
 		D2E5A1C22A3FD40F00392D4E /* DiskStorageTests */ = {
@@ -904,6 +918,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2DFAE032A45427B00D0245E /* MockMemoryCacheStorage.swift in Sources */,
+				D2DFAE002A452E4E00D0245E /* MockDiskStorage.swift in Sources */,
 				D21226D22A41933F009205E0 /* ImageManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

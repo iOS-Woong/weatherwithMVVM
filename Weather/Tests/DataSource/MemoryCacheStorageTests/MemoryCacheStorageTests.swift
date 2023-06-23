@@ -10,10 +10,10 @@ import XCTest
 
 final class MemoryCacheStorageTests: XCTestCase {
     
-    var sut: MemoryCacheStorage<Data>!
+    var sut: MemoryCacheStorage!
     
     override func setUpWithError() throws {
-        sut = MemoryCacheStorage<Data>()
+        sut = MemoryCacheStorage()
     }
     
     override func tearDownWithError() throws {

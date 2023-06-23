@@ -9,6 +9,7 @@
 import XCTest
 
 class MockDiskStorage: DiskStorageType {
+    let fileName: StaticString = "MockDiskStorage.swift"
     
     private var storage: [String:Data] = [:]
     
@@ -48,5 +49,15 @@ class MockDiskStorage: DiskStorageType {
         removeKey = key
         removeCallCount += 1
         storage[key] = nil
+    }
+    
+    func verifyIsStore(key: String, callCount: Int = 1) {
+        XCTAssertEqual(isStoreKey, key, file: fileName)
+        XCTAssertEqual(isStoreCallCount, callCount, file: fileName)
+    }
+    
+    func verifyObject(key: String, callCount: Int = 1) {
+        XCTAssertEqual(objectKey, key, file: fileName)
+        XCTAssertEqual(objectCallCount, callCount, file: fileName)
     }
 }
