@@ -98,12 +98,3 @@ private extension String {
         return nil
     }
 }
-
-private extension Double {
-    func convertCelciusTemp() -> String {
-        let celciusInt = Int(UnitTemperature.celsius.converter.value(fromBaseUnitValue: self))
-        
-        return celciusInt.description + "°"
-    }
-}
-

@@ -78,8 +78,8 @@ class CityCollectionViewCell: UICollectionViewCell {
     
     func configure(_ data: CityWeather) {
         cityLabel.text = data.description
-        maxTempLabel.text = data.temparature.tempMax.description
-        minTempLabel.text = data.temparature.tempMin.description
+        maxTempLabel.text = data.temparature.tempMax.convertCelciusTemp()
+        minTempLabel.text = data.temparature.tempMin.convertCelciusTemp()
     }
     
     private func setupViews() {
