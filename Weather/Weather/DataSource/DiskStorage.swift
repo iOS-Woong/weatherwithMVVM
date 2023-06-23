@@ -15,7 +15,15 @@ enum DiskStorageError: Error {
     case canNotLoadFile(path: String)
 }
 
-class DiskStorage {
+protocol DiskStorageType {
+    func isStored(for key: String) -> Bool
+    func insert(_ object: Data, for key: String)
+    func object(_ key: String) -> Data?
+    func remove(_ key: String) throws
+}
+
+
+class DiskStorage: DiskStorageType {
     private let fileManager: FileManager
     private let directory: URL
     
