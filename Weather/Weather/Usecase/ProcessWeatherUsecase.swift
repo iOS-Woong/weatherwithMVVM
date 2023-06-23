@@ -22,7 +22,8 @@ struct ProcessWeatherUsecase {
             service.fetch(url: url, type: CurrentWeather.self) { result in
                 switch result {
                 case .success(let weather):
-                    let cityWeather = CityWeather(coordinate: Coordinate(lon: weather.coord.lon, lat: weather.coord.lat),
+                    let cityWeather = CityWeather(name: weather.name, icon: weather.weather[0].icon,
+                                                  coordinate: Coordinate(lon: weather.coord.lon, lat: weather.coord.lat),
                                                   temparature: Temparature(temp: weather.main.temp, tempMin: weather.main.tempMin, tempMax: weather.main.tempMax),
                                                   description: weather.weather[0].description,
                                                   wind: WindInfo(speed: weather.wind.speed, deg: weather.wind.deg))

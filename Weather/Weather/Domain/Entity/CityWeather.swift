@@ -9,6 +9,8 @@ import Foundation
 
 struct CityWeather: Hashable { // TODO: 필요한 프로퍼티가 더 있다면 추가해야함.
     let id = UUID()
+    let name: String
+    let icon: String
     let coordinate: Coordinate
     let temparature: Temparature
     let description: String

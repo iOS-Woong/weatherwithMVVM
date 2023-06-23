@@ -46,6 +46,28 @@ enum QueryItem: String, CaseIterable {
         
         return queryItems
     }
+    
+    var cityNameKr: String {
+        switch self {
+        case .seoul:
+            return "서울"
+        case .busan:
+            return "부산"
+        case .incheon:
+            return "인천"
+        case .daegu:
+            return "대구"
+        case .daejeon:
+            return "대전"
+        case .gwhangju:
+            return "광주"
+        case .ulsan:
+            return "울산"
+        case .sejong:
+            return "세종"
+        }
+    }
+    
 }
 
 struct EndPoint {

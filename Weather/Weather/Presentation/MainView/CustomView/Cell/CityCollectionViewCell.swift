@@ -21,8 +21,6 @@ class CityCollectionViewCell: UICollectionViewCell {
     private let weatherImageView = {
         let imageView = UIImageView()
         
-        imageView.image = UIImage(systemName: "cloud")
-        
         return imageView
     }()
     
@@ -77,9 +75,23 @@ class CityCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(_ data: CityWeather) {
-        cityLabel.text = data.description
-        maxTempLabel.text = data.temparature.tempMax.convertCelciusTemp()
-        minTempLabel.text = data.temparature.tempMin.convertCelciusTemp()
+        DispatchQueue.main.async {
+            self.cityLabel.text = data.name.convertCityNameToKr()
+            self.maxTempLabel.text = data.temparature.tempMax.convertCelciusTemp()
+            self.minTempLabel.text = data.temparature.tempMin.convertCelciusTemp()
+        }
+    }
+    
+    func configure(_ image: Data) {
+        DispatchQueue.main.async {
+            self.weatherImageView.image = UIImage(data: image)
+        }
+    }
+    
+    private func convertCityNameToKr(with data: CityWeather) -> String? {
+        guard let queryItem = QueryItem(rawValue: data.name.lowercased()) else { return nil }
+        
+        return queryItem.cityNameKr
     }
     
     private func setupViews() {
@@ -109,5 +121,13 @@ class CityCollectionViewCell: UICollectionViewCell {
             minMaxChartHorizonStackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.55),
             minMaxChartHorizonStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
+    }
+}
+
+private extension String {
+    func convertCityNameToKr() -> String? {
+        guard let queryItem = QueryItem(rawValue: self.lowercased()) else { return nil }
+        
+        return queryItem.cityNameKr
     }
 }

@@ -270,6 +270,8 @@ extension WeatherViewController {
         let citySectionResistration = UICollectionView.CellRegistration<CityCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
             guard let itemIdentifier = itemIdentifier as? CityWeather else { return }
             cell.configure(itemIdentifier)
+            self.viewModel.fetchWeatherIcon(iconString: itemIdentifier.icon) {
+                cell.configure($0) }
         }
         return citySectionResistration
     }
