@@ -91,7 +91,7 @@ private extension String {
         if let utcDate = dateFormatter.date(from: utcDateString) {
             dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
             dateFormatter.locale = Locale(identifier: "ko_KR")
-            dateFormatter.dateFormat = "a hh시"
+            dateFormatter.dateFormat = "a h시"
             
             return dateFormatter.string(from: utcDate)
         }

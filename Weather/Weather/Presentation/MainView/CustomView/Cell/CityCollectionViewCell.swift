@@ -123,11 +123,3 @@ class CityCollectionViewCell: UICollectionViewCell {
         ])
     }
 }
-
-private extension String {
-    func convertCityNameToKr() -> String? {
-        guard let queryItem = QueryItem(rawValue: self.lowercased()) else { return nil }
-        
-        return queryItem.cityNameKr
-    }
-}

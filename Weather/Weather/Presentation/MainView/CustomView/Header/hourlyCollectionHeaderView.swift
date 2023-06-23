@@ -12,7 +12,6 @@ class hourlyCollectionHeaderView: UICollectionReusableView {
     private let regionLabel = {
        let label = UILabel()
         
-        label.text = "서울특별시" // test 지워야함.
         label.font = UIFont.boldSystemFont(ofSize: 30)
         label.textColor = .white
         label.textAlignment = .center
@@ -24,7 +23,6 @@ class hourlyCollectionHeaderView: UICollectionReusableView {
        let label = UILabel()
         
         label.font = UIFont.systemFont(ofSize: 120, weight: .light)
-        label.text = "17°" // test 지워야함.
         label.textColor = .white
         label.textAlignment = .center
         
@@ -35,7 +33,6 @@ class hourlyCollectionHeaderView: UICollectionReusableView {
        let label = UILabel()
         
         label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-        label.text = "대체로 흐림" // test 지워야함.
         label.textColor = .white
         label.textAlignment = .center
         
@@ -55,7 +52,6 @@ class hourlyCollectionHeaderView: UICollectionReusableView {
        let label = UILabel()
         
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.text = "최고:37°" // test 지워야함.
         label.textColor = .white
         label.textAlignment = .center
         
@@ -66,7 +62,6 @@ class hourlyCollectionHeaderView: UICollectionReusableView {
        let label = UILabel()
         
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.text = "최저:-17°" // test 지워야함.
         label.textColor = .white
         label.textAlignment = .center
         
@@ -82,8 +77,12 @@ class hourlyCollectionHeaderView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure() {
-        
+    func configure(data: CityWeather) {
+        regionLabel.text = "서울특별시"
+        tempLabel.text = data.temparature.temp.convertCelciusTemp()
+        descriptionLabel.text = data.description
+        minTempLabel.text = "최저: \(data.temparature.tempMin.convertCelciusTemp())"
+        maxTempLabel.text = "최고: \(data.temparature.tempMax.convertCelciusTemp())"
     }
 
     private func setupViews() {

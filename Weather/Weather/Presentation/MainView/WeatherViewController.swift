@@ -69,6 +69,7 @@ class WeatherViewController: UIViewController {
                 self.snapshot = .init()
             }
             self.snapshot?.appendSections([section])
+            self.snapshot?.reloadSections([section])
             self.snapshot?.appendItems(itemIdentifier, toSection: section)
             self.datasource?.apply(self.snapshot!, animatingDifferences: true)
         }
@@ -260,7 +261,9 @@ extension WeatherViewController {
     private func hourlySectionHeaderConfigure() -> UICollectionView.SupplementaryRegistration<hourlyCollectionHeaderView> {
         let hourlySectionHeaderResistration = UICollectionView.SupplementaryRegistration<hourlyCollectionHeaderView>(
             elementKind: UICollectionView.elementKindSectionHeader) { supplementaryView, elementKind, indexPath in
-            // TODO: 여기 hourlyHeader 컨피규어
+                if let weather = self.viewModel.weathers.value?.first(where: { $0.name == "Seoul" }) {
+                    supplementaryView.configure(data: weather)
+                }
         }
         
         return hourlySectionHeaderResistration
