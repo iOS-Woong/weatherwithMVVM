@@ -24,6 +24,7 @@ class MockMemoryCacheStorage: MemoryCacheStorageType {
         insertKey = key
         insertValue = object
         insertCallCount += 1
+        storage[key] = object
     }
     
     func object(_ key: String) -> Data? {
@@ -31,6 +32,11 @@ class MockMemoryCacheStorage: MemoryCacheStorageType {
         objectCallCount += 1
         
         return storage[key]
+    }
+    
+    func verifyObject(key: String, callCount: Int = 1) {
+        XCTAssertEqual(objectKey, key, file: fileName)
+        XCTAssertEqual(objectCallCount, callCount, file: fileName)
     }
     
     func verifyInsert(object: Data, key: String, callCount: Int = 1) {

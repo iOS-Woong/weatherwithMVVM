@@ -22,8 +22,30 @@ final class ImageManagerTests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
-
-    func test_retriveImage_디스크_Isstore_Object메서드_메모리캐시_Insert메서드_작동검증() {
+    
+    func test_retrieveImage_메모리캐시_object메서드_행동검증() {
+        let promise = expectation(description: "forAsyncTests")
+        defer { wait(for: [promise], timeout: 5) }
+        
+        let memoryCacheStorage = MockMemoryCacheStorage()
+        memoryCacheStorage.insert(data, for: testKeyUrl)
+        let diskStorage = MockDiskStorage()
+        
+        sut = ImageManager(memoryCacheStorage: memoryCacheStorage,
+                           diskStorage: diskStorage)
+        
+        sut.retriveImage(testKeyUrl) { result in
+            switch result {
+            case .success(_):
+                memoryCacheStorage.verifyObject(key: self.testKeyUrl)
+                promise.fulfill()
+            case .failure(_):
+                XCTFail()
+            }
+        }
+    }
+    
+    func test_retriveImage_디스크_Isstore_Object메서드_메모리캐시_Insert메서드_행동검증() {
         let promise = expectation(description: "forAsyncTests")
         defer { wait(for: [promise], timeout: 5) }
         
