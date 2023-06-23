@@ -371,9 +371,9 @@
 		D275F6202A3D7359002EB932 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				D2E5A1CC2A40399200392D4E /* ImageManager.swift */,
 				D275F6212A3D7FFD002EB932 /* MemoryCacheStorage.swift */,
 				D275F6232A3D84C9002EB932 /* DiskStorage.swift */,
-				D2E5A1CC2A40399200392D4E /* ImageManager.swift */,
 				D21960482A45954500E92980 /* NetworkLoaderType.swift */,
 			);
 			path = DataSource;

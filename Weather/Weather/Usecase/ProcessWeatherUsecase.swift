@@ -10,6 +10,7 @@ import Foundation
 struct ProcessWeatherUsecase {
     private let endPoint = EndPoint()
     private let service = NetworkService()
+    private let imageManager = ImageManager()
     
     func fetchAllCitiesCurrentWeather(completion: @escaping ([CityWeather]) -> Void) {
         let dispatchGroup = DispatchGroup()
@@ -63,9 +64,15 @@ struct ProcessWeatherUsecase {
     
     func fetchWeatherIcon(iconString: String,
                           completion: @escaping (Data) -> Void) {
-        let url = endPoint.imageUrl(icon: iconString)
-        service.fetch(url: url) { data in
-            completion(data)
+        guard let url = endPoint.imageUrl(icon: iconString) else { return }
+        imageManager.retriveImage(url.absoluteString) { result in
+            switch result {
+            case .success(let data):
+                completion(data)
+            case .failure(let error):
+                print(error)
+            }
         }
+
     }
 }

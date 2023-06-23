@@ -36,19 +36,7 @@ struct NetworkService {
             }
         }
     }
-    
-    func fetch(url: URL?,
-               completion: @escaping (Data) -> Void) {
-        repository.request(url: url) { result in
-            switch result {
-            case .success(let data):
-                completion(data)
-            case .failure(let error):
-                print("네트워크에러:", error)
-            }
-        }
-    }
-    
+        
     private func decode<T: Decodable>(with data: Data,
                                       type: T.Type) -> Result<T, ProcessDataError> {
         let jsonDecoder = JSONDecoder()
