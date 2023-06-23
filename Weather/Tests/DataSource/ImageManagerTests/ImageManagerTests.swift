@@ -12,25 +12,38 @@ final class ImageManagerTests: XCTestCase {
 
     var sut: ImageManager!
     var data: Data!
+    var testKeyUrl: String!
     
     override func setUpWithError() throws {
-        
+        data = UIImage(systemName: "cloud")?.pngData()
+        testKeyUrl = "test"
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
 
-    func test_retriveImage_네트워크를통해서받아올때() {
+    func test_retriveImage_디스크_Isstore_Object메서드_메모리캐시_Insert메서드_작동검증() {
+        let promise = expectation(description: "forAsyncTests")
+        defer { wait(for: [promise], timeout: 5) }
         
-        let networkManager = MockNetworkManager(data: data)
-        let memoryCacheStorage =  MockMemoryCacheStorage()
+        let memoryCacheStorage = MockMemoryCacheStorage()
         let diskStorage = MockDiskStorage()
+        diskStorage.insert(data, for: testKeyUrl)
         
-        sut = ImageManager(networkManager: networkManager,
-                           memoryCacheStorage: memoryCacheStorage,
+        sut = ImageManager(memoryCacheStorage: memoryCacheStorage,
                            diskStorage: diskStorage)
         
-        
+        sut.retriveImage(testKeyUrl) { result in
+            switch result {
+            case .success(let data):
+                diskStorage.verifyIsStore(key: self.testKeyUrl)
+                diskStorage.verifyObject(key: self.testKeyUrl)
+                memoryCacheStorage.verifyInsert(object: data!, key: self.testKeyUrl)
+                promise.fulfill()
+            case .failure(_):
+                XCTFail()
+            }
+        }
     }
 }
