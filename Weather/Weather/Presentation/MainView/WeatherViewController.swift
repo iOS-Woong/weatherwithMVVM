@@ -60,7 +60,7 @@ class WeatherViewController: UIViewController {
     }
     
     private func fetch() {
-        viewModel.fetch()
+        viewModel.fetchFiveDaysForecast()
     }
     
     private func configureSnapshot(_ itemIdentifier: [AnyHashable], to section: Section) {
