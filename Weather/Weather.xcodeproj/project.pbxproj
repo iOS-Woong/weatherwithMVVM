@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D21226D22A41933F009205E0 /* ImageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21226D12A41933F009205E0 /* ImageManagerTests.swift */; };
+		D21960492A45954500E92980 /* NetworkLoaderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21960482A45954500E92980 /* NetworkLoaderType.swift */; };
+		D219604C2A4597C900E92980 /* MockNetworkLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D219604A2A4597AB00E92980 /* MockNetworkLoader.swift */; };
 		D22BC1D92A394C9300CD5D2F /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22BC1D82A394C9300CD5D2F /* Forecast.swift */; };
 		D22BC1DB2A394CBB00CD5D2F /* CityWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22BC1DA2A394CBB00CD5D2F /* CityWeather.swift */; };
 		D22BC1DF2A39521400CD5D2F /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22BC1DE2A39521400CD5D2F /* Observable.swift */; };
@@ -120,6 +122,8 @@
 /* Begin PBXFileReference section */
 		D21226CF2A41933F009205E0 /* ImageManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D21226D12A41933F009205E0 /* ImageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManagerTests.swift; sourceTree = "<group>"; };
+		D21960482A45954500E92980 /* NetworkLoaderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoaderType.swift; sourceTree = "<group>"; };
+		D219604A2A4597AB00E92980 /* MockNetworkLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkLoader.swift; sourceTree = "<group>"; };
 		D22BC1D82A394C9300CD5D2F /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		D22BC1DA2A394CBB00CD5D2F /* CityWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityWeather.swift; sourceTree = "<group>"; };
 		D22BC1DE2A39521400CD5D2F /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -370,6 +374,7 @@
 				D275F6212A3D7FFD002EB932 /* MemoryCacheStorage.swift */,
 				D275F6232A3D84C9002EB932 /* DiskStorage.swift */,
 				D2E5A1CC2A40399200392D4E /* ImageManager.swift */,
+				D21960482A45954500E92980 /* NetworkLoaderType.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -565,6 +570,7 @@
 			children = (
 				D2DFADFE2A452E3300D0245E /* MockDiskStorage.swift */,
 				D2DFAE012A45426100D0245E /* MockMemoryCacheStorage.swift */,
+				D219604A2A4597AB00E92980 /* MockNetworkLoader.swift */,
 			);
 			path = TestDouble;
 			sourceTree = "<group>";
@@ -919,6 +925,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2DFAE032A45427B00D0245E /* MockMemoryCacheStorage.swift in Sources */,
+				D219604C2A4597C900E92980 /* MockNetworkLoader.swift in Sources */,
 				D2DFAE002A452E4E00D0245E /* MockDiskStorage.swift in Sources */,
 				D21226D22A41933F009205E0 /* ImageManagerTests.swift in Sources */,
 			);
@@ -1005,6 +1012,7 @@
 				D23664042A2A02CD00D6CDD6 /* StubURLSession.swift in Sources */,
 				D28E952D2A350DBE0076A8FA /* CityCollectionViewCell.swift in Sources */,
 				D28E954B2A37A38D0076A8FA /* ProcessWeatherUsecase.swift in Sources */,
+				D21960492A45954500E92980 /* NetworkLoaderType.swift in Sources */,
 				D28E953B2A365BA60076A8FA /* WeatherMaps.swift in Sources */,
 				D22BC1DB2A394CBB00CD5D2F /* CityWeather.swift in Sources */,
 				D2E5A1CD2A40399200392D4E /* ImageManager.swift in Sources */,

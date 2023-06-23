@@ -61,7 +61,30 @@ final class ImageManagerTests: XCTestCase {
             case .success(let data):
                 diskStorage.verifyIsStore(key: self.testKeyUrl)
                 diskStorage.verifyObject(key: self.testKeyUrl)
-                memoryCacheStorage.verifyInsert(object: data!, key: self.testKeyUrl)
+                memoryCacheStorage.verifyInsert(object: data, key: self.testKeyUrl)
+                promise.fulfill()
+            case .failure(_):
+                XCTFail()
+            }
+        }
+    }
+    
+    func test_retrieveImage_네트워크_loadImage메서드_행동검증() {
+        let promise = expectation(description: "forAsyncTests")
+        defer { wait(for: [promise], timeout: 5)}
+        
+        let memoryCacheStorage = MockMemoryCacheStorage()
+        let diskStorage = MockDiskStorage()
+        let networkLoader = MockNetworkLoader()
+        
+        sut = ImageManager(networkLoader: networkLoader,
+                           memoryCacheStorage: memoryCacheStorage,
+                           diskStorage: diskStorage)
+        
+        sut.retriveImage(testKeyUrl) { result in
+            switch result {
+            case .success(_):
+                networkLoader.verifyRequest(url: URL(string: self.testKeyUrl))
                 promise.fulfill()
             case .failure(_):
                 XCTFail()

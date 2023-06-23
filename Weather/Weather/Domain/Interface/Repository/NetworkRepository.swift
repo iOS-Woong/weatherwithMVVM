@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NetworkRepository {
+struct NetworkRepository: NetworkLoaderType {
     var urlSession: URLSessionProtocol
     
     init(urlSession: URLSessionProtocol = URLSession.shared) {
