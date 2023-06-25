@@ -12,8 +12,10 @@ class WeatherViewController: UIViewController {
     private let viewModel: WeatherViewModel
         
     private let pagingCollectionView = {
-        let collectioniView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        let collectioniView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         
+        collectioniView.register(PagingCollectionViewCell.self,
+                                 forCellWithReuseIdentifier: PagingCollectionViewCell.reuseIdentifier)
         collectioniView.translatesAutoresizingMaskIntoConstraints = false
         
         return collectioniView
@@ -35,6 +37,12 @@ class WeatherViewController: UIViewController {
     }
     
     private func setupCollectionViewAttributes() {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height)
+        flowLayout.collectionView?.isPagingEnabled = true
+        flowLayout.scrollDirection = .horizontal
+        
+        pagingCollectionView.collectionViewLayout = flowLayout
         pagingCollectionView.dataSource = self
     }
 
