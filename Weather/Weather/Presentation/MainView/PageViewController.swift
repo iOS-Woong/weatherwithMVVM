@@ -19,7 +19,7 @@ class PageViewController: UIViewController {
         setupViews()
     }
     
-    func setupViewControllers() {
+    private func setupViewControllers() {
         for page in Page.allCases {
             let viewModel = WeatherViewModel(page: page)
             let weatherViewController = WeatherViewController(viewModel: viewModel)
@@ -79,7 +79,7 @@ extension PageViewController: UIPageViewControllerDataSource {
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return Page.seoul.rawValue
+        return .zero
     }
 }
 

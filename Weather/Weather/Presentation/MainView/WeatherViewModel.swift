@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Page: Int, CaseIterable {
+enum Page: CaseIterable {
     case seoul, busan, incheon, daegu, daejeon, gwhangju, ulsan, sejong
 }
 

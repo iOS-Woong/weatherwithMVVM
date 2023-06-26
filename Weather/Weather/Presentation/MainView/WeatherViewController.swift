@@ -20,6 +20,14 @@ class WeatherViewController: UIViewController {
     private var datasource: Datasource?
     private var snapshot: Snapshot?
     
+    private let pageCityTitleView = {
+        let view = UIView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
     private let weatherCollectionView = {
         let collectioniView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
         
@@ -111,9 +119,10 @@ extension WeatherViewController {
                 group.contentInsets = .init(top: 0, leading: 10, bottom: 30, trailing: 10)
                 
                 let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                                               heightDimension: .fractionalHeight(0.4)),
+                                                                                               heightDimension: .fractionalHeight(0.05)),
                                                                              elementKind: UICollectionView.elementKindSectionHeader,
                                                                              alignment: .top)
+                headerView.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
                 section = .init(group: group)
                 section?.boundarySupplementaryItems = [headerView]
                 
@@ -221,7 +230,6 @@ extension WeatherViewController {
     }
     
     private func configureSupplementaryViewDatasource() {
-        let hourlyHeaderViewResistration = hourlySectionHeaderConfigure()
         let cityHeaderViewResistration = citySectionHeaderConfigure()
         
         datasource?.supplementaryViewProvider = { collectionView, elementKind, indexPath in
@@ -230,7 +238,7 @@ extension WeatherViewController {
             
             switch sectionKind {
             case .hourly:
-                collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: hourlyHeaderViewResistration, for: indexPath)
+                collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: cityHeaderViewResistration, for: indexPath)
             case .city:
                 collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: cityHeaderViewResistration, for: indexPath)
             case .wind:
@@ -257,18 +265,7 @@ extension WeatherViewController {
         
         return hourlySectionResistration
     }
-    
-    private func hourlySectionHeaderConfigure() -> UICollectionView.SupplementaryRegistration<hourlyCollectionHeaderView> {
-        let hourlySectionHeaderResistration = UICollectionView.SupplementaryRegistration<hourlyCollectionHeaderView>(
-            elementKind: UICollectionView.elementKindSectionHeader) { supplementaryView, elementKind, indexPath in
-                if let weather = self.viewModel.weathers.value?.first(where: { $0.name == "Seoul" }) {
-                    supplementaryView.configure(data: weather)
-                }
-        }
         
-        return hourlySectionHeaderResistration
-    }
-    
     private func citySectionItemConfigure() -> UICollectionView.CellRegistration<CityCollectionViewCell, Any> {
         let citySectionResistration = UICollectionView.CellRegistration<CityCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
             guard let itemIdentifier = itemIdentifier as? CityWeather else { return }
