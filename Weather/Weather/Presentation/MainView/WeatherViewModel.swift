@@ -7,11 +7,21 @@
 
 import Foundation
 
+enum Page: Int, CaseIterable {
+    case seoul, busan, incheon, daegu, daejeon, gwhangju, ulsan, sejong
+}
+
 class WeatherViewModel {
+    var page: Page
+        
     private let usecase = ProcessWeatherUsecase()
     
     var forecasts: Observable<[Forecast]?> = .init(nil)
     var weathers: Observable<[CityWeather]?> = .init(nil)
+    
+    init(page: Page) {
+        self.page = page
+    }
 }
 
 extension WeatherViewModel {
