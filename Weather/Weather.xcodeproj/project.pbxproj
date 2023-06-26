@@ -49,7 +49,6 @@
 		D2D3FCCD2A1E1F22000039FD /* NetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCCC2A1E1F22000039FD /* NetworkRepository.swift */; };
 		D2D3FCCF2A1E2435000039FD /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCCE2A1E2435000039FD /* NetworkError.swift */; };
 		D2D3FCD32A1FA71B000039FD /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCD22A1FA71B000039FD /* WeatherViewModel.swift */; };
-		D2D446292A47E46800981013 /* PagingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D446282A47E46800981013 /* PagingCollectionViewCell.swift */; };
 		D2DFAE002A452E4E00D0245E /* MockDiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DFADFE2A452E3300D0245E /* MockDiskStorage.swift */; };
 		D2DFAE032A45427B00D0245E /* MockMemoryCacheStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DFAE012A45426100D0245E /* MockMemoryCacheStorage.swift */; };
 		D2E5A1C42A3FD40F00392D4E /* DiskStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E5A1C32A3FD40F00392D4E /* DiskStorageTests.swift */; };
@@ -176,7 +175,6 @@
 		D2D3FCCC2A1E1F22000039FD /* NetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRepository.swift; sourceTree = "<group>"; };
 		D2D3FCCE2A1E2435000039FD /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		D2D3FCD22A1FA71B000039FD /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
-		D2D446282A47E46800981013 /* PagingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingCollectionViewCell.swift; sourceTree = "<group>"; };
 		D2DFADFE2A452E3300D0245E /* MockDiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDiskStorage.swift; sourceTree = "<group>"; };
 		D2DFAE012A45426100D0245E /* MockMemoryCacheStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMemoryCacheStorage.swift; sourceTree = "<group>"; };
 		D2E5A1C12A3FD40F00392D4E /* DiskStorageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiskStorageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -350,14 +348,13 @@
 			children = (
 				D27F6F9C2A46B9F20091104E /* BackgroundView */,
 				D24807872A1FBB4200922838 /* Header */,
-				D24807822A1FB7A500922838 /* ChildCell */,
-				D2D446272A47E3EF00981013 /* ParentCell */,
+				D24807822A1FB7A500922838 /* Cell */,
 				D24807882A1FBFDD00922838 /* ReusableView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
 		};
-		D24807822A1FB7A500922838 /* ChildCell */ = {
+		D24807822A1FB7A500922838 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				D248078A2A1FC18000922838 /* HourlyCollectionViewCell.swift */,
@@ -366,7 +363,7 @@
 				D28E95322A364FC90076A8FA /* TempMapCollectionViewCell.swift */,
 				D28E95342A3651FE0076A8FA /* DetailCollectionViewCell.swift */,
 			);
-			path = ChildCell;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		D24807872A1FBB4200922838 /* Header */ = {
@@ -599,14 +596,6 @@
 				D2D3FCD22A1FA71B000039FD /* WeatherViewModel.swift */,
 			);
 			path = MainView;
-			sourceTree = "<group>";
-		};
-		D2D446272A47E3EF00981013 /* ParentCell */ = {
-			isa = PBXGroup;
-			children = (
-				D2D446282A47E46800981013 /* PagingCollectionViewCell.swift */,
-			);
-			path = ParentCell;
 			sourceTree = "<group>";
 		};
 		D2DFADFD2A452DE900D0245E /* TestDouble */ = {
@@ -1052,7 +1041,6 @@
 				D276AB842A29F3C8007E3677 /* URLSessionProtocol.swift in Sources */,
 				D248078B2A1FC18000922838 /* HourlyCollectionViewCell.swift in Sources */,
 				D22BC1D92A394C9300CD5D2F /* Forecast.swift in Sources */,
-				D2D446292A47E46800981013 /* PagingCollectionViewCell.swift in Sources */,
 				D24807862A1FBB3900922838 /* hourlyCollectionHeaderView.swift in Sources */,
 				D28E95332A364FC90076A8FA /* TempMapCollectionViewCell.swift in Sources */,
 				D2D3FCAE2A1DB83E000039FD /* SceneDelegate.swift in Sources */,
