@@ -7,27 +7,14 @@
 
 import Foundation
 
-enum Page: CaseIterable {
-    case seoul, busan, incheon, daegu, daejeon, gwhangju, ulsan, sejong
-    var description: String {
-        switch self {
-        case .seoul:
-            return "Seoul"
-        case .busan:
-            return "Busan"
-        case .incheon:
-            return "Incheon"
-        case .daegu:
-            return "Daegu"
-        case .daejeon:
-            return "Daejeon"
-        case .gwhangju:
-            return "Gwhangju"
-        case .ulsan:
-            return "Ulsan"
-        case .sejong:
-            return "Sejong"
-        }
+enum Page: String, CaseIterable {
+    case seoul, busan, incheon, daegu, daejeon, gwangju, ulsan, sejong
+    
+    var capitalizedPage: String {
+        let capitalizedFirst = self.rawValue.prefix(1).capitalized
+        let exceptFirst = self.rawValue.dropFirst()
+        
+        return capitalizedFirst + exceptFirst
     }
 }
 
@@ -37,17 +24,21 @@ class WeatherViewModel {
     private let usecase = ProcessWeatherUsecase()
     
     var forecasts: Observable<[Forecast]?> = .init(nil)
-    var weathers: Observable<[CityWeather]?> = .init(nil)
+    var cityWeathers: [CityWeather]
     
-    init(page: Page) {
+    var cityWeathersExcludingCurrentPage: [CityWeather] {
+        return cityWeathers.filter { $0.name != page.capitalizedPage }
+    }
+    
+    init(page: Page, cityWeathers: [CityWeather]) {
         self.page = page
+        self.cityWeathers = cityWeathers
     }
 }
 
 extension WeatherViewModel {
     func fetchWeatherData() {
         usecase.fetchFiveDaysForecast { self.forecasts.value = $0 }
-        usecase.fetchAllCitiesCurrentWeather { self.weathers.value = $0 }
     }
     
     func fetchWeatherIcon(iconString: String , completion: @escaping (Data) -> Void) {
