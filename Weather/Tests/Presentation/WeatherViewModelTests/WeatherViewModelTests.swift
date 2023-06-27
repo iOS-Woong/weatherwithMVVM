@@ -33,7 +33,7 @@ final class WeatherViewModelTests: XCTestCase {
             promise.fulfill()
         }
         
-        sut.weathers.subscribe {
+        sut.cityWeathers.subscribe {
             testCityWeathers = $0
             promise.fulfill()
         }

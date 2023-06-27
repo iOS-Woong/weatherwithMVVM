@@ -8,6 +8,7 @@
 import UIKit
 
 class PageViewController: UIViewController {
+    private let usecase = ProcessWeatherUsecase()
     private var contentsViewControllers = [UIViewController]()
     private let pageViewController = UIPageViewController(transitionStyle: .scroll,
                                                           navigationOrientation: .horizontal)
@@ -20,20 +21,22 @@ class PageViewController: UIViewController {
     }
     
     private func setupViewControllers() {
-        for page in Page.allCases {
-            let viewModel = WeatherViewModel(page: page)
-            let weatherViewController = WeatherViewController(viewModel: viewModel)
+        usecase.fetchAllCitiesCurrentWeather {
+            for page in Page.allCases {
+                let viewModel = WeatherViewModel(page: page, cityWeathers: .init($0))
+                let weatherViewController = WeatherViewController(viewModel: viewModel)
+                
+                self.contentsViewControllers.append(weatherViewController)
+            }
             
-            contentsViewControllers.append(weatherViewController)
+            if let firstViewController = self.contentsViewControllers.first {
+                self.pageViewController.setViewControllers([firstViewController], direction: .forward, animated: true)
+            }
         }
     }
         
     private func setupAttributes() {
         pageViewController.dataSource = self
-        
-        if let firstViewController = contentsViewControllers.first {
-            pageViewController.setViewControllers([firstViewController], direction: .forward, animated: true)
-        }
     }
     
     private func setupViews() {
