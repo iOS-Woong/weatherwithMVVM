@@ -1,5 +1,5 @@
 //
-//  ContentCollectionHeaderView.swift
+//  CommonTitleView.swift
 //  Weather
 //
 //  Created by 서현웅 on 2023/05/26.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class hourlyCollectionHeaderView: UICollectionReusableView {
+class CommonTitleView: UIView {
     
     private let regionLabel = {
        let label = UILabel()
@@ -78,7 +78,7 @@ class hourlyCollectionHeaderView: UICollectionReusableView {
     }
     
     func configure(data: CityWeather) {
-        regionLabel.text = "서울특별시"
+        regionLabel.text = data.name
         tempLabel.text = data.temparature.temp.convertCelciusTemp()
         descriptionLabel.text = data.description
         minTempLabel.text = "최저: \(data.temparature.tempMin.convertCelciusTemp())"
@@ -86,6 +86,8 @@ class hourlyCollectionHeaderView: UICollectionReusableView {
     }
 
     private func setupViews() {
+        self.backgroundColor = .clear
+        
         [maxTempLabel, minTempLabel].forEach(minMaxTempHorizontalStackView.addArrangedSubview(_:))
         
         let targetViews = [regionLabel, tempLabel, descriptionLabel, minMaxTempHorizontalStackView]
