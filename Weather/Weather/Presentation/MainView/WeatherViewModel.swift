@@ -9,6 +9,26 @@ import Foundation
 
 enum Page: CaseIterable {
     case seoul, busan, incheon, daegu, daejeon, gwhangju, ulsan, sejong
+    var description: String {
+        switch self {
+        case .seoul:
+            return "Seoul"
+        case .busan:
+            return "Busan"
+        case .incheon:
+            return "Incheon"
+        case .daegu:
+            return "Daegu"
+        case .daejeon:
+            return "Daejeon"
+        case .gwhangju:
+            return "Gwhangju"
+        case .ulsan:
+            return "Ulsan"
+        case .sejong:
+            return "Sejong"
+        }
+    }
 }
 
 class WeatherViewModel {

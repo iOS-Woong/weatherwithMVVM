@@ -20,19 +20,33 @@ class WeatherViewController: UIViewController {
     private var datasource: Datasource?
     private var snapshot: Snapshot?
     
-    private let pageCityTitleView = {
-        let view = UIView()
+    private let scrollView = {
+        let scrollView = UIScrollView()
         
-        view.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         
+        return scrollView
+    }()
+    
+    private let contentsVerticalStackView = {
+        let stackView = UIStackView()
+        
+        stackView.axis = .vertical
+        stackView.spacing = 15
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
+    }()
+    
+    private let commonTitleView = {
+        let view = CommonTitleView()
         return view
     }()
     
     private let weatherCollectionView = {
         let collectioniView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-        
-        collectioniView.translatesAutoresizingMaskIntoConstraints = false
-        
         return collectioniView
     }()
     
@@ -60,15 +74,24 @@ class WeatherViewController: UIViewController {
             guard let forecasts else { return }
             self.configureSnapshot(forecasts, to: .hourly)
         })
-     
+        
         viewModel.weathers.subscribe(onNext: { weathers in
             guard let weathers else { return }
+            self.configureCommonTitleView()
             self.configureSnapshot(weathers, to: .city)
         })
     }
     
     private func fetch() {
         viewModel.fetchWeatherData()
+    }
+    
+    private func configureCommonTitleView() {
+        guard let pageCityWeather = viewModel.weathers.value?.filter({
+            $0.name == viewModel.page.description
+        }).first else { return }
+        
+        commonTitleView.configure(data: pageCityWeather)
     }
     
     private func configureSnapshot(_ itemIdentifier: [AnyHashable], to section: Section) {
@@ -84,19 +107,34 @@ class WeatherViewController: UIViewController {
     }
     
     private func setupCollectionViewAttributes() {
+        weatherCollectionView.isScrollEnabled = false
         weatherCollectionView.collectionViewLayout = createLayout()
     }
     
     private func setupViews() {
-        let collectionImage = UIImage(named: "night")
-        weatherCollectionView.backgroundView = UIImageView(image: collectionImage)
-        view.addSubview(weatherCollectionView)
+        // TODO: 수정
+        let viewImage = UIImage(named: "night")
+        view.backgroundColor = UIColor(patternImage: viewImage!)
+        weatherCollectionView.backgroundColor = .clear
+        
+        [commonTitleView, weatherCollectionView].forEach(contentsVerticalStackView.addArrangedSubview(_:))
+        scrollView.addSubview(contentsVerticalStackView)
+        view.addSubview(scrollView)
         
         NSLayoutConstraint.activate([
-            weatherCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            weatherCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            weatherCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            weatherCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            contentsVerticalStackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentsVerticalStackView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentsVerticalStackView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentsVerticalStackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            contentsVerticalStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
+            commonTitleView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4),
+            weatherCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.8)
         ])
     }
 }
@@ -116,10 +154,10 @@ extension WeatherViewController {
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
                                                                                  heightDimension: .absolute(150)),
                                                                subitems: [item])
-                group.contentInsets = .init(top: 0, leading: 10, bottom: 30, trailing: 10)
+                group.contentInsets = .init(top: 10, leading: 10, bottom: 30, trailing: 10)
                 
                 let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                                               heightDimension: .fractionalHeight(0.05)),
+                                                                                               heightDimension: .fractionalHeight(0.08)),
                                                                              elementKind: UICollectionView.elementKindSectionHeader,
                                                                              alignment: .top)
                 headerView.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
@@ -129,7 +167,7 @@ extension WeatherViewController {
                 section?.orthogonalScrollingBehavior = .continuous
                 
                 return section
-            
+                
             case .city:
                 let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
                                                                     heightDimension: .fractionalHeight(1.0)))
@@ -178,7 +216,7 @@ extension WeatherViewController {
                 section = .init(group: group)
                 section?.boundarySupplementaryItems = [headerView]
                 section?.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
-
+                
                 
                 return section
                 
@@ -193,7 +231,7 @@ extension WeatherViewController {
                 
                 return section
             }
-        
+            
         }
         return layout
     }
@@ -265,7 +303,7 @@ extension WeatherViewController {
         
         return hourlySectionResistration
     }
-        
+    
     private func citySectionItemConfigure() -> UICollectionView.CellRegistration<CityCollectionViewCell, Any> {
         let citySectionResistration = UICollectionView.CellRegistration<CityCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
             guard let itemIdentifier = itemIdentifier as? CityWeather else { return }
@@ -279,8 +317,8 @@ extension WeatherViewController {
     private func citySectionHeaderConfigure() -> UICollectionView.SupplementaryRegistration<CityCollectionHeaderView> {
         let citySectionHeaderResistration = UICollectionView.SupplementaryRegistration<CityCollectionHeaderView>(
             elementKind: UICollectionView.elementKindSectionHeader) { supplementaryView, elementKind, indexPath in
-            // TODO: 여기 cityHeader 컨피규어
-        }
+                // TODO: 여기 cityHeader 컨피규어
+            }
         
         return citySectionHeaderResistration
     }
