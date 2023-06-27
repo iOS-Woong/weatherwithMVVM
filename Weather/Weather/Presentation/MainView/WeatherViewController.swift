@@ -230,6 +230,8 @@ extension WeatherViewController {
             }
             
         }
+        layout.register(CommonCollectionBackgroundView.self, forDecorationViewOfKind: CommonCollectionBackgroundView.reuseIdentifier)
+        
         return layout
     }
 }
