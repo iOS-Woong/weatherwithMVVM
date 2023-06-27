@@ -29,7 +29,7 @@ class CommonCollectionBackgroundView: UICollectionReusableView, ReusableView {
     }
     
     private func setupViews() {
-        self.backgroundColor = .black
+        self.backgroundColor = .clear
         self.addSubview(backDecorateView)
         
         NSLayoutConstraint.activate([
