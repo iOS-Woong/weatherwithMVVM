@@ -16,7 +16,6 @@ class WeatherViewController: UIViewController {
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>
     
     private let viewModel: WeatherViewModel
-    
     private var datasource: Datasource?
     private var snapshot: Snapshot?
     
@@ -65,6 +64,7 @@ class WeatherViewController: UIViewController {
         setupCollectionViewAttributes()
         configureCollectionViewCellDatasource()
         configureSupplementaryViewDatasource()
+        configureCommonTitleView()
         bind()
         fetch()
     }
@@ -72,13 +72,10 @@ class WeatherViewController: UIViewController {
     private func bind() {
         viewModel.forecasts.subscribe(onNext: { forecasts in
             guard let forecasts else { return }
-            self.configureSnapshot(forecasts, to: .hourly)
-        })
-        
-        viewModel.weathers.subscribe(onNext: { weathers in
-            guard let weathers else { return }
-            self.configureCommonTitleView()
-            self.configureSnapshot(weathers, to: .city)
+            self.configureLastSnapshot(forecasts,
+                                       to: .hourly)
+            self.configureLastSnapshot(self.viewModel.cityWeathersExcludingCurrentPage,
+                                       to: .city)
         })
     }
     
@@ -87,20 +84,20 @@ class WeatherViewController: UIViewController {
     }
     
     private func configureCommonTitleView() {
-        guard let pageCityWeather = viewModel.weathers.value?.filter({
-            $0.name == viewModel.page.description
+        guard let pageCityWeather = viewModel.cityWeathers.filter({
+            $0.name == viewModel.page.capitalizedPage
         }).first else { return }
         
         commonTitleView.configure(data: pageCityWeather)
     }
     
-    private func configureSnapshot(_ itemIdentifier: [AnyHashable], to section: Section) {
+    
+    private func configureLastSnapshot(_ itemIdentifier: [AnyHashable], to section: Section) {
         DispatchQueue.main.async {
             if self.snapshot == nil {
                 self.snapshot = .init()
             }
             self.snapshot?.appendSections([section])
-            self.snapshot?.reloadSections([section])
             self.snapshot?.appendItems(itemIdentifier, toSection: section)
             self.datasource?.apply(self.snapshot!, animatingDifferences: true)
         }
