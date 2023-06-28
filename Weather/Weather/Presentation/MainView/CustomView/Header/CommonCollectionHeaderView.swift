@@ -43,6 +43,7 @@ class CommonCollectionHeaderView: UICollectionReusableView {
             calendarFlagImageView.image = UIImage(systemName: "wind")
             descriptionLabel.text = "바람"
         case .tempMap:
+            calendarFlagImageView.image = UIImage(systemName: "globe")
             descriptionLabel.text = "세계온도"
         case .detail:
             descriptionLabel.text = "아직안함"

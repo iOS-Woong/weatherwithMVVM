@@ -222,6 +222,9 @@ extension WeatherViewController {
                 headerView.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
                 section = .init(group: group)
                 section?.boundarySupplementaryItems = [headerView]
+                section?.decorationItems = [
+                    NSCollectionLayoutDecorationItem.background(elementKind: CommonCollectionBackgroundView.reuseIdentifier)
+                ]
                 section?.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
                 
                 
