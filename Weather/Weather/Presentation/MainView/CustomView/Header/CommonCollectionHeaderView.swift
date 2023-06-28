@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CityCollectionHeaderView: UICollectionReusableView {
+class CommonCollectionHeaderView: UICollectionReusableView {
     
     private let calendarFlagImageView = {
        let imageView = UIImageView()

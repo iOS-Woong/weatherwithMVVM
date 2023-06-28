@@ -12,7 +12,6 @@ class WindCollectionViewCell: UICollectionViewCell {
     private let windSpeedLabel = {
        let label = UILabel()
         
-        label.text = "55m/s"
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         
@@ -22,8 +21,8 @@ class WindCollectionViewCell: UICollectionViewCell {
     private let descriptionLabel = {
        let label = UILabel()
 
-        label.text = "현재의 풍속은 33m/s 이며, \n이런이런상황입니다."
         label.textColor = .white
+        label.numberOfLines = 2
 
         return label
     }()
@@ -44,6 +43,14 @@ class WindCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(data: CityWeather) {
+        let roundedSpeed = Int(data.wind.speed)
+        
+        windSpeedLabel.text = "\(data.wind.speed) m/s"
+        descriptionLabel.text =
+        "현재의 풍속은 \(roundedSpeed) m/s 이며,\n바람의 방향은 \(data.wind.deg.convertWindDirection())입니다."
     }
     
     private func setupViews() {
@@ -67,6 +74,16 @@ class WindCollectionViewCell: UICollectionViewCell {
             graphView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05)
         ])
     }
-    
-    
+}
+
+private extension Int {
+    func convertWindDirection() -> String {
+        let directions = ["북풍", "북동풍", "동풍", "남동풍", "남풍", "남서풍", "서풍", "북서풍"]
+        
+        let doubleSelf = Double(self)
+        let adjustedAngle = doubleSelf.truncatingRemainder(dividingBy: 360)
+        let index = Int((adjustedAngle + 22.5) / 45) % 8
+        
+        return directions[index]
+    }
 }

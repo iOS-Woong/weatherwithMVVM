@@ -76,6 +76,7 @@ class WeatherViewController: UIViewController {
                                        to: .hourly)
             self.configureLastSnapshot(self.viewModel.cityWeathersExcludingCurrentPage,
                                        to: .city)
+            self.configureLastSnapshot([self.viewModel.cityWeatherCurrentPage], to: .wind)
         })
     }
     
@@ -129,7 +130,7 @@ class WeatherViewController: UIViewController {
             contentsVerticalStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             commonTitleView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4),
-            weatherCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.8)
+            weatherCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1.5)
         ])
     }
 }
@@ -200,6 +201,9 @@ extension WeatherViewController {
                 section = .init(group: group)
                 
                 section?.boundarySupplementaryItems = [headerView]
+                section?.decorationItems = [
+                    NSCollectionLayoutDecorationItem.background(elementKind: CommonCollectionBackgroundView.reuseIdentifier)
+                ]
                 section?.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
                 return section
                 
@@ -328,7 +332,8 @@ extension WeatherViewController {
     
     private func windSectionItemConfigure() -> UICollectionView.CellRegistration<WindCollectionViewCell, Any> {
         let windSectionResistration = UICollectionView.CellRegistration<WindCollectionViewCell,Any> { cell, indexPath, itemIdentifier in
-            // TODO: 여기 windCell 컨피규어
+            guard let itemIdentifier = itemIdentifier as? CityWeather else { return }
+            cell.configure(data: itemIdentifier)
         }
         return windSectionResistration
     }
