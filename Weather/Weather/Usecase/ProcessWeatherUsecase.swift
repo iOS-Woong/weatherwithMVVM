@@ -63,9 +63,8 @@ struct ProcessWeatherUsecase {
         }
     }
     
-    func fetchWeatherIcon(iconString: String,
-                          completion: @escaping (Data) -> Void) {
-        guard let url = endPoint.imageUrl(icon: iconString) else { return }
+    func getImageDataFromImageManager(url: URL,
+                                      completion: @escaping (Data) -> Void) {
         imageManager.retriveImage(url.absoluteString) { result in
             switch result {
             case .success(let data):
@@ -74,6 +73,5 @@ struct ProcessWeatherUsecase {
                 print(error)
             }
         }
-
     }
 }

@@ -22,10 +22,10 @@ class WeatherViewModel {
     var page: Page
         
     private let usecase = ProcessWeatherUsecase()
+    private let endPoint = EndPoint()
     
     var forecasts: Observable<[Forecast]?> = .init(nil)
     var cityWeathers: [CityWeather]
-    
     
     var cityWeatherCurrentPage: CityWeather? {
         return cityWeathers.first { $0.name == page.capitalizedPage }
@@ -47,6 +47,15 @@ extension WeatherViewModel {
     }
     
     func fetchWeatherIcon(iconString: String , completion: @escaping (Data) -> Void) {
-        usecase.fetchWeatherIcon(iconString: iconString, completion: completion)
+        guard let url = endPoint.imageUrl(icon: iconString) else { return }
+        
+        usecase.getImageDataFromImageManager(url: url, completion: completion)
     }
+    
+    func fetchTempMap(completion: @escaping (Data) -> Void) {
+        guard let url = endPoint.tempMapUrl() else { return }
+        
+        usecase.getImageDataFromImageManager(url: url, completion: completion)
+    }
+    
 }

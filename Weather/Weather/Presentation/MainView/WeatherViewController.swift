@@ -78,6 +78,7 @@ class WeatherViewController: UIViewController {
             self.configureLastSnapshot(self.viewModel.cityWeathersExcludingCurrentPage,
                                        to: .city)
             self.configureLastSnapshot([self.viewModel.cityWeatherCurrentPage], to: .wind)
+            self.configureLastSnapshot([UUID()], to: .tempMap)
         })
     }
     
@@ -330,7 +331,9 @@ extension WeatherViewController {
     
     private func tempSectionItemConfigure() -> UICollectionView.CellRegistration<TempMapCollectionViewCell, Any> {
         let tempSectionResistration = UICollectionView.CellRegistration<TempMapCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
-            // TODO: 여기 tempCell 컨피규어
+            self.viewModel.fetchTempMap {
+                cell.configure(data: $0)
+            }
         }
         
         return tempSectionResistration
