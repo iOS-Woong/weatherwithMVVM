@@ -84,11 +84,9 @@ class WeatherViewController: UIViewController {
     }
     
     private func configureCommonTitleView() {
-        guard let pageCityWeather = viewModel.cityWeathers.filter({
-            $0.name == viewModel.page.capitalizedPage
-        }).first else { return }
+        guard let cityWeatherCurrentPage = viewModel.cityWeatherCurrentPage else { return }
         
-        commonTitleView.configure(data: pageCityWeather)
+        commonTitleView.configure(data: cityWeatherCurrentPage)
     }
     
     

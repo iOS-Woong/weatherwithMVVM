@@ -586,9 +586,9 @@
 			isa = PBXGroup;
 			children = (
 				D24807812A1FB5CE00922838 /* CustomView */,
+				D2BD80982A493F67009176F7 /* PageViewController.swift */,
 				D2D3FCAF2A1DB83E000039FD /* WeatherViewController.swift */,
 				D2D3FCD22A1FA71B000039FD /* WeatherViewModel.swift */,
-				D2BD80982A493F67009176F7 /* PageViewController.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";

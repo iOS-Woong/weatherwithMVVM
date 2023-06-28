@@ -26,6 +26,11 @@ class WeatherViewModel {
     var forecasts: Observable<[Forecast]?> = .init(nil)
     var cityWeathers: [CityWeather]
     
+    
+    var cityWeatherCurrentPage: CityWeather? {
+        return cityWeathers.first { $0.name == page.capitalizedPage }
+    }
+    
     var cityWeathersExcludingCurrentPage: [CityWeather] {
         return cityWeathers.filter { $0.name != page.capitalizedPage }
     }
