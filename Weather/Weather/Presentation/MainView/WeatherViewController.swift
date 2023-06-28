@@ -7,10 +7,11 @@
 
 import UIKit
 
+enum Section: Int {
+    case hourly, city, wind, tempMap, detail
+}
+
 class WeatherViewController: UIViewController {
-    enum Section: Int {
-        case hourly, city, wind, tempMap, detail
-    }
     
     typealias Datasource = UICollectionViewDiffableDataSource<Section, AnyHashable>
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>
@@ -275,24 +276,12 @@ extension WeatherViewController {
     }
     
     private func configureSupplementaryViewDatasource() {
-        let cityHeaderViewResistration = citySectionHeaderConfigure()
+        let cityHeaderViewResistration = commonSectionHeaderConfigure()
         
         datasource?.supplementaryViewProvider = { collectionView, elementKind, indexPath in
-            guard let sectionKind = Section(rawValue: indexPath.section) else { return nil }
             var collectionReusableView: UICollectionReusableView?
-            
-            switch sectionKind {
-            case .hourly:
-                collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: cityHeaderViewResistration, for: indexPath)
-            case .city:
-                collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: cityHeaderViewResistration, for: indexPath)
-            case .wind:
-                collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: cityHeaderViewResistration, for: indexPath)
-            case .tempMap:
-                collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: cityHeaderViewResistration, for: indexPath)
-            case .detail:
-                print("A")
-            }
+            collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: cityHeaderViewResistration,
+                                                                                           for: indexPath)
             
             return collectionReusableView
         }
@@ -321,10 +310,11 @@ extension WeatherViewController {
         return citySectionResistration
     }
     
-    private func citySectionHeaderConfigure() -> UICollectionView.SupplementaryRegistration<CityCollectionHeaderView> {
-        let citySectionHeaderResistration = UICollectionView.SupplementaryRegistration<CityCollectionHeaderView>(
+    private func commonSectionHeaderConfigure() -> UICollectionView.SupplementaryRegistration<CommonCollectionHeaderView> {
+        let citySectionHeaderResistration = UICollectionView.SupplementaryRegistration<CommonCollectionHeaderView>(
             elementKind: UICollectionView.elementKindSectionHeader) { supplementaryView, elementKind, indexPath in
-                // TODO: 여기 cityHeader 컨피규어
+                guard let sectionKind = Section(rawValue: indexPath.section) else { return }
+                supplementaryView.configureHeader(section: sectionKind)
             }
         
         return citySectionHeaderResistration

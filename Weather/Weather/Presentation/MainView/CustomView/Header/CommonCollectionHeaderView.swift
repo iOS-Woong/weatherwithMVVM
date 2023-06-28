@@ -12,7 +12,6 @@ class CommonCollectionHeaderView: UICollectionReusableView {
     private let calendarFlagImageView = {
        let imageView = UIImageView()
         
-        imageView.image = UIImage(systemName: "calendar")
         imageView.tintColor = .white
         
         return imageView
@@ -22,7 +21,6 @@ class CommonCollectionHeaderView: UICollectionReusableView {
     private let descriptionLabel = {
        let label = UILabel()
         
-        label.text = "10일간의 일기예보"
         label.textColor = .white
         
         return label
@@ -31,6 +29,24 @@ class CommonCollectionHeaderView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+    }
+    
+    func configureHeader(section: Section) {
+        switch section {
+        case .hourly:
+            calendarFlagImageView.image = UIImage(systemName: "clock.badge")
+            descriptionLabel.text = "시간별 일기예보"
+        case .city:
+            calendarFlagImageView.image = UIImage(systemName: "calendar")
+            descriptionLabel.text = "10일간의 일기예보"
+        case .wind:
+            calendarFlagImageView.image = UIImage(systemName: "wind")
+            descriptionLabel.text = "바람"
+        case .tempMap:
+            descriptionLabel.text = "세계온도"
+        case .detail:
+            descriptionLabel.text = "아직안함"
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -53,6 +69,5 @@ class CommonCollectionHeaderView: UICollectionReusableView {
             descriptionLabel.leadingAnchor.constraint(equalTo: calendarFlagImageView.trailingAnchor, constant: 10),
             descriptionLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
-        
     }
 }
