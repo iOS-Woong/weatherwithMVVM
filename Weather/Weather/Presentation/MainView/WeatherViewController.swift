@@ -20,31 +20,6 @@ class WeatherViewController: UIViewController {
     private var datasource: Datasource?
     private var snapshot: Snapshot?
     
-    private let scrollView = {
-        let scrollView = UIScrollView()
-        
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return scrollView
-    }()
-    
-    private let contentsVerticalStackView = {
-        let stackView = UIStackView()
-        
-        stackView.axis = .vertical
-        stackView.spacing = 15
-        stackView.distribution = .fill
-        stackView.alignment = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return stackView
-    }()
-    
-    private let commonTitleView = {
-        let view = CommonTitleView()
-        return view
-    }()
-    
     private let weatherCollectionView = {
         let collectioniView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
         return collectioniView
@@ -65,7 +40,6 @@ class WeatherViewController: UIViewController {
         setupCollectionViewAttributes()
         configureCollectionViewCellDatasource()
         configureSupplementaryViewDatasource()
-        configureCommonTitleView()
         bind()
         fetch()
     }
@@ -85,13 +59,6 @@ class WeatherViewController: UIViewController {
     private func fetch() {
         viewModel.fetchWeatherData()
     }
-    
-    private func configureCommonTitleView() {
-        guard let cityWeatherCurrentPage = viewModel.cityWeatherCurrentPage else { return }
-        
-        commonTitleView.configure(data: cityWeatherCurrentPage)
-    }
-    
     
     private func configureLastSnapshot(_ itemIdentifier: [AnyHashable], to section: Section) {
         DispatchQueue.main.async {
@@ -115,24 +82,13 @@ class WeatherViewController: UIViewController {
         view.backgroundColor = UIColor(patternImage: viewImage!)
         weatherCollectionView.backgroundColor = .clear
         
-        [commonTitleView, weatherCollectionView].forEach(contentsVerticalStackView.addArrangedSubview(_:))
-        scrollView.addSubview(contentsVerticalStackView)
-        view.addSubview(scrollView)
+        view.addSubview(weatherCollectionView)
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            contentsVerticalStackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-            contentsVerticalStackView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
-            contentsVerticalStackView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
-            contentsVerticalStackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
-            contentsVerticalStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            
-            commonTitleView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4),
-            weatherCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1.5)
+            weatherCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            weatherCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            weatherCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            weatherCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }
