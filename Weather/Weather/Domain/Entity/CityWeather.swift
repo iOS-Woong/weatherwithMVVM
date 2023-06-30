@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CityWeather: Hashable { // TODO: 필요한 프로퍼티가 더 있다면 추가해야함.
+struct CityWeather: Hashable {
     let id = UUID()
     let name: String
     let icon: String
@@ -15,6 +15,8 @@ struct CityWeather: Hashable { // TODO: 필요한 프로퍼티가 더 있다면 
     let temparature: Temparature
     let description: String
     let wind: WindInfo
+    let cloud: Cloud
+    let sun: Sun
 }
 
 struct Coordinate: Hashable {
@@ -23,12 +25,29 @@ struct Coordinate: Hashable {
 }
 
 struct Temparature: Hashable {
+    let detail: DetailStuff
     let temp: Double
     let tempMin: Double
     let tempMax: Double
+    let sensoryTemp: Double
+}
+
+struct DetailStuff: Hashable {
+    let pressure: Int
+    let humidity: Int
+    let visibility: Int
 }
 
 struct WindInfo: Hashable {
     let speed: Double
     let deg: Int
+}
+
+struct Cloud: Hashable {
+    let Cloudiness: Int
+}
+
+struct Sun: Hashable {
+    let sunrise: Int
+    let sunset: Int
 }
