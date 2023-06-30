@@ -323,8 +323,8 @@ extension WeatherViewController {
         return tempSectionResistration
     }
     
-    private func detailSectionItemConfigure() -> UICollectionView.CellRegistration<DetailCollectionViewCell, Any> {
-        let detailSectionResistration = UICollectionView.CellRegistration<DetailCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
+    private func detailSectionItemConfigure() -> UICollectionView.CellRegistration<UICollectionViewCell, Any> {
+        let detailSectionResistration = UICollectionView.CellRegistration<UICollectionViewCell, Any> { cell, indexPath, itemIdentifier in
             // TODO: detailSection의 복잡도로 인해 컨피규어는 추후 서버통신작업을 마치고 진행함
         }
         return detailSectionResistration
