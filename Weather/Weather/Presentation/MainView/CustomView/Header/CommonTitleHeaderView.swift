@@ -1,5 +1,5 @@
 //
-//  CommonTitleView.swift
+//  CommonTitleHeaderView.swift
 //  Weather
 //
 //  Created by 서현웅 on 2023/05/26.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CommonTitleView: UIView {
+class CommonTitleHeaderView: UICollectionReusableView {
     
     private let regionLabel = {
        let label = UILabel()

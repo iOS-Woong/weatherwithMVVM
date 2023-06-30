@@ -1,5 +1,5 @@
 //
-//  CityCollectionHeaderView.swift
+//  CommonCollectionSectionHeaderView.swift
 //  Weather
 //
 //  Created by 서현웅 on 2023/06/11.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CommonCollectionHeaderView: UICollectionReusableView {
+class CommonCollectionSectionHeaderView: UICollectionReusableView {
     
     private let calendarFlagImageView = {
        let imageView = UIImageView()

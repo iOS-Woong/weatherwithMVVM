@@ -279,8 +279,8 @@ extension WeatherViewController {
         return citySectionResistration
     }
     
-    private func commonSectionHeaderConfigure() -> UICollectionView.SupplementaryRegistration<CommonCollectionHeaderView> {
-        let citySectionHeaderResistration = UICollectionView.SupplementaryRegistration<CommonCollectionHeaderView>(
+    private func commonSectionHeaderConfigure() -> UICollectionView.SupplementaryRegistration<CommonCollectionSectionHeaderView> {
+        let citySectionHeaderResistration = UICollectionView.SupplementaryRegistration<CommonCollectionSectionHeaderView>(
             elementKind: UICollectionView.elementKindSectionHeader) { supplementaryView, elementKind, indexPath in
                 guard let sectionKind = Section(rawValue: indexPath.section) else { return }
                 supplementaryView.configureHeader(section: sectionKind)
