@@ -22,11 +22,22 @@ struct ProcessWeatherUsecase {
             service.fetch(url: url, type: CurrentWeather.self) { result in
                 switch result {
                 case .success(let weather):
-                    let cityWeather = CityWeather(name: weather.name, icon: weather.weather[0].icon,
+                    let cityWeather = CityWeather(name: weather.name,
+                                                  icon: weather.weather[0].icon,
                                                   coordinate: Coordinate(lon: weather.coord.lon, lat: weather.coord.lat),
-                                                  temparature: Temparature(temp: weather.main.temp, tempMin: weather.main.tempMin, tempMax: weather.main.tempMax),
+                                                  temparature: Temparature(detail: DetailStuff(pressure: weather.main.pressure,
+                                                                                               humidity: weather.main.humidity,
+                                                                                               visibility: weather.visibility),
+                                                                           temp: weather.main.temp,
+                                                                           tempMin: weather.main.tempMin,
+                                                                           tempMax: weather.main.tempMax,
+                                                                           sensoryTemp: weather.main.feelsLike),
                                                   description: weather.weather[0].description,
-                                                  wind: WindInfo(speed: weather.wind.speed, deg: weather.wind.deg))
+                                                  wind: WindInfo(speed: weather.wind.speed,
+                                                                 deg: weather.wind.deg),
+                                                  cloud: Cloud(Cloudiness: weather.clouds.all),
+                                                  sun: Sun(sunrise: weather.sys.sunrise,
+                                                           sunset: weather.sys.sunset))
                     citiesWeather.append(cityWeather)
                 case .failure(let error):
                     print(error)
