@@ -342,13 +342,32 @@
 			path = NetworkRepositoryTests;
 			sourceTree = "<group>";
 		};
+		D241F7442A4EFEB00050ACF1 /* DetailSectionCells */ = {
+			isa = PBXGroup;
+			children = (
+				D28E95342A3651FE0076A8FA /* DetailCollectionViewCell.swift */,
+			);
+			path = DetailSectionCells;
+			sourceTree = "<group>";
+		};
+		D241F7452A4EFECE0050ACF1 /* NormalSectionCells */ = {
+			isa = PBXGroup;
+			children = (
+				D248078A2A1FC18000922838 /* HourlyCollectionViewCell.swift */,
+				D28E952C2A350DBE0076A8FA /* CityCollectionViewCell.swift */,
+				D28E95302A3646F40076A8FA /* WindCollectionViewCell.swift */,
+				D28E95322A364FC90076A8FA /* TempMapCollectionViewCell.swift */,
+			);
+			path = NormalSectionCells;
+			sourceTree = "<group>";
+		};
 		D24807812A1FB5CE00922838 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				D24807882A1FBFDD00922838 /* ReusableView.swift */,
 				D2BD80BE2A49CB8E009176F7 /* CommonView */,
 				D24807872A1FBB4200922838 /* Header */,
 				D24807822A1FB7A500922838 /* Cell */,
-				D24807882A1FBFDD00922838 /* ReusableView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -356,11 +375,8 @@
 		D24807822A1FB7A500922838 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				D248078A2A1FC18000922838 /* HourlyCollectionViewCell.swift */,
-				D28E952C2A350DBE0076A8FA /* CityCollectionViewCell.swift */,
-				D28E95302A3646F40076A8FA /* WindCollectionViewCell.swift */,
-				D28E95322A364FC90076A8FA /* TempMapCollectionViewCell.swift */,
-				D28E95342A3651FE0076A8FA /* DetailCollectionViewCell.swift */,
+				D241F7452A4EFECE0050ACF1 /* NormalSectionCells */,
+				D241F7442A4EFEB00050ACF1 /* DetailSectionCells */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
