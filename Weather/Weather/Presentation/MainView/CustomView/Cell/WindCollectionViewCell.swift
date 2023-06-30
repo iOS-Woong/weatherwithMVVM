@@ -23,6 +23,7 @@ class WindCollectionViewCell: UICollectionViewCell {
 
         label.textColor = .white
         label.numberOfLines = 2
+        label.font = UIFont.systemFont(ofSize: 16, weight: .light)
 
         return label
     }()

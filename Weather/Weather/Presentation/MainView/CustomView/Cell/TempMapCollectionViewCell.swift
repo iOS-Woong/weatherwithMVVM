@@ -13,6 +13,8 @@ class TempMapCollectionViewCell: UICollectionViewCell {
        let imageView = UIImageView()
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 15
+        imageView.clipsToBounds = true
         
         return imageView
     }()
@@ -37,10 +39,11 @@ class TempMapCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(tempMapImageView)
         
         NSLayoutConstraint.activate([
-            tempMapImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            tempMapImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            tempMapImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            tempMapImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            tempMapImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            tempMapImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.95),
+
+            tempMapImageView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor),
+            tempMapImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
         
     }

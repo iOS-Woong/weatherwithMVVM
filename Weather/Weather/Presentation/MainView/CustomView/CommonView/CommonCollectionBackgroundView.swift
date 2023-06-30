@@ -11,7 +11,7 @@ class CommonCollectionBackgroundView: UICollectionReusableView, ReusableView {
     private let backDecorateView = {
         let view = UIView()
         
-        view.backgroundColor = .secondarySystemFill
+        view.backgroundColor = .quaternarySystemFill
         view.layer.cornerRadius = 15
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -29,12 +29,12 @@ class CommonCollectionBackgroundView: UICollectionReusableView, ReusableView {
     }
     
     private func setupViews() {
-        self.backgroundColor = .clear
+
         self.addSubview(backDecorateView)
         
         NSLayoutConstraint.activate([
-            backDecorateView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
-            backDecorateView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
+            backDecorateView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
+            backDecorateView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5),
             backDecorateView.topAnchor.constraint(equalTo: self.topAnchor),
             backDecorateView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])

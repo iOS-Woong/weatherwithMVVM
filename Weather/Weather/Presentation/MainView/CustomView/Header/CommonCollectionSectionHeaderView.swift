@@ -55,6 +55,9 @@ class CommonCollectionSectionHeaderView: UICollectionReusableView {
     }
     
     private func setupViews() {
+        backgroundColor = .systemFill
+        self.layer.cornerRadius = 8
+        
         let targetViews = [calendarFlagImageView, descriptionLabel]
         
         targetViews.forEach {
@@ -63,6 +66,7 @@ class CommonCollectionSectionHeaderView: UICollectionReusableView {
         }
         
         NSLayoutConstraint.activate([
+            calendarFlagImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
             calendarFlagImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.05),
             calendarFlagImageView.heightAnchor.constraint(equalTo: calendarFlagImageView.widthAnchor),
             calendarFlagImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
