@@ -22,6 +22,7 @@ class WeatherViewController: UIViewController {
     
     private let weatherCollectionView = {
         let collectioniView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+        collectioniView.translatesAutoresizingMaskIntoConstraints = false
         return collectioniView
     }()
     
@@ -72,7 +73,6 @@ class WeatherViewController: UIViewController {
     }
     
     private func setupCollectionViewAttributes() {
-        weatherCollectionView.isScrollEnabled = false
         weatherCollectionView.collectionViewLayout = createLayout()
     }
     
@@ -108,7 +108,6 @@ extension WeatherViewController {
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
                                                                                  heightDimension: .absolute(150)),
                                                                subitems: [item])
-//                group.contentInsets = .init(top: 10, leading: 10, bottom: 30, trailing: 10)
                 
                 let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
                                                                                                heightDimension: .fractionalHeight(0.05)),
@@ -131,7 +130,6 @@ extension WeatherViewController {
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
                                                                                heightDimension: .absolute(60)),
                                                              subitems: [item])
-//                group.contentInsets = .init(top: 10, leading: 10, bottom: 5, trailing: 10)
                 let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
                                                                                                heightDimension: .fractionalHeight(0.05)),
                                                                              elementKind: UICollectionView.elementKindSectionHeader,
@@ -207,7 +205,13 @@ extension WeatherViewController {
         
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 15
-        config.contentInsetsReference = .safeArea
+        let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                                                                                       heightDimension: .absolute(380)),
+                                                                     elementKind: "layout-header-element-kind",
+                                                                     alignment: .top)
+        
+        config.boundarySupplementaryItems = [headerView]
+        
         
         layout.configuration = config
         return layout
@@ -245,15 +249,33 @@ extension WeatherViewController {
     }
     
     private func configureSupplementaryViewDatasource() {
+        let commonTitleHeaderResistration = commonTitleHeaderConfigure()
         let cityHeaderViewResistration = commonSectionHeaderConfigure()
         
         datasource?.supplementaryViewProvider = { collectionView, elementKind, indexPath in
             var collectionReusableView: UICollectionReusableView?
-            collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: cityHeaderViewResistration,
-                                                                                           for: indexPath)
+            switch elementKind {
+                case "layout-header-element-kind":
+                collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: commonTitleHeaderResistration,
+                                                                                               for: indexPath)
+            default:
+                collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: cityHeaderViewResistration,
+                                                                                               for: indexPath)
+            }
+            
             
             return collectionReusableView
         }
+    }
+    
+    private func commonTitleHeaderConfigure() -> UICollectionView.SupplementaryRegistration<CommonTitleHeaderView> {
+        let commonSectionHeaderResistration = UICollectionView.SupplementaryRegistration<CommonTitleHeaderView>(
+            elementKind: "layout-header-element-kind") { supplementaryView, elementKind, indexPath in
+                guard let cityWeatherCurrentPage = self.viewModel.cityWeatherCurrentPage else { return }
+                supplementaryView.configure(data: cityWeatherCurrentPage)
+        }
+        
+        return commonSectionHeaderResistration
     }
     
     private func hourlySecitonItemConfigure() -> UICollectionView.CellRegistration<HourlyCollectionViewCell, Any> {
