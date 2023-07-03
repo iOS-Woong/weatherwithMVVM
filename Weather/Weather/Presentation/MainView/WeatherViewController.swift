@@ -203,6 +203,7 @@ extension WeatherViewController {
             }
             
         }
+        
         layout.register(CommonCollectionBackgroundView.self, forDecorationViewOfKind: CommonCollectionBackgroundView.reuseIdentifier)
         
         let config = UICollectionViewCompositionalLayoutConfiguration()
@@ -339,7 +340,7 @@ extension WeatherViewController {
     
     private func detailSectionItemConfigure() -> UICollectionView.CellRegistration<DetailTwoLabelStyleCollectionViewCell, Any> {
         let detailSectionResistration = UICollectionView.CellRegistration<DetailTwoLabelStyleCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
-            guard let itemIdentifier = itemIdentifier as? CityWeather else { return }
+            guard let itemIdentifier = self.viewModel.cityWeatherCurrentPage else { return }
             cell.configure(data: itemIdentifier)
         }
         
