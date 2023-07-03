@@ -99,122 +99,34 @@ extension WeatherViewController {
     private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { sectionNumber, environment -> NSCollectionLayoutSection? in
             guard let sectionKind = Section(rawValue: sectionNumber) else { return nil }
-            var section: NSCollectionLayoutSection?
             
             switch sectionKind {
             case .hourly:
-                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.2),
-                                                                    heightDimension: .fractionalHeight(1.0)))
-                
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                                 heightDimension: .absolute(150)),
-                                                               subitems: [item])
-                
-                let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                                               heightDimension: .fractionalHeight(0.07)),
-                                                                             elementKind: UICollectionView.elementKindSectionHeader,
-                                                                             alignment: .top)
-                headerView.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
-                headerView.pinToVisibleBounds = true
-                section = .init(group: group)
-                section?.boundarySupplementaryItems = [headerView]
-                let decorateItem = NSCollectionLayoutDecorationItem.background(elementKind: CommonCollectionBackgroundView.reuseIdentifier)
-                section?.decorationItems = [decorateItem]
-                
-                section?.orthogonalScrollingBehavior = .continuous
-                
-                return section
-                
+                return NSCollectionLayoutSection.continuousFiveColumnsSection()
             case .city:
-                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                    heightDimension: .fractionalHeight(1.0)))
-                let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                               heightDimension: .absolute(60)),
-                                                             subitems: [item])
-                let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                                               heightDimension: .fractionalHeight(0.07)),
-                                                                             elementKind: UICollectionView.elementKindSectionHeader,
-                                                                             alignment: .top)
-                headerView.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
-                headerView.pinToVisibleBounds = true
-                section = .init(group: group)
-                section?.boundarySupplementaryItems = [headerView]
-                let decorateItem = NSCollectionLayoutDecorationItem.background(elementKind: CommonCollectionBackgroundView.reuseIdentifier)
-                section?.decorationItems = [decorateItem]
-                
-                return section
-                
+                return NSCollectionLayoutSection.listSection(heightDimension: .absolute(60))
             case .wind:
-                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                    heightDimension: .fractionalHeight(1.0)))
-                let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                               heightDimension: .absolute(150)),
-                                                             subitems: [item])
-                let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                                               heightDimension: .fractionalHeight(0.07)),
-                                                                             elementKind: UICollectionView.elementKindSectionHeader,
-                                                                             alignment: .top)
-                headerView.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
-                headerView.pinToVisibleBounds = true
-                section = .init(group: group)
-                
-                section?.boundarySupplementaryItems = [headerView]
-                
-                let decorateItem = NSCollectionLayoutDecorationItem.background(elementKind: CommonCollectionBackgroundView.reuseIdentifier)
-                section?.decorationItems = [decorateItem]
-
-                return section
-                
+                return NSCollectionLayoutSection.listSection(heightDimension: .absolute(130))
             case .tempMap:
-                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                    heightDimension: .fractionalHeight(1.0)))
-                let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                               heightDimension: .absolute(300)),
-                                                             subitems: [item])
-                let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                                               heightDimension: .fractionalHeight(0.07)),
-                                                                             elementKind: UICollectionView.elementKindSectionHeader,
-                                                                             alignment: .top)
-                headerView.contentInsets = .init(top: 10, leading: 10, bottom: 10, trailing: 10)
-                headerView.pinToVisibleBounds = true
-                section = .init(group: group)
-                section?.boundarySupplementaryItems = [headerView]
-                
-                let decorateItem = NSCollectionLayoutDecorationItem.background(elementKind: CommonCollectionBackgroundView.reuseIdentifier)
-                section?.decorationItems = [decorateItem]
-                
-                return section
-                
+                return NSCollectionLayoutSection.listSection(heightDimension: .absolute(300))
             case .detail:
-                let headerView = NSCollectionLayoutSupplementaryItem.init(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                                            heightDimension: .absolute(30)),
-                                                                          elementKind: "detailSection-itemHeader",
-                                                                          containerAnchor: .init(edges: .top))
-                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
-                                                                    heightDimension: .fractionalHeight(1.0)),
-                                                  supplementaryItems: [headerView])
-                item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                                 heightDimension: .absolute(220)),
-                                                               subitems: [item])
-                section = .init(group: group)
-                
-                return section
+                return NSCollectionLayoutSection.gridSection()
             }
-            
         }
         
-        layout.register(CommonCollectionBackgroundView.self, forDecorationViewOfKind: CommonCollectionBackgroundView.reuseIdentifier)
-        
+        let headerView = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                              heightDimension: .absolute(380)),
+            elementKind: "layout-header-element-kind",
+            alignment: .top
+        )
         let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 15
-        let headerView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                                       heightDimension: .absolute(380)),
-                                                                     elementKind: "layout-header-element-kind",
-                                                                     alignment: .top)
         
+        config.interSectionSpacing = 15
         config.boundarySupplementaryItems = [headerView]
         layout.configuration = config
+        layout.register(CommonCollectionBackgroundView.self,
+                        forDecorationViewOfKind: CommonCollectionBackgroundView.reuseIdentifier)
         return layout
     }
 }
