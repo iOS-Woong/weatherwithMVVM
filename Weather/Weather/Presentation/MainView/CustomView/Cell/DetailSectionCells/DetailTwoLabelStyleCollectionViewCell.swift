@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum DetailItem {
+enum DetailItem: Int {
     case sensory, humidity // graph, twoLabel
     case visiblity, sun // twoLabel, graph
     case cloud, pressure // twoLabel, graph

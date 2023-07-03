@@ -31,7 +31,7 @@ class CommonCollectionSectionHeaderView: UICollectionReusableView {
         setupViews()
     }
     
-    func configureHeader(section: Section) {
+    func configureHeader(section: Section, item: Int) {
         switch section {
         case .hourly:
             calendarFlagImageView.image = UIImage(systemName: "clock.badge")
@@ -46,7 +46,32 @@ class CommonCollectionSectionHeaderView: UICollectionReusableView {
             calendarFlagImageView.image = UIImage(systemName: "globe")
             descriptionLabel.text = "세계온도"
         case .detail:
-            descriptionLabel.text = "아직안함"
+            configureDetailSection(item: item)
+        }
+    }
+    
+    private func configureDetailSection(item: Int) {
+        guard let itemKind = DetailItem(rawValue: item) else { return }
+        
+        switch itemKind {
+        case .sensory:
+            calendarFlagImageView.image = UIImage(systemName: "thermometer.medium")
+            descriptionLabel.text = "체감온도"
+        case .humidity:
+            calendarFlagImageView.image = UIImage(systemName: "humidity")
+            descriptionLabel.text = "습도"
+        case .visiblity:
+            calendarFlagImageView.image = UIImage(systemName: "eye.fill")
+            descriptionLabel.text = "가시거리"
+        case .sun:
+            calendarFlagImageView.image = UIImage(systemName: "sunset.fill")
+            descriptionLabel.text = "일출 & 일몰"
+        case .cloud:
+            calendarFlagImageView.image = UIImage(systemName: "cloud.fill")
+            descriptionLabel.text = "흐림정도"
+        case .pressure:
+            calendarFlagImageView.image = UIImage(systemName: "rectangle.compress.vertical")
+            descriptionLabel.text = "기압"
         }
     }
     
@@ -67,8 +92,8 @@ class CommonCollectionSectionHeaderView: UICollectionReusableView {
         
         NSLayoutConstraint.activate([
             calendarFlagImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5),
-            calendarFlagImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.05),
-            calendarFlagImageView.heightAnchor.constraint(equalTo: calendarFlagImageView.widthAnchor),
+            calendarFlagImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.55),
+            calendarFlagImageView.widthAnchor.constraint(equalTo: calendarFlagImageView.heightAnchor, multiplier: 1.05),
             calendarFlagImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             
             descriptionLabel.leadingAnchor.constraint(equalTo: calendarFlagImageView.trailingAnchor, constant: 10),

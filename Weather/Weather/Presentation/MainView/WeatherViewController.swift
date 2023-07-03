@@ -193,8 +193,9 @@ extension WeatherViewController {
                 let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
                                                                     heightDimension: .fractionalHeight(1.0)),
                                                   supplementaryItems: [headerView])
+                item.contentInsets = .init(top: 5, leading: 5, bottom: 5, trailing: 5)
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                                 heightDimension: .absolute(350)),
+                                                                                 heightDimension: .absolute(220)),
                                                                subitems: [item])
                 section = .init(group: group)
                 
@@ -311,7 +312,8 @@ extension WeatherViewController {
         let citySectionHeaderResistration = UICollectionView.SupplementaryRegistration<CommonCollectionSectionHeaderView>(
             elementKind: elementKind) { supplementaryView, elementKind, indexPath in
                 guard let sectionKind = Section(rawValue: indexPath.section) else { return }
-                supplementaryView.configureHeader(section: sectionKind)
+                supplementaryView.configureHeader(section: sectionKind,
+                                                  item: indexPath.item)
             }
         
         return citySectionHeaderResistration
