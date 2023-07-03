@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum Section: Int {
+enum Section: Int, CaseIterable {
     case hourly, city, wind, tempMap, detail
 }
 
@@ -46,15 +46,8 @@ class WeatherViewController: UIViewController {
     }
     
     private func bind() {
-        viewModel.forecasts.subscribe(onNext: { forecasts in
-            guard let forecasts else { return }
-            self.configureLastSnapshot(forecasts,
-                                       to: .hourly)
-            self.configureLastSnapshot(self.viewModel.cityWeathersExcludingCurrentPage,
-                                       to: .city)
-            self.configureLastSnapshot([self.viewModel.cityWeatherCurrentPage], to: .wind)
-            self.configureLastSnapshot([UUID()], to: .tempMap)
-            self.configureLastSnapshot([UUID(),UUID(),UUID(),UUID(),UUID(),UUID()], to: .detail)
+        viewModel.forecasts.subscribe(onNext: {
+            self.configureLastSnapshot($0)
         })
     }
     
@@ -62,13 +55,21 @@ class WeatherViewController: UIViewController {
         viewModel.fetchWeatherData()
     }
     
-    private func configureLastSnapshot(_ itemIdentifier: [AnyHashable], to section: Section) {
+    private func configureLastSnapshot(_ itemIdentifier: [AnyHashable]?) {
         DispatchQueue.main.async {
             if self.snapshot == nil {
                 self.snapshot = .init()
             }
-            self.snapshot?.appendSections([section])
-            self.snapshot?.appendItems(itemIdentifier, toSection: section)
+            guard let itemIdentifier else { return }
+            
+            self.snapshot?.appendSections(Section.allCases)
+            
+            self.snapshot?.appendItems(itemIdentifier, toSection: .hourly)
+            self.snapshot?.appendItems(self.viewModel.cityWeathersExcludingCurrentPage, toSection: .city)
+            self.snapshot?.appendItems([self.viewModel.cityWeatherCurrentPage], toSection: .wind)
+            self.snapshot?.appendItems([UUID()], toSection: .tempMap)
+            self.snapshot?.appendItems([UUID(),UUID(),UUID(),UUID(),UUID(),UUID()], toSection: .detail) // 임시
+            
             self.datasource?.apply(self.snapshot!, animatingDifferences: true)
         }
     }
@@ -142,7 +143,7 @@ extension WeatherViewController {
         
         datasource = Datasource(collectionView: weatherCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             guard let sectionKind = Section(rawValue: indexPath.section) else { return nil }
-            // TODO: 공통으로 들어가는 섹션구성
+
             switch sectionKind {
             case .hourly:
                 return self.weatherCollectionView.dequeueConfiguredReusableCell(using: hourlyCollectionViewCellResistration,
