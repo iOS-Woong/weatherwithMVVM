@@ -7,6 +7,12 @@
 
 import UIKit
 
+enum DetailItem {
+    case sensory, humidity // graph, twoLabel
+    case visiblity, sun // twoLabel, graph
+    case cloud, pressure // twoLabel, graph
+}
+
 class DetailTwoLabelStyleCollectionViewCell: UICollectionViewCell {
     private let mainLabel = {
        let label = UILabel()
@@ -28,6 +34,11 @@ class DetailTwoLabelStyleCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(data: CityWeather) {
+        mainLabel.text = "20 test"
+        subLabel.text = "sublabel tests"
     }
     
     private func setupCellAttributes() {

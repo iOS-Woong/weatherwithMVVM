@@ -54,6 +54,7 @@ class WeatherViewController: UIViewController {
                                        to: .city)
             self.configureLastSnapshot([self.viewModel.cityWeatherCurrentPage], to: .wind)
             self.configureLastSnapshot([UUID()], to: .tempMap)
+            self.configureLastSnapshot([UUID(),UUID(),UUID(),UUID(),UUID(),UUID()], to: .detail)
         })
     }
     
@@ -185,13 +186,17 @@ extension WeatherViewController {
                 return section
                 
             case .detail:
+                let headerView = NSCollectionLayoutSupplementaryItem.init(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                                                                                            heightDimension: .absolute(30)),
+                                                                          elementKind: "detailSection-itemHeader",
+                                                                          containerAnchor: .init(edges: .top))
                 let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
-                                                                    heightDimension: .fractionalHeight(1.0)))
-                let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                                                                               heightDimension: .absolute(300)),
-                                                             subitems: [item])
+                                                                    heightDimension: .fractionalHeight(1.0)),
+                                                  supplementaryItems: [headerView])
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(1.0),
+                                                                                 heightDimension: .absolute(350)),
+                                                               subitems: [item])
                 section = .init(group: group)
-                
                 
                 return section
             }
@@ -219,6 +224,7 @@ extension WeatherViewController {
         let cityCollectionViewCellResistration = citySectionItemConfigure()
         let windCollectionViewCellResistration = windSectionItemConfigure()
         let tempMapCollectionViewCellResistration = tempSectionItemConfigure()
+        let detailCollectionViewCellResistration = detailSectionItemConfigure()
         
         datasource = Datasource(collectionView: weatherCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             guard let sectionKind = Section(rawValue: indexPath.section) else { return nil }
@@ -237,23 +243,29 @@ extension WeatherViewController {
                 return self.weatherCollectionView.dequeueConfiguredReusableCell(using: tempMapCollectionViewCellResistration,
                                                                                 for: indexPath, item: itemIdentifier)
             case .detail:
-                return nil
+                return self.weatherCollectionView.dequeueConfiguredReusableCell(using: detailCollectionViewCellResistration,
+                                                                                for: indexPath, item: itemIdentifier)
             }
         })
     }
     
     private func configureSupplementaryViewDatasource() {
         let commonTitleHeaderResistration = commonTitleHeaderConfigure()
-        let cityHeaderViewResistration = commonSectionHeaderConfigure()
+        let commonSectionHeaderViewResistration = commonSectionHeaderConfigure(of: UICollectionView.elementKindSectionHeader)
+        let itemHeaderViewResistration = commonSectionHeaderConfigure(of: "detailSection-itemHeader")
         
         datasource?.supplementaryViewProvider = { collectionView, elementKind, indexPath in
             var collectionReusableView: UICollectionReusableView?
+            
             switch elementKind {
-                case "layout-header-element-kind":
+            case "layout-header-element-kind":
                 collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: commonTitleHeaderResistration,
                                                                                                for: indexPath)
+            case "detailSection-itemHeader":
+                collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: itemHeaderViewResistration,
+                                                                                               for: indexPath)
             default:
-                collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: cityHeaderViewResistration,
+                collectionReusableView = collectionView.dequeueConfiguredReusableSupplementary(using: commonSectionHeaderViewResistration,
                                                                                                for: indexPath)
             }
             
@@ -295,9 +307,9 @@ extension WeatherViewController {
         return citySectionResistration
     }
     
-    private func commonSectionHeaderConfigure() -> UICollectionView.SupplementaryRegistration<CommonCollectionSectionHeaderView> {
+    private func commonSectionHeaderConfigure(of elementKind: String) -> UICollectionView.SupplementaryRegistration<CommonCollectionSectionHeaderView> {
         let citySectionHeaderResistration = UICollectionView.SupplementaryRegistration<CommonCollectionSectionHeaderView>(
-            elementKind: UICollectionView.elementKindSectionHeader) { supplementaryView, elementKind, indexPath in
+            elementKind: elementKind) { supplementaryView, elementKind, indexPath in
                 guard let sectionKind = Section(rawValue: indexPath.section) else { return }
                 supplementaryView.configureHeader(section: sectionKind)
             }
@@ -323,11 +335,12 @@ extension WeatherViewController {
         return tempSectionResistration
     }
     
-    private func detailSectionItemConfigure() -> UICollectionView.CellRegistration<UICollectionViewCell, Any> {
-        let detailSectionResistration = UICollectionView.CellRegistration<UICollectionViewCell, Any> { cell, indexPath, itemIdentifier in
-            // TODO: detailSection의 복잡도로 인해 컨피규어는 추후 서버통신작업을 마치고 진행함
+    private func detailSectionItemConfigure() -> UICollectionView.CellRegistration<DetailTwoLabelStyleCollectionViewCell, Any> {
+        let detailSectionResistration = UICollectionView.CellRegistration<DetailTwoLabelStyleCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
+            guard let itemIdentifier = itemIdentifier as? CityWeather else { return }
+            cell.configure(data: itemIdentifier)
         }
+        
         return detailSectionResistration
     }
-    
 }
