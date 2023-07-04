@@ -107,7 +107,7 @@ extension WeatherViewController {
             case .city:
                 return NSCollectionLayoutSection.listSection(heightDimension: .absolute(60))
             case .wind:
-                return NSCollectionLayoutSection.listSection(heightDimension: .absolute(130))
+                return NSCollectionLayoutSection.listSection(heightDimension: .absolute(150))
             case .tempMap:
                 return NSCollectionLayoutSection.listSection(heightDimension: .absolute(300))
             case .detail:
