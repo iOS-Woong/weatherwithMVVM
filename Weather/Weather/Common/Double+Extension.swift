@@ -13,4 +13,9 @@ extension Double {
         
         return celciusInt.description + "°"
     }
+    
+    func convertCelciusTempDouble() -> Double {
+        let intTemp = Int(UnitTemperature.celsius.converter.value(fromBaseUnitValue: self))
+        return Double(intTemp)
+    }
 }

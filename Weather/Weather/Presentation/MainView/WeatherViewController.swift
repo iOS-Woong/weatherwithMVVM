@@ -253,8 +253,9 @@ extension WeatherViewController {
     
     private func detailSectionItemConfigure() -> UICollectionView.CellRegistration<DetailTwoLabelStyleCollectionViewCell, Any> {
         let detailSectionResistration = UICollectionView.CellRegistration<DetailTwoLabelStyleCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
+            guard let detailItemKind = DetailItem(rawValue: indexPath.row) else { return }
             guard let itemIdentifier = self.viewModel.cityWeatherCurrentPage else { return }
-            cell.configure(data: itemIdentifier)
+            cell.configure(data: itemIdentifier, detailItemKind: detailItemKind)
         }
         
         return detailSectionResistration
