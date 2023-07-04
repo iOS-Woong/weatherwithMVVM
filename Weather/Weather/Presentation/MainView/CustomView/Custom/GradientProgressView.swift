@@ -10,9 +10,10 @@ import UIKit
 class GradientProgressView: UIProgressView {
 
     private lazy var gradientLayer: CAGradientLayer = initGradientLayer()
-    private let gradientColors: [CGColor] = [
+    var gradientColors: [CGColor] = [
         UIColor.systemYellow.cgColor,
-        UIColor.systemOrange.cgColor
+        UIColor.systemOrange.cgColor,
+        UIColor.systemRed.cgColor
     ]
     private let cornerRadius: CGFloat = 3.0
     

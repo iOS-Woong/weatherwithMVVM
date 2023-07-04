@@ -37,7 +37,6 @@ class CityCollectionViewCell: UICollectionViewCell {
     
     private let chartView = {
         let progressView = GradientProgressView()
-//        progressView.setProgress(0.7, animated: true)
         return progressView
     }()
     

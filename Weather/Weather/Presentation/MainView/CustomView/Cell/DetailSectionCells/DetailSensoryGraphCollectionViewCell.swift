@@ -53,6 +53,13 @@ class DetailSensoryGraphCollectionViewCell: UICollectionViewCell {
         mainLabel.text = sensoryTemp.convertCelciusTemp()
         secondLabel.text = celciusTempDouble.sensoryTempDegree().0
         thirdLabel.text = celciusTempDouble.sensoryTempDegree().1
+        
+        let progressValue = calculatePercnetage(celciusTempDouble)
+        graphView.setProgress(progressValue, animated: true)
+    }
+    
+    private func calculatePercnetage(_ temp: Double) -> Float {
+        return Float(temp - (-20)) / (40 - (-20))
     }
     
     private func setupCellAttributes() {
