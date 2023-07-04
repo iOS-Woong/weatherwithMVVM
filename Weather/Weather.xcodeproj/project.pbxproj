@@ -309,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				D22BC1DE2A39521400CD5D2F /* Observable.swift */,
+				D24807882A1FBFDD00922838 /* ReusableView.swift */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -369,7 +370,6 @@
 			isa = PBXGroup;
 			children = (
 				D2DB780B2A53F33A0094B52D /* Custom */,
-				D24807882A1FBFDD00922838 /* ReusableView.swift */,
 				D2BD80BE2A49CB8E009176F7 /* CommonView */,
 				D24807872A1FBB4200922838 /* Header */,
 				D24807822A1FB7A500922838 /* Cell */,

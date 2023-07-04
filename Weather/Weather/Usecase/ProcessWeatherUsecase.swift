@@ -29,8 +29,8 @@ struct ProcessWeatherUsecase {
                                                                                                humidity: weather.main.humidity,
                                                                                                visibility: weather.visibility),
                                                                            temp: weather.main.temp,
-                                                                           tempMin: weather.main.tempMin,
-                                                                           tempMax: weather.main.tempMax,
+                                                                           tempMin: weather.main.tempMin - 3, // API의 온도가 부정확하여 최저온도 가중치를 줍니다.
+                                                                           tempMax: weather.main.tempMax + 3, // API의 온도가 부정확하여 최고온도 가중치를 줍니다.
                                                                            sensoryTemp: weather.main.feelsLike),
                                                   description: weather.weather[0].description,
                                                   wind: WindInfo(speed: weather.wind.speed,
