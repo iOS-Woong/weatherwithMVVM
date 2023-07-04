@@ -37,7 +37,7 @@ class CityCollectionViewCell: UICollectionViewCell {
     
     private let chartView = {
         let progressView = GradientProgressView()
-        progressView.setProgress(0.7, animated: true)
+//        progressView.setProgress(0.7, animated: true)
         return progressView
     }()
     
@@ -77,7 +77,17 @@ class CityCollectionViewCell: UICollectionViewCell {
             self.cityLabel.text = data.name.convertCityNameToKr()
             self.maxTempLabel.text = data.temparature.tempMax.convertCelciusTemp()
             self.minTempLabel.text = data.temparature.tempMin.convertCelciusTemp()
+            let percentageValue = self.calculatePercentage(data.temparature)
+            self.chartView.setProgress(percentageValue, animated: true)
         }
+    }
+    
+    private func calculatePercentage(_ data: Temparature) -> Float {
+        let tempMax = data.tempMax
+        let currentTemp = data.temp
+        let tempMin = data.tempMin
+        
+        return Float((currentTemp - tempMin) / (tempMax - tempMin))
     }
     
     func configure(_ image: Data) {
