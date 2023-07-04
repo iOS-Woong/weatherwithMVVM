@@ -139,7 +139,10 @@ extension WeatherViewController {
         let cityCollectionViewCellResistration = citySectionItemConfigure()
         let windCollectionViewCellResistration = windSectionItemConfigure()
         let tempMapCollectionViewCellResistration = tempSectionItemConfigure()
-        let detailCollectionViewCellResistration = detailSectionItemConfigure()
+        
+        // detail
+        let detailCollectionViewCellResistration = detailSectionTwoLabelStyleItemConfigure()
+        let detailSensoryCellResistration = detailSectionSensoryGraphStyleItemConfigure()
         
         datasource = Datasource(collectionView: weatherCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             guard let sectionKind = Section(rawValue: indexPath.section) else { return nil }
@@ -158,8 +161,27 @@ extension WeatherViewController {
                 return self.weatherCollectionView.dequeueConfiguredReusableCell(using: tempMapCollectionViewCellResistration,
                                                                                 for: indexPath, item: itemIdentifier)
             case .detail:
-                return self.weatherCollectionView.dequeueConfiguredReusableCell(using: detailCollectionViewCellResistration,
-                                                                                for: indexPath, item: itemIdentifier)
+                guard let itemKind = DetailItem(rawValue: indexPath.item) else { return nil }
+                switch itemKind {
+                case .sensory:
+                    return self.weatherCollectionView.dequeueConfiguredReusableCell(using: detailSensoryCellResistration,
+                                                                                    for: indexPath, item: itemIdentifier)
+                case .humidity:
+                    return self.weatherCollectionView.dequeueConfiguredReusableCell(using: detailCollectionViewCellResistration,
+                                                                                    for: indexPath, item: itemIdentifier)
+                case .visiblity:
+                    return self.weatherCollectionView.dequeueConfiguredReusableCell(using: detailCollectionViewCellResistration,
+                                                                                    for: indexPath, item: itemIdentifier)
+                case .sun:
+                    return self.weatherCollectionView.dequeueConfiguredReusableCell(using: detailSensoryCellResistration,
+                                                                                    for: indexPath, item: itemIdentifier)
+                case .cloud:
+                    return self.weatherCollectionView.dequeueConfiguredReusableCell(using: detailCollectionViewCellResistration,
+                                                                                    for: indexPath, item: itemIdentifier)
+                case .pressure:
+                    return self.weatherCollectionView.dequeueConfiguredReusableCell(using: detailSensoryCellResistration,
+                                                                                    for: indexPath, item: itemIdentifier)
+                }
             }
         })
     }
@@ -251,13 +273,25 @@ extension WeatherViewController {
         return tempSectionResistration
     }
     
-    private func detailSectionItemConfigure() -> UICollectionView.CellRegistration<DetailTwoLabelStyleCollectionViewCell, Any> {
-        let detailSectionResistration = UICollectionView.CellRegistration<DetailTwoLabelStyleCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
+    // DetailSectionItem, MultiCellConfiguration
+    
+    private func detailSectionTwoLabelStyleItemConfigure() -> UICollectionView.CellRegistration<DetailTwoLabelStyleCollectionViewCell, Any> {
+        let detailSectionTwoLabelStyleResistration = UICollectionView.CellRegistration<DetailTwoLabelStyleCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
             guard let detailItemKind = DetailItem(rawValue: indexPath.row) else { return }
             guard let itemIdentifier = self.viewModel.cityWeatherCurrentPage else { return }
             cell.configure(data: itemIdentifier, detailItemKind: detailItemKind)
         }
         
-        return detailSectionResistration
+        return detailSectionTwoLabelStyleResistration
     }
+    
+    private func detailSectionSensoryGraphStyleItemConfigure() -> UICollectionView.CellRegistration<DetailSensoryGraphCollectionViewCell, Any> {
+        let detailSectionSensoryGraphStyleResistration = UICollectionView.CellRegistration<DetailSensoryGraphCollectionViewCell, Any> { cell, indexPath, itemIdentifier in
+            guard let itemIdentifier = self.viewModel.cityWeatherCurrentPage else { return }
+            cell.configure(data: itemIdentifier)
+        }
+        
+        return detailSectionSensoryGraphStyleResistration
+    }
+    
 }

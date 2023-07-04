@@ -75,7 +75,7 @@ class DetailTwoLabelStyleCollectionViewCell: UICollectionViewCell {
             mainLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 40),
             mainLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             
-            subLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            subLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             subLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }
