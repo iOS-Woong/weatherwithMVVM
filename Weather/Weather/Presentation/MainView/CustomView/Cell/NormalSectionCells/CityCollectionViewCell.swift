@@ -36,11 +36,9 @@ class CityCollectionViewCell: UICollectionViewCell {
     }()
     
     private let chartView = {
-        let view = UIView()
-        
-        view.backgroundColor = .yellow // TODO: Chart 라이브러리 적용하여 삭제할 것
-        
-        return view
+        let progressView = GradientProgressView()
+        progressView.setProgress(0.7, animated: true)
+        return progressView
     }()
     
     private let maxTempLabel = {
