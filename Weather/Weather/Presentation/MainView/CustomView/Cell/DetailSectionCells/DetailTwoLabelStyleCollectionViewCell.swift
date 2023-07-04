@@ -54,7 +54,7 @@ class DetailTwoLabelStyleCollectionViewCell: UICollectionViewCell {
             subLabel.text = data.temparature.detail.humidity.calculateDewPoint(data: data)
         case .visiblity:
             mainLabel.text = "\(data.temparature.detail.visibility / 1000)km"
-            subLabel.text = "매우 좋은 가시거리입니다."
+            subLabel.text = "가시거리가 매우 좋습니다."
         case .cloud:
             mainLabel.text = "\(data.cloud.Cloudiness)%"
             subLabel.text = data.cloud.Cloudiness.calculateCloudness()

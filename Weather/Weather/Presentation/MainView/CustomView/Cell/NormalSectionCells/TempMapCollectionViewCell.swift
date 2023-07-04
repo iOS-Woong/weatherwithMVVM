@@ -39,10 +39,10 @@ class TempMapCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(tempMapImageView)
         
         NSLayoutConstraint.activate([
-            tempMapImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
-            tempMapImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.95),
-
-            tempMapImageView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor),
+            tempMapImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
+            tempMapImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.9),
+            
+            tempMapImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             tempMapImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
         
