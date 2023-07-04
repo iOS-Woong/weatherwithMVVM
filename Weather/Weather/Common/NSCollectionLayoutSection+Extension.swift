@@ -13,14 +13,13 @@ extension NSCollectionLayoutSection {
                                                             heightDimension: .fractionalHeight(1.0)))
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: .init(widthDimension: .fractionalWidth(1.0),
-                              heightDimension: .absolute(150)),
+                              heightDimension: .absolute(110)),
             subitems: [item])
-        
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [commonSectionHeaderView()]
         section.decorationItems = [commonDecorateItemView()]
         section.orthogonalScrollingBehavior = .continuous
-        
+        section.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
         return section
     }
     
@@ -35,7 +34,7 @@ extension NSCollectionLayoutSection {
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [commonSectionHeaderView()]
         section.decorationItems = [commonDecorateItemView()]
-        
+        section.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
         return section
     }
     
@@ -51,7 +50,7 @@ extension NSCollectionLayoutSection {
             subitems: [item]
         )
         let section = NSCollectionLayoutSection(group: group)
-        
+        section.contentInsets = .init(top: 0, leading: 5, bottom: 0, trailing: 5)
         return section
     }
     
@@ -83,7 +82,7 @@ extension NSCollectionLayoutSection {
         let decorateItem = NSCollectionLayoutDecorationItem.background(
             elementKind: CommonCollectionBackgroundView.reuseIdentifier
         )
-
+        decorateItem.contentInsets = .init(top: 0, leading: 5, bottom: 0, trailing: 5)
         return decorateItem
     }
     
