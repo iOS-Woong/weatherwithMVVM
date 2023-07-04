@@ -30,6 +30,12 @@ class DetailTwoLabelStyleCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        mainLabel.text = nil
+        subLabel.text = nil
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupCellAttributes()
@@ -44,7 +50,6 @@ class DetailTwoLabelStyleCollectionViewCell: UICollectionViewCell {
         switch detailItemKind {
         
         case .humidity:
-            print(data.temparature.detail.humidity)
             mainLabel.text = "\(data.temparature.detail.humidity)%"
             subLabel.text = data.temparature.detail.humidity.calculateDewPoint(data: data)
         case .visiblity:
