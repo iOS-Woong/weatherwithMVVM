@@ -64,7 +64,7 @@ class DetailPressureGraphCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupCellAttributes() {
-        self.backgroundColor = .systemFill
+        self.backgroundColor = .decoreateItemViewColor
         self.layer.cornerRadius = 15
     }
     

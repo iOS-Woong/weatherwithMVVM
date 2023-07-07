@@ -80,7 +80,7 @@ class CommonCollectionSectionHeaderView: UICollectionReusableView {
     }
     
     private func setupViews() {
-        backgroundColor = .systemFill
+        backgroundColor = .sectionHeaderColor
         self.layer.cornerRadius = 8
         
         let targetViews = [calendarFlagImageView, descriptionLabel]

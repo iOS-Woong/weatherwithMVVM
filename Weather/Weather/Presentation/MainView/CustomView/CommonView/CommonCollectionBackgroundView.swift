@@ -11,7 +11,7 @@ class CommonCollectionBackgroundView: UICollectionReusableView, ReusableView {
     private let backDecorateView = {
         let view = UIView()
         
-        view.backgroundColor = .quaternarySystemFill
+        view.backgroundColor = UIColor.decoreateItemViewColor
         view.layer.cornerRadius = 15
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
