@@ -25,6 +25,7 @@ class DetailTwoLabelStyleCollectionViewCell: UICollectionViewCell {
     private let subLabel = {
        let label = UILabel()
         label.textColor = .white
+        label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 15, weight: .light)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -95,7 +96,7 @@ private extension Int {
     func calculateCloudness() -> String? {
         switch self {
         case 0..<30:
-            return "맑은 상태입니다.."
+            return "맑은 상태입니다."
         case 30..<70:
             return "약간 흐린 상태입니다."
         default:

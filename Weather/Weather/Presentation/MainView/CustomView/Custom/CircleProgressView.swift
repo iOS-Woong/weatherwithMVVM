@@ -15,7 +15,7 @@ class CircleProgressView: UIView {
         }
     }
     
-    public var gradients: [UIColor] = [#colorLiteral(red: 0.7843137255, green: 0.4274509804, blue: 0.8431372549, alpha: 1), #colorLiteral(red: 0.1882352941, green: 0.137254902, blue: 0.6823529412, alpha: 1)] {
+    public var gradients: [UIColor] = [#colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1), #colorLiteral(red: 1, green: 1, blue: 0.4941176471, alpha: 1)] {
         didSet {
             let gradientColors = gradients.map { $0.cgColor }
             pulsingGradientLayer.colors = gradientColors
@@ -37,18 +37,6 @@ class CircleProgressView: UIView {
         }
     }
     
-    public var textColor: UIColor = UIColor.white {
-        didSet {
-            progressLbl.textColor = textColor
-        }
-    }
-    
-    public var font: UIFont = UIFont(name: "HelveticaNeue-Medium", size: 22)! {
-        didSet {
-            progressLbl.font = font
-        }
-    }
-    
     public var progress: Double = 0 {
         didSet {
             updateProgress()
@@ -65,8 +53,8 @@ class CircleProgressView: UIView {
     
     lazy var progressLbl: UILabel = {
         let lbl = UILabel()
-        lbl.textColor = textColor
-        lbl.font = font
+        lbl.textColor = .white
+        lbl.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         lbl.textAlignment = .center
         return lbl
     }()
@@ -130,17 +118,8 @@ class CircleProgressView: UIView {
     func updateProgress() {
         shapeLayer.strokeEnd = CGFloat(progress)
         
-        let intProgress = Int(progress*100)
-        
-        if intProgress <= 100 {
-            progressLbl.text = "\(intProgress)%"
-        }
-        
-        if intProgress == 100 {
-            startPulseAnimation()
-        } else {
-            stopPulseAnimation()
-        }
+        let processed = Int(progress * 100 + 950.0)
+        progressLbl.text = "\(processed)hpa"
         
         UIView.animate(withDuration: 0.5, animations: {
             self.progressLbl.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)

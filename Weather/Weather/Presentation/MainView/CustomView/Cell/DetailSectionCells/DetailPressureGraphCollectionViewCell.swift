@@ -9,15 +9,38 @@ import UIKit
 
 class DetailPressureGraphCollectionViewCell: UICollectionViewCell {
     private let graphView = {
-       let view = CircleProgressView()
-        
-        view.trackColor = #colorLiteral(red: 0.1977782398, green: 0.1977782398, blue: 0.1977782398, alpha: 0.5)
-        view.gradients = [#colorLiteral(red: 0, green: 0.6588235294, blue: 0.7725490196, alpha: 1), #colorLiteral(red: 1, green: 1, blue: 0.4941176471, alpha: 1)]
-        view.lineDashPattern = [4, 2]
-        view.textColor = .white
-        view.lineHeight = 10
+        let view = CircleProgressView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    private let highLabel = {
+        let label = UILabel()
+        label.text = "고"
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .white
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private let lowLabel = {
+        let label = UILabel()
+        label.text = "저"
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .white
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private let labelHorizontalStackView = {
+       let stackView = UIStackView()
+        
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return stackView
     }()
     
     override init(frame: CGRect) {
@@ -31,25 +54,34 @@ class DetailPressureGraphCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(data: Temparature) {
-        print(data.detail.pressure)
-        graphView.progress = 0.7
+        let pressure = Double(data.detail.pressure)
+        graphView.progress = calculateValue(pressure: pressure)
+    }
+    
+    private func calculateValue(pressure: Double) -> Double {
+        let subtractionDefaultValue = pressure - 950
+        return subtractionDefaultValue * 0.01
     }
     
     private func setupCellAttributes() {
         self.backgroundColor = .systemFill
         self.layer.cornerRadius = 15
-
     }
     
     private func setupViews() {
-        contentView.addSubview(graphView)
+        [highLabel, lowLabel].forEach(labelHorizontalStackView.addArrangedSubview(_:))
+        [graphView, labelHorizontalStackView].forEach(contentView.addSubview(_:))
         
         NSLayoutConstraint.activate([
             graphView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            graphView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            graphView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 40),
             
-            graphView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
-            graphView.heightAnchor.constraint(equalTo: contentView.widthAnchor)
+            graphView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.7),
+            graphView.heightAnchor.constraint(equalTo: graphView.widthAnchor),
+            
+            labelHorizontalStackView.topAnchor.constraint(equalTo: graphView.bottomAnchor),
+            labelHorizontalStackView.widthAnchor.constraint(equalTo: graphView.widthAnchor, multiplier: 0.5),
+            labelHorizontalStackView.centerXAnchor.constraint(equalTo: graphView.centerXAnchor)
         ])
     }
 }
