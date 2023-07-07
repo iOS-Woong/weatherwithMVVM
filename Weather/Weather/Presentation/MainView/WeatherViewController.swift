@@ -143,6 +143,7 @@ extension WeatherViewController {
         // detail
         let detailCollectionViewCellResistration = detailSectionTwoLabelStyleItemConfigure()
         let detailSensoryCellResistration = detailSectionSensoryGraphStyleItemConfigure()
+        let detailPressureResistration = detailSectionPressureGraphStyleItemConfigure()
         
         datasource = Datasource(collectionView: weatherCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             guard let sectionKind = Section(rawValue: indexPath.section) else { return nil }
@@ -179,7 +180,7 @@ extension WeatherViewController {
                     return self.weatherCollectionView.dequeueConfiguredReusableCell(using: detailCollectionViewCellResistration,
                                                                                     for: indexPath, item: itemIdentifier)
                 case .pressure:
-                    return self.weatherCollectionView.dequeueConfiguredReusableCell(using: detailSensoryCellResistration,
+                    return self.weatherCollectionView.dequeueConfiguredReusableCell(using: detailPressureResistration,
                                                                                     for: indexPath, item: itemIdentifier)
                 }
             }
@@ -292,6 +293,15 @@ extension WeatherViewController {
         }
         
         return detailSectionSensoryGraphStyleResistration
+    }
+    
+    private func detailSectionPressureGraphStyleItemConfigure() -> UICollectionView.CellRegistration<DetailPressureGraphCollectionViewCell, Any> {
+        let detailSectionPressureGraphStyleResistration = UICollectionView.CellRegistration<DetailPressureGraphCollectionViewCell,Any> { cell, indexPath, itemIdentifier in
+            guard let itemIdentifier = self.viewModel.cityWeatherCurrentPage else { return }
+            cell.configure(data: itemIdentifier.temparature)
+        }
+        
+        return detailSectionPressureGraphStyleResistration
     }
     
 }

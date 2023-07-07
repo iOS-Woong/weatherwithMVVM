@@ -24,6 +24,7 @@
 		D275F6222A3D7FFE002EB932 /* MemoryCacheStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D275F6212A3D7FFD002EB932 /* MemoryCacheStorage.swift */; };
 		D275F6242A3D84C9002EB932 /* DiskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D275F6232A3D84C9002EB932 /* DiskStorage.swift */; };
 		D275F62D2A3D8559002EB932 /* MemoryCacheStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D275F62C2A3D8559002EB932 /* MemoryCacheStorageTests.swift */; };
+		D276833C2A5683BE0012AE33 /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276833B2A5683BE0012AE33 /* CircleProgressView.swift */; };
 		D276AB7A2A29F225007E3677 /* URLSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276AB792A29F225007E3677 /* URLSessionTests.swift */; };
 		D276AB842A29F3C8007E3677 /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276AB832A29F3C8007E3677 /* URLSessionProtocol.swift */; };
 		D27F6F982A45CAA70091104E /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27F6F972A45CAA70091104E /* Double+Extension.swift */; };
@@ -38,6 +39,7 @@
 		D28E954B2A37A38D0076A8FA /* ProcessWeatherUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E954A2A37A38D0076A8FA /* ProcessWeatherUsecase.swift */; };
 		D28E95532A384EC10076A8FA /* ProcessWeatherUsecaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28E95522A384EC10076A8FA /* ProcessWeatherUsecaseTests.swift */; };
 		D2ADF4EF2A547CC8003E6FC3 /* DetailSensoryGraphCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ADF4EE2A547CC8003E6FC3 /* DetailSensoryGraphCollectionViewCell.swift */; };
+		D2ADF4F12A54952C003E6FC3 /* DetailPressureGraphCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ADF4F02A54952C003E6FC3 /* DetailPressureGraphCollectionViewCell.swift */; };
 		D2BD80992A493F67009176F7 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BD80982A493F67009176F7 /* PageViewController.swift */; };
 		D2D3FCAC2A1DB83E000039FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCAB2A1DB83E000039FD /* AppDelegate.swift */; };
 		D2D3FCAE2A1DB83E000039FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D3FCAD2A1DB83E000039FD /* SceneDelegate.swift */; };
@@ -148,6 +150,7 @@
 		D275F6232A3D84C9002EB932 /* DiskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStorage.swift; sourceTree = "<group>"; };
 		D275F62A2A3D8558002EB932 /* MemoryCacheStorageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemoryCacheStorageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D275F62C2A3D8559002EB932 /* MemoryCacheStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCacheStorageTests.swift; sourceTree = "<group>"; };
+		D276833B2A5683BE0012AE33 /* CircleProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
 		D276AB772A29F224007E3677 /* URLSessionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = URLSessionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D276AB792A29F225007E3677 /* URLSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionTests.swift; sourceTree = "<group>"; };
 		D276AB832A29F3C8007E3677 /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
@@ -165,6 +168,7 @@
 		D28E95502A384EC10076A8FA /* ProcessWeatherUsecaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProcessWeatherUsecaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D28E95522A384EC10076A8FA /* ProcessWeatherUsecaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessWeatherUsecaseTests.swift; sourceTree = "<group>"; };
 		D2ADF4EE2A547CC8003E6FC3 /* DetailSensoryGraphCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSensoryGraphCollectionViewCell.swift; sourceTree = "<group>"; };
+		D2ADF4F02A54952C003E6FC3 /* DetailPressureGraphCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPressureGraphCollectionViewCell.swift; sourceTree = "<group>"; };
 		D2BD80982A493F67009176F7 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		D2D3FCA82A1DB83E000039FD /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D3FCAB2A1DB83E000039FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -354,6 +358,7 @@
 			children = (
 				D28E95342A3651FE0076A8FA /* DetailTwoLabelStyleCollectionViewCell.swift */,
 				D2ADF4EE2A547CC8003E6FC3 /* DetailSensoryGraphCollectionViewCell.swift */,
+				D2ADF4F02A54952C003E6FC3 /* DetailPressureGraphCollectionViewCell.swift */,
 			);
 			path = DetailSectionCells;
 			sourceTree = "<group>";
@@ -619,6 +624,7 @@
 			isa = PBXGroup;
 			children = (
 				D2DB780C2A53F37B0094B52D /* GradientProgressView.swift */,
+				D276833B2A5683BE0012AE33 /* CircleProgressView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -1077,12 +1083,14 @@
 				D23664042A2A02CD00D6CDD6 /* StubURLSession.swift in Sources */,
 				D28E952D2A350DBE0076A8FA /* CityCollectionViewCell.swift in Sources */,
 				D28E954B2A37A38D0076A8FA /* ProcessWeatherUsecase.swift in Sources */,
+				D2ADF4F12A54952C003E6FC3 /* DetailPressureGraphCollectionViewCell.swift in Sources */,
 				D21960492A45954500E92980 /* NetworkLoaderType.swift in Sources */,
 				D22BC1DB2A394CBB00CD5D2F /* CityWeather.swift in Sources */,
 				D2E5A1CD2A40399200392D4E /* ImageManager.swift in Sources */,
 				D275F6242A3D84C9002EB932 /* DiskStorage.swift in Sources */,
 				D275F6222A3D7FFE002EB932 /* MemoryCacheStorage.swift in Sources */,
 				D28E95392A3659920076A8FA /* FiveDayWeatherForecast.swift in Sources */,
+				D276833C2A5683BE0012AE33 /* CircleProgressView.swift in Sources */,
 				D2D3FCD32A1FA71B000039FD /* WeatherViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
