@@ -19,6 +19,7 @@ class WeatherViewController: UIViewController {
     private let viewModel: WeatherViewModel
     private var datasource: Datasource?
     private var snapshot: Snapshot?
+    var delegate: BackgroundViewUpdateDelegate?
     
     private let weatherCollectionView = {
         let collectioniView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
@@ -43,6 +44,15 @@ class WeatherViewController: UIViewController {
         configureSupplementaryViewDatasource()
         bind()
         fetch()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updatePageBackgroundView()
+    }
+    
+    private func updatePageBackgroundView() {
+        delegate?.updateBackgroundView()
     }
     
     private func bind() {
@@ -80,8 +90,9 @@ class WeatherViewController: UIViewController {
     
     private func setupViews() {
         // TODO: 수정
-        let viewImage = UIImage(named: "night")
-        view.backgroundColor = UIColor(patternImage: viewImage!)
+        
+//        let viewImage = UIImage(named: "rainy")
+//        view.backgroundColor = UIColor(patternImage: viewImage!)
         weatherCollectionView.backgroundColor = .clear
         
         view.addSubview(weatherCollectionView)

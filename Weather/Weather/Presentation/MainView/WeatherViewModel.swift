@@ -57,5 +57,4 @@ extension WeatherViewModel {
         
         usecase.getImageDataFromImageManager(url: url, completion: completion)
     }
-    
 }

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol BackgroundViewUpdateDelegate {
+    func updateBackgroundView()
+}
+
 class PageViewController: UIViewController {
     private let usecase = ProcessWeatherUsecase()
     private var contentsViewControllers = [UIViewController]()
@@ -25,7 +29,7 @@ class PageViewController: UIViewController {
             for page in Page.allCases {
                 let viewModel = WeatherViewModel(page: page, cityWeathers: .init($0))
                 let weatherViewController = WeatherViewController(viewModel: viewModel)
-                
+                weatherViewController.delegate = self
                 self.contentsViewControllers.append(weatherViewController)
             }
             
@@ -86,3 +90,10 @@ extension PageViewController: UIPageViewControllerDataSource {
     }
 }
 
+extension PageViewController: BackgroundViewUpdateDelegate {
+    func updateBackgroundView() {
+        print("불리나?")
+        let viewImage = UIImage(named: "rainy")
+        view.backgroundColor = UIColor(patternImage: viewImage!)
+    }
+}
