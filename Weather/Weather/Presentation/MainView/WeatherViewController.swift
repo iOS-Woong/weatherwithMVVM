@@ -52,7 +52,9 @@ class WeatherViewController: UIViewController {
     }
     
     private func updatePageBackgroundView() {
-        delegate?.updateBackgroundView()
+        guard let weatherId = viewModel.cityWeatherCurrentPage?.weatherId else { return }
+        
+        delegate?.updateBackgroundView(weatherId: weatherId)
     }
     
     private func bind() {

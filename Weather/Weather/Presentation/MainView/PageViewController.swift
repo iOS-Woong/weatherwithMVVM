@@ -8,7 +8,7 @@
 import UIKit
 
 protocol BackgroundViewUpdateDelegate {
-    func updateBackgroundView()
+    func updateBackgroundView(weatherId: Int)
 }
 
 class PageViewController: UIViewController {
@@ -90,10 +90,63 @@ extension PageViewController: UIPageViewControllerDataSource {
     }
 }
 
+// MARK: BackgroundViewUpdateDelegate 관련
 extension PageViewController: BackgroundViewUpdateDelegate {
-    func updateBackgroundView() {
-        print("불리나?")
-        let viewImage = UIImage(named: "rainy")
-        view.backgroundColor = UIColor(patternImage: viewImage!)
+    func updateBackgroundView(weatherId: Int) {
+        guard let weather: WeatherCase = branchWeatherCase(weatherId: weatherId),
+              let weatherImage = weather.imageDescription else { return }
+        
+        view.backgroundColor = UIColor(patternImage: weatherImage)
+    }
+    
+    private func branchWeatherCase(weatherId: Int) -> WeatherCase? {
+        switch weatherId {
+        case 200...299:
+            return .thunder
+        case 300...599:
+            return .rainy
+        case 600...699:
+            return .snow
+        default:
+            guard let classfiedWeatherCase = classifyCurrentTime() else { return nil }
+            
+            return classfiedWeatherCase
+        }
+    }
+    
+    private func classifyCurrentTime() -> WeatherCase? {
+        let currentDate = Date()
+        let calendar = Calendar.current
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+
+        guard let morningStartTime = calendar.date(bySettingHour: 6, minute: 0, second: 0, of: currentDate),
+              let morningEndTime = calendar.date(bySettingHour: 17, minute: 59, second: 59, of: currentDate) else { return nil }
+
+        if currentDate >= morningStartTime && currentDate <= morningEndTime {
+            return .clearMorning
+        } else {
+            return .clearNight
+        }
+    }
+}
+
+private enum WeatherCase {
+    case thunder, rainy, snow, clearMorning, clearNight
+    
+    var imageDescription: UIImage? {
+        switch self {
+        case .thunder:
+            return UIImage(named: "thunder")
+        case .rainy:
+            return UIImage(named: "rainy")
+        case .snow:
+            return UIImage(named: "snow")
+        case .clearMorning:
+            return UIImage(named: "clearMorning")
+        case .clearNight:
+            return UIImage(named: "clearNight")
+        }
     }
 }
