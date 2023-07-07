@@ -9,6 +9,7 @@ import Foundation
 
 struct CityWeather: Hashable {
     let id = UUID()
+    let weatherId: Int
     let name: String
     let icon: String
     let coordinate: Coordinate

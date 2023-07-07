@@ -89,10 +89,6 @@ class WeatherViewController: UIViewController {
     }
     
     private func setupViews() {
-        // TODO: 수정
-        
-//        let viewImage = UIImage(named: "rainy")
-//        view.backgroundColor = UIColor(patternImage: viewImage!)
         weatherCollectionView.backgroundColor = .clear
         
         view.addSubview(weatherCollectionView)
