@@ -9,7 +9,7 @@ import Foundation
 
 struct ProcessWeatherUsecase {
     private let endPoint = EndPoint()
-    private let service = NetworkRepository()
+    private let service = DefaultNetworkRepository()
     private let imageManager = ImageManager()
     
     func fetchAllCitiesCurrentWeather(completion: @escaping ([CityWeather]) -> Void) {

@@ -1,5 +1,5 @@
 //
-//  NetworkService.swift
+//  DefaultNetworkRepository.swift
 //  Weather
 //
 //  Created by 서현웅 on 2023/05/24.
@@ -11,7 +11,7 @@ enum ProcessDataError: Error {
     case decodeError(query: URL? = nil)
 }
 
-struct NetworkRepository {
+struct DefaultNetworkRepository {
     private let repository = NetworkService()
     
     func fetch<T: Decodable>(
