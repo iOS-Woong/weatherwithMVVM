@@ -14,7 +14,6 @@ enum ProcessDataError: Error {
 struct NetworkService {
     private let repository = NetworkRepository()
     
-    
     func fetch<T: Decodable>(url: URL?,
                              type: T.Type,
                              completion: @escaping (Result<T, ProcessDataError>) -> Void) {
