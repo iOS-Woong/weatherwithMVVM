@@ -7,6 +7,18 @@
 
 import Foundation
 
+enum NetworkError: Error {
+    case invalidURL
+    case invalidResponse
+    case invalidData
+    case requestError
+    case responseError(code: Int, data: Data?)
+}
+
+protocol NetworkLoaderType {
+    func request(url: URL?, completion: @escaping (Result<Data, NetworkError>) -> Void)
+}
+
 struct NetworkService: NetworkLoaderType {
     var urlSession: URLSessionProtocol
     
@@ -42,7 +54,6 @@ struct NetworkService: NetworkLoaderType {
             }
             
             completion(.success(data))
-            
         }
         task.resume()
     }
