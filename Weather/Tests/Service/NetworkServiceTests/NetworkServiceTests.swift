@@ -31,7 +31,7 @@ final class NetworkServiceTests: XCTestCase {
         let seoulString = "Seoul"
         let promise = expectation(description: "[fetch & Precess Test]")
         
-        sut.fetch(url: url, type: FiveDayWeatherForecast.self) { result in
+        sut.fetch(url: url, type: ForecastDTO.self) { result in
             switch result {
             case .success(let data):
                 XCTAssertEqual(data.city.name, seoulString)
@@ -55,7 +55,7 @@ final class NetworkServiceTests: XCTestCase {
         let url = endPoint.url(city: .ulsan, for: .weather)!
         let promise = expectation(description: "[단수도시 fetch & Precess Test]")
         
-        sut.fetch(url: url, type: CurrentWeather.self) { result in
+        sut.fetch(url: url, type: WeatherDTO.self) { result in
             switch result {
             case .success(let data):
                 XCTAssertEqual(data.name, "Ulsan")
@@ -75,7 +75,7 @@ final class NetworkServiceTests: XCTestCase {
         for city in QueryItem.allCases {
             let url = endPoint.url(city: city, for: .weather)!
 
-            sut.fetch(url: url, type: CurrentWeather.self) { result in
+            sut.fetch(url: url, type: WeatherDTO.self) { result in
                 switch result {
                 case .success(let data):
                     let cityName = data.name

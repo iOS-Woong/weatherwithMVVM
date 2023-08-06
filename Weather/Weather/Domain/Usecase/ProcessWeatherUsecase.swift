@@ -19,7 +19,7 @@ struct ProcessWeatherUsecase {
         for city in QueryItem.allCases {
             dispatchGroup.enter()
             let url = endPoint.url(city: city, for: .weather)
-            service.fetch(url: url, type: CurrentWeather.self) { result in
+            service.fetch(url: url, type: WeatherDTO.self) { result in
                 switch result {
                 case .success(let weather):
                     let cityWeather = CityWeather(weatherId: weather.weather[0].id,
@@ -55,7 +55,7 @@ struct ProcessWeatherUsecase {
     func fetchFiveDaysForecast(completion: @escaping ([Forecast]) -> Void) {
         let url = endPoint.url(city: .seoul, for: .forecast)
         
-        service.fetch(url: url, type: FiveDayWeatherForecast.self) { result in
+        service.fetch(url: url, type: ForecastDTO.self) { result in
             switch result {
             case .success(let fivedayForecast):
                 let limit = 27
