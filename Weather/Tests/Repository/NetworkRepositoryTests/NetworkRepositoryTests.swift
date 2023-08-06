@@ -9,10 +9,10 @@ import XCTest
 @testable import Weather
 
 final class NetworkRepositoryTests: XCTestCase {
-    var sut: NetworkRepository!
+    var sut: NetworkService!
     
     override func setUpWithError() throws {
-        sut = NetworkRepository()
+        sut = NetworkService()
     }
     
     override func tearDownWithError() throws {

@@ -11,11 +11,11 @@ import XCTest
 
 final class NetworkServiceTests: XCTestCase {
     
-    var sut: NetworkService!
+    var sut: NetworkRepository123!
     let endPoint = EndPoint()
     
     override func setUpWithError() throws {
-        sut = NetworkService()
+        sut = NetworkRepository123()
     }
     
     override func tearDownWithError() throws {

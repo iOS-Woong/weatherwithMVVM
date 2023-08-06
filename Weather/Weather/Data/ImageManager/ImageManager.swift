@@ -17,7 +17,7 @@ class ImageManager: ImageManagerType {
     private let memoryCacheStorage: MemoryCacheStorageType
     private let diskStorage: DiskStorageType?
     
-    init(networkLoader: NetworkLoaderType = NetworkRepository(),
+    init(networkLoader: NetworkLoaderType = NetworkService(),
          memoryCacheStorage: MemoryCacheStorageType = MemoryCacheStorage(),
          diskStorage: DiskStorageType = try! DiskStorage(directoryName: "mainDirectory")) {
         self.networkLoader = networkLoader

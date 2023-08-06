@@ -1,5 +1,5 @@
 //
-//  NetworkService.swift
+//  Repository.swift
 //  Weather
 //
 //  Created by 서현웅 on 2023/05/24.
@@ -7,45 +7,43 @@
 
 import Foundation
 
-enum ProcessDataError: Error {
-    case decodeError(query: URL? = nil)
-}
-
-struct NetworkService {
-    private let repository = NetworkRepository()
+struct NetworkService: NetworkLoaderType {
+    var urlSession: URLSessionProtocol
     
-    func fetch<T: Decodable>(url: URL?,
-                             type: T.Type,
-                             completion: @escaping (Result<T, ProcessDataError>) -> Void) {
-        repository.request(url: url) { result in
-            switch result {
-            case .success(let data):
-                let processedData = decode(with: data, type: type.self)
-                
-                switch processedData {
-                case .success(let decodedData):
-                    completion(.success(decodedData))
-                case .failure(_):
-                    completion(.failure(ProcessDataError.decodeError(query: url)))
-                }
-                                
-            case .failure(let error):
-                print("네트워크에러:", error)
-                print(error.localizedDescription)
-            }
-        }
+    init(urlSession: URLSessionProtocol = URLSession.shared) {
+        self.urlSession = urlSession
     }
-        
-    private func decode<T: Decodable>(with data: Data,
-                                      type: T.Type) -> Result<T, ProcessDataError> {
-        let jsonDecoder = JSONDecoder()
-        
-        do {
-            let entity = try jsonDecoder.decode(type.self, from: data)
-            return .success(entity)
-        } catch {
-            return .failure(.decodeError())
+    
+    func request(url: URL?, completion: @escaping (Result<Data, NetworkError>) -> Void) {
+        guard let url = url else {
+            completion(.failure(.invalidURL))
+            return
         }
+                
+        let task = urlSession.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(.failure(.requestError))
+            }
+            
+            guard let response = response as? HTTPURLResponse else {
+                completion(.failure(.invalidResponse))
+                return
+            }
+            
+            guard (200..<300) ~= response.statusCode else {
+                completion(.failure(.responseError(code: response.statusCode, data: data)))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(.invalidData))
+                return
+            }
+            
+            completion(.success(data))
+            
+        }
+        task.resume()
     }
 }
-
