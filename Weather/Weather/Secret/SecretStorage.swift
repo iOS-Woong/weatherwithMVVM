@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+struct SecretStorage {
+    let API_KEY = "44aea5632c5f4c27d89bbe765acbed69"
+}

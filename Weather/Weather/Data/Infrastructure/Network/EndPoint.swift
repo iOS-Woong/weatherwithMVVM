@@ -1,102 +1,85 @@
 //
-//  EndPoint.swift
+//  NewEndPoint.swift
 //  Weather
 //
-//  Created by 서현웅 on 2023/05/24.
+//  Created by 서현웅 on 2023/08/06.
 //
 
 import Foundation
 
-// currentWather: https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
-// 5dayweather: https://api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
-// ImageData: https://api.openweathermap.org/img/wn/{image Name}@2x.png
-// map: https://tile.openweathermap.org/map/temp/0/0/0.png?appid=44aea5632c5f4c27d89bbe765acbed69
-
-enum Scheme: String {
-    case https = "https"
+public protocol TargetType {
+    var baseURL: String { get }
+    var path: String { get }
+    var requestParameters: [URLQueryItem] { get }
+    var url: URL? { get }
 }
 
-enum Host: String {
-    case base = "api.openweathermap.org"
-    case sub = "openweathermap.org"
-    case map = "tile.openweathermap.org"
+enum EndPoint {
+    case weather(city: String)
+    case forecast(city: String)
+    case image(imageName: String)
+    case map
 }
 
-enum Path: String {
-    case weather = "/data/2.5/weather"
-    case forecast = "/data/2.5/forecast"
-    case icon = "/img/wn"
-    case map = "/map/temp/0/0/0.png"
-}
-
-enum QueryItem: String, CaseIterable {
-    case seoul = "seoul"
-    case busan = "busan"
-    case incheon = "incheon"
-    case daegu = "daegu"
-    case daejeon = "daejeon"
-    case gwhangju = "gwangju"
-    case ulsan = "ulsan"
-    case sejong = "sejong"
-    
-    var description: [URLQueryItem] {
-        let queryItems = [
-            URLQueryItem(name: "q", value: self.rawValue),
-            URLQueryItem(name: "appid", value: "44aea5632c5f4c27d89bbe765acbed69"),
-            URLQueryItem(name: "lang", value: "kr")
-        ]
-        
-        return queryItems
-    }
-    
-    var cityNameKr: String {
+extension EndPoint: TargetType {
+    var baseURL: String {
         switch self {
-        case .seoul:
-            return "서울"
-        case .busan:
-            return "부산"
-        case .incheon:
-            return "인천"
-        case .daegu:
-            return "대구"
-        case .daejeon:
-            return "대전"
-        case .gwhangju:
-            return "광주"
-        case .ulsan:
-            return "울산"
-        case .sejong:
-            return "세종"
+        case .map:
+            return "https://tile.openweathermap.org"
+        default:
+            return "https://api.openweathermap.org"
         }
     }
     
+    var path: String {
+        switch self {
+        case .weather:
+            return "/data/2.5/weather"
+        case .forecast:
+            return "/data/2.5/forecast"
+        case .image:
+            return "/img/wn"
+        case .map:
+            return "/map/temp/0/0/0.png"
+        }
+    }
+    
+    var requestParameters: [URLQueryItem] {
+        switch self {
+        case .weather(let city):
+            return [
+                URLQueryItem(name: "q", value: city),
+                URLQueryItem(name: "appid", value: SecretStorage().API_KEY)
+            ]
+        case .forecast(let city):
+            return [
+                URLQueryItem(name: "q", value: city),
+                URLQueryItem(name: "appid", value: SecretStorage().API_KEY)
+            ]
+        case .image(let imageName):
+            return [
+                URLQueryItem(name: "image", value: imageName),
+            ]
+        case .map:
+            return [
+                URLQueryItem(name: "appid", value: SecretStorage().API_KEY)
+            ]
+        }
+    }
+    
+    var url: URL? {
+        return asURL()
+    }
 }
 
-struct EndPoint {
-    func url(city query: QueryItem?, for pathKind: Path) -> URL? {
+extension EndPoint {
+    private func asURL() -> URL? {
         var component = URLComponents()
-        component.scheme = Scheme.https.rawValue
-        component.host = Host.base.rawValue
-        component.path = pathKind.rawValue
-        component.queryItems = query?.description
-        return component.url
-    }
-    
-    func imageUrl(icon name: String) -> URL? {
-        var component = URLComponents()
-        component.scheme = Scheme.https.rawValue
-        component.host = Host.sub.rawValue
-        component.path = Path.icon.rawValue
-        component.path.append("/\(name)@2x.png")
-        return component.url
-    }
-    
-    func tempMapUrl() -> URL? {
-        var component = URLComponents()
-        component.scheme = Scheme.https.rawValue
-        component.host = Host.map.rawValue
-        component.path = Path.map.rawValue
-        component.query = "appid=44aea5632c5f4c27d89bbe765acbed69"
+        component.host = baseURL
+        component.path = path
+        component.queryItems = requestParameters
+        
         return component.url
     }
 }
+
