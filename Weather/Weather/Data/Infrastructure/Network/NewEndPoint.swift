@@ -8,25 +8,26 @@
 import Foundation
 
 public protocol TargetType {
-    var baseURL: URL { get }
+    var baseURL: String { get }
     var path: String { get }
-    var requestParameters: [String: Any] { get }
+    var requestParameters: [URLQueryItem] { get }
+    var urlRequest: URLRequest? { get }
 }
 
 enum NewEndPoint {
-    case weather(city: String, apiKey: String)
-    case forecast(city: String, apiKey: String)
+    case weather(city: String)
+    case forecast(city: String)
     case image(imageName: String)
-    case map(apiKey: String)
+    case map
 }
 
 extension NewEndPoint: TargetType {
-    var baseURL: URL {
+    var baseURL: String {
         switch self {
         case .map:
-            return URL(string: "https://tile.openweathermap.org")!
+            return "https://tile.openweathermap.org"
         default:
-            return URL(string: "https://api.openweathermap.org")!
+            return "https://api.openweathermap.org"
         }
     }
     
@@ -43,16 +44,49 @@ extension NewEndPoint: TargetType {
         }
     }
     
-    var requestParameters: [String : Any] {
+    var requestParameters: [URLQueryItem] {
         switch self {
-        case .weather(let city, let apiKey):
-            return ["q": city, "appid": apiKey]
-        case .forecast(let city, let apiKey):
-            return ["q": city, "appid": apiKey]
+        case .weather(let city):
+            return [
+                URLQueryItem(name: "q", value: city),
+                URLQueryItem(name: "appid", value: SecretStorage().API_KEY)
+            ]
+        case .forecast(let city):
+            return [
+                URLQueryItem(name: "q", value: city),
+                URLQueryItem(name: "appid", value: SecretStorage().API_KEY)
+            ]
         case .image(let imageName):
-            return ["image": imageName]
-        case .map(let apiKey):
-            return ["appid": apiKey]
+            return [
+                URLQueryItem(name: "image", value: imageName),
+            ]
+        case .map:
+            return [
+                URLQueryItem(name: "appid", value: SecretStorage().API_KEY)
+            ]
         }
     }
+    
+    var urlRequest: URLRequest? {
+        return asURLRequest()
+    }
 }
+
+extension NewEndPoint {
+    private func asURLRequest() -> URLRequest? {
+        guard let url = asURL() else { return nil }
+        
+        return URLRequest(url: url)
+    }
+    
+    
+    private func asURL() -> URL? {
+        var component = URLComponents()
+        component.host = baseURL
+        component.path = path
+        component.queryItems = requestParameters
+        
+        return component.url
+    }
+}
+
