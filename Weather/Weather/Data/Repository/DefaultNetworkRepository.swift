@@ -16,9 +16,9 @@ extension DefaultNetworkRepository {
         city: String,
         completion: @escaping (Result<CityWeather, ProcessDataError>) -> Void)
     {
-        let endPoint = EndPoint.forecast(city: "seoul")
+        let endPoint = EndPoint.forecast(city: city)
         
-        dataTransferService.request(url: endPoint, type: WeatherDTO.self) { result in
+        dataTransferService.request(endPoint, type: WeatherDTO.self) { result in
             switch result {
             case .success(let responseDTO):
                 let cityWeather = responseDTO.mapToCityWeather()
