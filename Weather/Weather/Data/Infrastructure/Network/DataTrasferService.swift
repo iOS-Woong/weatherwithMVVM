@@ -17,8 +17,12 @@ final class DefaultDataTransferService {
 }
 
 extension DefaultDataTransferService {
-    func request<T: Decodable>(url: TargetType, type: T.Type, completion: @escaping (Result<T, ProcessDataError>) -> Void) {
-        networkService.request(url: url.url) { [weak self] result in
+    func request<T: Decodable>(
+        _ endPoint: TargetType,
+        type: T.Type,
+        completion: @escaping (Result<T, ProcessDataError>) -> Void)
+    {
+        networkService.request(url: endPoint.url) { [weak self] result in
             switch result {
             case .success(let data):
                 guard let self else { return }
@@ -31,10 +35,8 @@ extension DefaultDataTransferService {
     }
     
     private func decode<T: Decodable>(with data: Data, type: T.Type) -> Result<T, ProcessDataError> {
-        let jsonDecoder = JSONDecoder()
-        
         do {
-            let entity = try jsonDecoder.decode(type.self, from: data)
+            let entity = try JSONDecoder().decode(type.self, from: data)
             return .success(entity)
         } catch {
             return .failure(.decodeError())
