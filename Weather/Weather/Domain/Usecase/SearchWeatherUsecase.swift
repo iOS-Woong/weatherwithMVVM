@@ -7,13 +7,57 @@
 
 import Foundation
 
+enum SearchError: Error {
+    case cityWeatherFetchError([ProcessDataError])
+}
+
 final class SearchWeatherUsecase {
     private let repository = DefaultNetworkRepository()
     private let imageManager = ImageManager()
 }
-    
-extension SearchWeatherUsecase {
 
+extension SearchWeatherUsecase {
+    func searchCityWeatherList(
+        cities: [String],
+        completion: @escaping (Result<[CityWeather], SearchError>) -> Void) {
+        let group = DispatchGroup()
+        var weatherResults = [CityWeather]()
+        var errors = [ProcessDataError]()
+        
+        for city in cities {
+            group.enter()
+            fetchCityWeather(city: city) { result in
+                switch result {
+                case .success(let weather):
+                    weatherResults.append(weather)
+                case .failure(let error):
+                    errors.append(error)
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .global()) {
+            if errors.isEmpty {
+                completion(.success(weatherResults))
+            } else {
+                completion(.failure(.cityWeatherFetchError(errors)))
+            }
+        }
+    }
+    
+    private func fetchCityWeather(
+        city: String,
+        completion: @escaping (Result<CityWeather, ProcessDataError>) -> Void) {
+        repository.requestCurrentCityWeather(city: city) { result in
+            switch result {
+            case .success(let weather):
+                completion(.success(weather))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }
 
 
