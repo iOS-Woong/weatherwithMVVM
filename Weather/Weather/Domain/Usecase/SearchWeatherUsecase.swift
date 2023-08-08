@@ -12,13 +12,13 @@ enum SearchError: Error {
 }
 
 final class SearchWeatherUsecase {
-    private let repository = DefaultNetworkRepository()
+    private let repository = CityUnitRepository()
     private let imageManager = ImageManager()
 }
 
 extension SearchWeatherUsecase {
     func searchCityWeatherList(
-        cities: [String],
+        cities: [City],
         completion: @escaping (Result<[CityWeather], SearchError>) -> Void) {
         let group = DispatchGroup()
         var weatherResults = [CityWeather]()
@@ -47,9 +47,9 @@ extension SearchWeatherUsecase {
     }
     
     private func fetchCityWeather(
-        city: String,
+        city: City,
         completion: @escaping (Result<CityWeather, ProcessDataError>) -> Void) {
-        repository.requestCurrentCityWeather(city: city) { result in
+            repository.requestCurrentCityWeather(city: city) { result in
             switch result {
             case .success(let weather):
                 completion(.success(weather))

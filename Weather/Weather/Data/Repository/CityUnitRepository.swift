@@ -7,16 +7,16 @@
 
 import Foundation
 
-final class DefaultNetworkRepository {
+final class CityUnitRepository {
     private let dataTransferService = DefaultDataTransferService()
 }
 
-extension DefaultNetworkRepository {
+extension CityUnitRepository {
     func requestCurrentCityWeather(
-        city: String,
+        city: City,
         completion: @escaping (Result<CityWeather, ProcessDataError>) -> Void)
     {
-        let endPoint = EndPoint.forecast(city: city)
+        let endPoint = EndPoint.forecast(city: city.rawValue)
         
         dataTransferService.request(endPoint, type: WeatherDTO.self) { result in
             switch result {
