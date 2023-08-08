@@ -64,3 +64,36 @@ extension WeatherDTO {
         let sunrise, sunset: Int
     }
 }
+
+// MARK: Mapping
+
+extension WeatherDTO {
+    func mapToCityWeather() -> CityWeather {
+        let coordinate = Coordinate(lon: self.coord.lon, lat: self.coord.lat)
+        let detailStuff = DetailStuff(
+            pressure: self.main.pressure,
+            humidity: self.main.humidity,
+            visibility: self.visibility)
+        
+        let temparature = Temparature(
+            detail: detailStuff,
+            temp: self.main.temp,
+            tempMin: self.main.tempMin,
+            tempMax: self.main.tempMax,
+            sensoryTemp: self.main.feelsLike)
+
+        let windInfo = WindInfo(speed: self.wind.speed, deg: self.wind.deg)
+        let cloud = Cloud(Cloudiness: self.clouds.all)
+        let sun = Sun(sunrise: self.sys.sunrise, sunset: self.sys.sunset)
+        
+        return CityWeather(weatherId: self.weather.first?.id ?? 0,
+                           name: self.name,
+                           icon: self.weather.first?.icon ?? "",
+                           coordinate: coordinate,
+                           temparature: temparature,
+                           description: self.weather.first?.description ?? "",
+                           wind: windInfo,
+                           cloud: cloud,
+                           sun: sun)
+    }
+}

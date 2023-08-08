@@ -7,46 +7,25 @@
 
 import Foundation
 
-enum ProcessDataError: Error {
-    case decodeError(query: URL? = nil)
+final class DefaultNetworkRepository {
+    private let dataTransferService = DefaultDataTransferService()
 }
 
-struct DefaultNetworkRepository {
-    private let repository = NetworkService()
-    
-    func fetch<T: Decodable>(
-        url: URL?,
-        type: T.Type,
-        completion: @escaping (Result<T, ProcessDataError>) -> Void) {
-            repository.request(url: url) { result in
-                switch result {
-                case .success(let data):
-                    let processedData = decode(with: data, type: type.self)
-                    
-                    switch processedData {
-                    case .success(let decodedData):
-                        completion(.success(decodedData))
-                    case .failure(_):
-                        completion(.failure(ProcessDataError.decodeError(query: url)))
-                    }
-                    
-                case .failure(let error):
-                    print("네트워크에러:", error)
-                    print(error.localizedDescription)
-                }
-            }
-    }
-    
-    private func decode<T: Decodable>(with data: Data,
-                                      type: T.Type) -> Result<T, ProcessDataError> {
-        let jsonDecoder = JSONDecoder()
+extension DefaultNetworkRepository {
+    func requestCurrentCityWeather(
+        city: String,
+        completion: @escaping (Result<CityWeather, ProcessDataError>) -> Void)
+    {
+        let endPoint = EndPoint.forecast(city: "seoul")
         
-        do {
-            let entity = try jsonDecoder.decode(type.self, from: data)
-            return .success(entity)
-        } catch {
-            return .failure(.decodeError())
+        dataTransferService.request(url: endPoint, type: WeatherDTO.self) { result in
+            switch result {
+            case .success(let responseDTO):
+                let cityWeather = responseDTO.mapToCityWeather()
+                completion(.success(cityWeather))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
 }
-
