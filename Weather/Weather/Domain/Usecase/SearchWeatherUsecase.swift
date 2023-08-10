@@ -19,14 +19,15 @@ final class SearchWeatherUsecase {
 extension SearchWeatherUsecase {
     func searchCityWeatherList(
         cities: [City],
-        completion: @escaping (Result<[CityWeather], SearchError>) -> Void) {
+        completion: @escaping (Result<[CityWeather], SearchError>) -> Void)
+    {
         let group = DispatchGroup()
         var weatherResults = [CityWeather]()
         var errors = [ProcessDataError]()
         
         for city in cities {
             group.enter()
-            fetchCityWeather(city: city) { result in
+            searchCityWeather(city: city) { result in
                 switch result {
                 case .success(let weather):
                     weatherResults.append(weather)
@@ -46,9 +47,10 @@ extension SearchWeatherUsecase {
         }
     }
     
-    private func fetchCityWeather(
+    private func searchCityWeather(
         city: City,
-        completion: @escaping (Result<CityWeather, ProcessDataError>) -> Void) {
+        completion: @escaping (Result<CityWeather, ProcessDataError>) -> Void)
+    {
             repository.requestCurrentCityWeather(city: city) { result in
             switch result {
             case .success(let weather):
